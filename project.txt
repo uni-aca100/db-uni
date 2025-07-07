@@ -1,0 +1,108 @@
+# Requisiti:
+L'obiettivo di questo progetto è creare un database per la gestione di un'associazione di birdwatching.Il database permette di gestire sia le informazioni relative alle varie specie di uccelli, solitamente avvistate in Europa (ma non solo), sia quelle riguardanti le attività osservative e revisionali dei soci dell'associazione.
+
+I soci devono potersi connettere al database per consultare le specie di uccelli, gli avvistamenti effettuati e tutte le informazioni relative (ad esempio, numero di esemplari, contenuti multimediali, condizioni ambientali, ecc.). Possono anche effettuare ricerche sulla distribuzione regionale o nazionale delle specie avvistate e analisi migratorie.
+
+Inoltre, per registrare un avvistamento, i soci devono compilare un apposito modulo da consegnare ai responsabili dell'associazione. Sarà poi compito del responsabile dell'associazione registrare l'avvistamento nel database, associando le informazioni fornite dal socio.
+
+I Responsabili dell'associazione hanno l'ulteriore compito di gestire sia le informazioni sui soci sia quelle relative alle specie di uccelli, ai loro habitat e alle distribuzioni geografiche. Devono mantenere aggiornate queste informazioni tramite operazioni di inserimento, modifica e cancellazione. I dati sulle specie di uccelli, gli habitat, provengono dalla banca dati Europe Nature Information System (EUNIS).
+
+I Revisori, che sono soci con un ruolo specifico, devono potersi connettere al database per revisionare e validare gli avvistamenti effettuati dagli osservatori. La validazione avviene tramite una classificazione che include le opzioni "confermato", "possibile" e "non confermato". Questa valutazione si basa sulle informazioni fornite, come i contenuti multimediali (foto, video, audio), le condizioni ambientali (meteo, temperatura, umidità, vento), ed eventuali testimonianze di altri soci, oltre che sulla conoscenza della specie avvistata (ad esempio, habitat e distribuzione). È importante sottolineare che i Revisori non possono validare i propri avvistamenti.
+
+I soci possono ricevere badge di riconoscimento in base ai risultati ottenuti. Questi includono, ad esempio, badge per il numero di avvistamenti confermati (come il primo, il decimo, ecc.), oppure per la prima osservazione di una specie in uno stato di conservazione particolare (ad esempio, Criticamente Minacciata (CR) o in Pericolo (EN)).
+
+La richiesta di assegnazione di un badge può essere effettuata informalmente da un socio a un Responsabile dell'associazione. Il Responsabile provvederà poi a registrare l'assegnazione nel database, ma solo se i requisiti sono stati soddisfatti e gli avvistamenti confermati da un Revisore.
+
+# vincoli di integrità:
+## vincoli dinamici:
+- Non è consentito registrare un avvistamento se la località non rientra tra gli habitat tipici della specie in quel periodo dell'anno.
+- Un badge non può essere assegnato a un socio se non sono stati soddisfatti i requisiti specifici per quel badge.
+- Per le specie non migratorie (ovvero 'stanziali'), è possibile registrare al massimo un solo pattern migratorio per habitat.
+- Per le specie non migratorie, il periodo di migrazione deve coprire l'intero arco dell'anno
+- Un Revisore non può validare i propri avvistamenti.
+- Un Revisore non può modificare le revisioni effettuate da altri Revisori.
+- Non è possibile inserire avvistamento che sia stato effettuato prima della data di iscrizione del socio.
+
+
+# Descrizione del generale del database e sistema di gestione associazioni di birdwatching:
+- Socio:
+  è l'entità principale che rappresenta un membro dell'associazione.
+  Nel momento della sua iscrizione, gli viene fornito un codice tessera
+  da parte dei Responsabili dell'associazione.
+  Il codice tessera è univoco e serve per identificare il socio.
+  - Osservatore: 
+    è un tipo di socio il quale è testimone di uno o più avvistamenti.
+  - Revisore:
+    è un tipo di socio che ha il compito di verificare e validare gli avvistamenti
+    effettuati dagli osservatori.
+    Il revisore non può validare i propri avvistamenti.
+
+- Avvistamento:
+  è l'entità che rappresenta un avvistamento di un esemplare di uccello.
+  Ogni avvistamento è associato a un osservatore e può essere validato da
+  un revisore.
+  Per ogni avvistamento, viene assegnato un codice di avvistamento univoco.
+  Il quale è assegnato dall'associazione al momento della richiesta di
+  registrazione dell'avvistamento da parte dell'osservatore.
+  Il Responsabile dell'associazione nell'inserimento dell'avvistamento
+  associa l'esemplare di uccello avvistato e la località dell'avvistamento.
+  Inoltre il Responsabile dell'associazione può opzionalmente decidere
+  di associare media (foto, video, audio) all'avvistamento forniti
+  dall'osservatore.
+  Sempre opzionalmente, il Responsabile può associare le condizioni
+  ambientali dell'avvistamento (meteo, temperatura, umidità, vento)
+  se fornite dall'osservatore.
+  
+- specie:
+  è l'entità che rappresenta una specie di uccello, il quale comprende
+  informazioni biologiche e altre informazioni utili.
+  Ogni specie ha un nome scientifico il quale è univoco.
+  le informazioni sulle specie sono registrate dai Responsabili dell'associazione,
+  e provengono dalla banca dati Europe Nature Information System (EUNIS).
+  Per le specie non migratrici, esiste un record in pattern_migratori con motivo_migrazione='stanziale'.
+  gli stati di conservazione sono LC, NT, VU, EN, CR
+
+- Esemplare:
+  è l'entità che rappresenta un esemplare di uccello avvistato.
+  Ogni esemplare è associato a una specie e sempre associato a un avvistamento.
+  Ogni esemplare è identificabile tramite il codice di avvistamento e
+  un numero di esemplare avvistato.
+
+- Media:
+  è l'entità che rappresenta i media associati a un avvistamento, non è obbligatoria.
+  I media possono essere foto, video o audio e sono forniti dall'osservatore al momento
+  della richiesta di registrazione dell'avvistamento.
+
+- Condizioni_Ambientali:
+  è l'entità che rappresenta le condizioni ambientali associate a un avvistamento,
+  non è obbligatoria.
+  Le condizioni ambientali possono essere fornite dall'osservatore al momento
+  della richiesta di registrazione dell'avvistamento.
+
+- località_avvistamento:
+  è l'entità che rappresenta una geolocalizzazione in cui è stato effettuato
+  l'avvistamento. una località_avvistamento è registrata solo se un avvistamento
+  è associato a essa. Quindi, non tutti gli habitat hanno una località_avvistamento.
+  Ogni località_avvistamento è identificata da un plus code (Open Location Code - OLC).
+
+- Habitat:
+  è l'entità che rappresenta l'habitat in cui vive la specie di uccello.
+  Le informazioni sugli habitat sono registrate dai Responsabili dell'associazione,
+  e provengono dalla banca dati Europe Nature Information System (EUNIS).
+  Ogni habitat è associato a una o più specie di uccelli.
+
+- regione:
+  è l'entità che rappresenta una regione geografica parte di un paese.
+  Ogni regione è identificata da un codice ISO 3166-2.
+  Le regioni possono essere associate a una o più località_avvistamento.
+  è spesso impiegata per analizzare la distribuzione delle specie di uccelli avvistati.
+
+  - Pattern_Migratori:
+  I pattern migratori rappresentano le rotte e i comportamenti di migrazione delle specie di uccelli.
+  Questi pattern possono variare notevolmente tra le diverse specie e sono influenzati da fattori ambientali, disponibilità di cibo e condizioni climatiche.
+  Se una specie di uccello non è migratoria, il suo motivo_migrazione sarà 'stanziale' e i valori di periodo_inizio e periodo_fine saranno nulli.
+
+  - Badge:
+  I badge sono riconoscimenti assegnati ai soci, l'assegnazione può avvenire da parte dei Responsabili dell'associazione solo dopo che un avvistamento è stato confermato da un Revisore.
+  Uno stesso badge non può essere assegnato più volte a un socio, quindi l'assegnazione di un badge è univoca per ogni socio.
+  Ogni badge ha un nome e un criterio di assegnazione. Il nome del badge combinato con il codice tessera del socio forma un identificatore univoco per il badge assegnato.
