@@ -1,0 +1,157 @@
+/*
+  Tipi di dati per le tabelle che richiedono array di valori.
+  Questi tipi sono utilizzati per gestire i campi che accettano
+  più valori, come maturità, sesso e condizioni di salute degli esemplari.
+*/
+CREATE OR REPLACE TYPE tbe_maturita AS
+  TABLE OF esemplare.maturita%TYPE;
+CREATE OR REPLACE TYPE tbe_sesso AS
+  TABLE OF esemplare.sesso%TYPE;
+CREATE OR REPLACE TYPE tbe_condizioni_salute AS
+  TABLE OF esemplare.condizioni_salute%TYPE;
+
+/*  
+  Procedura Automatica di Inserimento Avvistamenti Questa procedura automatizza
+  l'inserimento degli avvistamenti, gestendo anche le tabelle correlate. Vengono coinvolte:
+    - Avvistamento (inserito sempre)
+    - Osservatore (inserito solo se non già esistente)
+    - Esemplare (sempre inserito)
+    - Località_avvistamento (inserita solo se non già esistente)
+    - Regione (inserita solo se non già esistente).
+
+  La procedura fallisce se l'osservatore non è un socio già iscritto.
+
+  Le informazioni relative a media e condizioni_ambientali sono opzionali e
+  possono essere aggiunte in un secondo momento tramite inserimento manuale,
+  evitando così di appesantire ulteriormente questa procedura.
+*/
+CREATE OR REPLACE PROCEDURE add_avvistamento (
+  p_data_avvistamento          IN avvistamento.data_avvistamento%TYPE,
+  p_ora_avvistamento           IN avvistamento.ora_avvistamento%TYPE,
+  p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
+  p_plus_code                  IN avvistamento.plus_code%TYPE,
+  p_nome_localita              IN localita_avvistamento.nome%TYPE,
+  p_area_protetta              IN localita_avvistamento.area_protetta%TYPE,
+  p_url_mappa                  IN localita_avvistamento.url_mappa%TYPE,
+  p_codice_eunis               IN localita_avvistamento.codice_eunis%TYPE,
+  p_codice_iso_regione         IN localita_avvistamento.codice_iso_regione%TYPE,
+  p_nome_regione               IN regione.nome_regione%TYPE,
+  p_paese                      IN regione.paese%TYPE,
+  p_maturita                   IN tbe_maturita,
+  p_condizioni_salute          IN tbe_condizioni_salute,
+  p_sesso                      IN tbe_sesso,
+  p_nome_scientifico_specie    IN esemplare.nome_scientifico_specie%TYPE
+) AS
+  var_codice_avvistamento  avvistamento.codice_avvistamento%TYPE;
+  var_n_avvistamento_today NUMBER := 0;
+  socio_exists             NUMBER := 0;
+  socio_non_esistente EXCEPTION;
+BEGIN
+  -- Verifica se il socio osservatore esiste
+  SELECT COUNT(*)
+    INTO socio_exists
+    FROM socio
+   WHERE codice_tessera = p_codice_tessera_osservatore;
+
+  IF socio_exists = 0 THEN
+    RAISE socio_non_esistente;
+  END IF; 
+
+  -- Inserimento del socio osservatore se non esiste
+  -- dovuto dal fatto che potrebbe essere la sua prima osservazione
+  INSERT INTO osservatore ( codice_tessera )
+    SELECT p_codice_tessera_osservatore
+      FROM dual
+     WHERE NOT EXISTS (
+      SELECT 1
+        FROM osservatore
+       WHERE codice_tessera = p_codice_tessera_osservatore
+    );
+    
+  -- Inserimento della regione se non esiste
+  INSERT INTO regione (
+    codice_iso,
+    nome_regione,
+    paese
+  )
+    SELECT p_codice_iso_regione,
+           p_nome_regione,
+           p_paese
+      FROM dual
+     WHERE NOT EXISTS (
+      SELECT 1
+        FROM regione
+       WHERE codice_iso = p_codice_iso_regione
+    );
+
+  -- Inserimento della località di avvistamento se non esiste
+  INSERT INTO localita_avvistamento (
+    plus_code,
+    nome,
+    area_protetta,
+    url_mappa,
+    codice_iso_regione,
+    codice_eunis
+  )
+    SELECT p_plus_code,
+           p_nome_localita,
+           p_area_protetta,
+           p_url_mappa,
+           p_codice_iso_regione,
+           p_codice_eunis
+      FROM dual
+     WHERE NOT EXISTS (
+      SELECT 1
+        FROM localita_avvistamento
+       WHERE plus_code = p_plus_code
+    );
+
+  var_codice_avvistamento := genera_codice_avvistamento(
+    p_codice_tessera_osservatore,
+    p_data_avvistamento
+  );
+
+  -- Inserimento dell'avvistamento
+  INSERT INTO avvistamento (
+    codice_avvistamento,
+    data_avvistamento,
+    ora_avvistamento,
+    codice_tessera_osservatore,
+    plus_code
+  ) VALUES ( var_codice_avvistamento,
+             p_data_avvistamento,
+             p_ora_avvistamento,
+             p_codice_tessera_osservatore,
+             p_plus_code );
+
+  -- inserimento esemplari
+  FOR i IN 1..p_maturita.count LOOP
+    INSERT INTO esemplare (
+      codice_avvistamento,
+      numero_esemplare,
+      maturita,
+      condizioni_salute,
+      sesso,
+      nome_scientifico_specie
+    ) VALUES ( var_codice_avvistamento,
+               i,
+               p_maturita(i),
+               p_condizioni_salute(i),
+               p_sesso(i),
+               p_nome_scientifico_specie(i) );
+  END LOOP;
+  COMMIT;
+EXCEPTION
+  WHEN socio_non_esistente THEN
+    raise_application_error(
+      -20016,
+      'Il socio osservatore specificato non esiste.'
+    );
+    ROLLBACK;
+  WHEN OTHERS THEN
+    raise_application_error(
+      -20017,
+      'Errore durante l''inserimento dell''avvistamento o degli esemplari.'
+    );
+    ROLLBACK;
+END;

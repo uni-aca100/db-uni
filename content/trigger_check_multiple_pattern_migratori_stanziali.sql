@@ -17,7 +17,7 @@ BEGIN
   SELECT COUNT(*)
     INTO var_same_habitat_count
     FROM pattern_migratori
-   WHERE codice_eunis = :new.codice_eunis
+   WHERE codice_eunis_habitat = :new.codice_eunis_habitat
      AND nome_scientifico_specie = :new.nome_scientifico_specie
      AND motivo_migrazione = 'stanziale';
 

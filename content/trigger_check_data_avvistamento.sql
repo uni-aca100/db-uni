@@ -9,7 +9,7 @@ CREATE OR REPLACE TRIGGER trg_check_data_avvistamento BEFORE
   FOR EACH ROW
 DECLARE
   var_data_iscrizione socio.data_iscrizione%TYPE;
-  old_avvistamento    avvistamento.data_avvistamento%TYPE;
+  date_avvistamento_precedente EXCEPTION;
 BEGIN
   -- Recupera la data di iscrizione del socio osservatore
   SELECT data_iscrizione
@@ -19,7 +19,7 @@ BEGIN
 
   -- Se la data dell'avvistamento è precedente alla data di iscrizione, solleva errore
   IF :new.data_avvistamento < var_data_iscrizione THEN
-    RAISE old_avvistamento;
+    RAISE date_avvistamento_precedente;
   END IF;
 EXCEPTION
   WHEN no_data_found THEN
@@ -27,7 +27,7 @@ EXCEPTION
       -20011,
       'Il socio osservatore non esiste.'
     );
-  WHEN old_avvistamento THEN
+  WHEN date_avvistamento_precedente THEN
     raise_application_error(
       -20012,
       'Non è consentito inserire avvistamenti precedenti alla data di iscrizione del
