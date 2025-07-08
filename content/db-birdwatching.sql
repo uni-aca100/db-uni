@@ -751,63 +751,63 @@ CREATE OR REPLACE TYPE tbe_condizioni_salute AS
   TABLE OF esemplare.condizioni_salute%TYPE;
 
 /*  
-  La seguente procedura automatizza l'inserimento degli avvistamenti, coinvolgendo oltre la tabella di
-  avvistamento le tabelle osservatore (inserito se non esiste), esemplare (inserito),
-  localita_avvistamento (inserito se non esiste), regione (inserito se non esiste) a seconda
-  delle loro dipendenze.
-  media e condizioni_ambientali essendo opzionali possono essere fornite in un secondo momento, con
-  una operazione di inserimento manuale, non è necessario appesantire ulteriormente la procedura.
+  Procedura Automatica di Inserimento Avvistamenti Questa procedura automatizza
+  l'inserimento degli avvistamenti, gestendo anche le tabelle correlate. Vengono coinvolte:
+    - Avvistamento
+    - Osservatore (inserito solo se non già esistente)
+    - Esemplare (sempre inserito)
+    - Località_avvistamento (inserita solo se non già esistente)
+    - Regione (inserita solo se non già esistente).
+
+  La procedura fallisce se l'osservatore non è un socio già iscritto.
+
+  Le informazioni relative a media e condizioni_ambientali sono opzionali e
+  possono essere aggiunte in un secondo momento tramite inserimento manuale,
+  evitando così di appesantire ulteriormente questa procedura.
 */
 CREATE OR REPLACE PROCEDURE add_avvistamento (
-  p_data_avvistamento           IN avvistamento.data_avvistamento%TYPE,
-  p_ora_avvistamento            IN avvistamento.ora_avvistamento%TYPE,
-  p_codice_tessera_osservatore  IN avvistamento.codice_tessera_osservatore%TYPE,
-  p_nome_osservatore            IN socio.nome%TYPE,
-  p_cognome_osservatore         IN socio.cognome%TYPE,
-  p_email_osservatore           IN socio.email%TYPE,
-  p_telefono_osservatore        IN socio.telefono%TYPE,
-  p_data_nascita_osservatore    IN socio.data_nascita%TYPE,
-  p_data_iscrizione_osservatore IN socio.data_iscrizione%TYPE,
-  p_plus_code                   IN avvistamento.plus_code%TYPE,
-  p_nome_localita               IN localita_avvistamento.nome%TYPE,
-  p_area_protetta               IN localita_avvistamento.area_protetta%TYPE,
-  p_url_mappa                   IN localita_avvistamento.url_mappa%TYPE,
-  p_codice_eunis                IN localita_avvistamento.codice_eunis%TYPE,
-  p_codice_iso_regione          IN localita_avvistamento.codice_iso_regione%TYPE,
-  p_nome_regione                IN regione.nome_regione%TYPE,
-  p_paese                       IN regione.paese%TYPE,
-  p_maturita                    IN tbe_maturita,
-  p_condizioni_salute           IN tbe_condizioni_salute,
-  p_sesso                       IN tbe_sesso,
-  p_nome_scientifico_specie     IN esemplare.nome_scientifico_specie%TYPE
+  p_data_avvistamento          IN avvistamento.data_avvistamento%TYPE,
+  p_ora_avvistamento           IN avvistamento.ora_avvistamento%TYPE,
+  p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
+  p_plus_code                  IN avvistamento.plus_code%TYPE,
+  p_nome_localita              IN localita_avvistamento.nome%TYPE,
+  p_area_protetta              IN localita_avvistamento.area_protetta%TYPE,
+  p_url_mappa                  IN localita_avvistamento.url_mappa%TYPE,
+  p_codice_eunis               IN localita_avvistamento.codice_eunis%TYPE,
+  p_codice_iso_regione         IN localita_avvistamento.codice_iso_regione%TYPE,
+  p_nome_regione               IN regione.nome_regione%TYPE,
+  p_paese                      IN regione.paese%TYPE,
+  p_maturita                   IN tbe_maturita,
+  p_condizioni_salute          IN tbe_condizioni_salute,
+  p_sesso                      IN tbe_sesso,
+  p_nome_scientifico_specie    IN esemplare.nome_scientifico_specie%TYPE
 ) AS
   var_codice_avvistamento  avvistamento.codice_avvistamento%TYPE;
   var_n_avvistamento_today NUMBER := 0;
+  socio_exists             NUMBER := 0;
+  socio_non_esistente EXCEPTION;
 BEGIN
+  -- Verifica se il socio osservatore esiste
+  SELECT COUNT(*)
+    INTO socio_exists
+    FROM socio
+   WHERE codice_tessera = p_codice_tessera_osservatore;
+
+  IF socio_exists = 0 THEN
+    RAISE socio_non_esistente;
+  END IF; 
+
   -- Inserimento del socio osservatore se non esiste
-  INSERT INTO socio (
-    codice_tessera,
-    nome,
-    cognome,
-    email,
-    telefono,
-    data_nascita,
-    data_iscrizione
-  )
-    SELECT p_codice_tessera_osservatore,
-           p_nome_osservatore,
-           p_cognome_osservatore,
-           p_email_osservatore,
-           p_telefono_osservatore,
-           p_data_nascita_osservatore,
-           p_data_iscrizione_osservatore
+  -- dovuto dal fatto che potrebbe essere la sua prima osservazione
+  INSERT INTO osservatore ( codice_tessera )
+    SELECT p_codice_tessera_osservatore
       FROM dual
      WHERE NOT EXISTS (
       SELECT 1
-        FROM socio
+        FROM osservatore
        WHERE codice_tessera = p_codice_tessera_osservatore
     );
-
+    
   -- Inserimento della regione se non esiste
   INSERT INTO regione (
     codice_iso,
@@ -897,6 +897,12 @@ BEGIN
   END LOOP;
   COMMIT;
 EXCEPTION
+  WHEN socio_non_esistente THEN
+    raise_application_error(
+      -20016,
+      'Il socio osservatore specificato non esiste.'
+    );
+    ROLLBACK;
   WHEN OTHERS THEN
     raise_application_error(
       -20017,
