@@ -1,21 +1,23 @@
 /*
-  Tipi di dati per le tabelle che richiedono array di valori.
-  Questi tipi sono utilizzati per gestire i campi che accettano
+  Questi tipi sono utilizzati per i campi che accettano
   più valori, come maturità, sesso e condizioni di salute degli esemplari.
 */
-CREATE OR REPLACE TYPE tbe_maturita AS
-  TABLE OF esemplare.maturita%TYPE;
-CREATE OR REPLACE TYPE tbe_sesso AS
-  TABLE OF esemplare.sesso%TYPE;
-CREATE OR REPLACE TYPE tbe_condizioni_salute AS
-  TABLE OF esemplare.condizioni_salute%TYPE;
+CREATE OR REPLACE TYPE tb_esp_maturita AS
+  TABLE OF VARCHAR2(10);
+/
+CREATE OR REPLACE TYPE tb_esp_sesso AS
+  TABLE OF VARCHAR2(12);
+/
+CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
+  TABLE OF VARCHAR2(10);
+/
 
 /*  
   Procedura Automatica di Inserimento Avvistamenti Questa procedura automatizza
   l'inserimento degli avvistamenti, gestendo anche le tabelle correlate. Vengono coinvolte:
     - Avvistamento (inserito sempre)
     - Osservatore (inserito solo se non già esistente)
-    - Esemplare (sempre inserito)
+    - Esemplare (inserito sempre, con molteplici valori per maturità, sesso e condizioni di salute)
     - Località_avvistamento (inserita solo se non già esistente)
     - Regione (inserita solo se non già esistente).
 
@@ -37,9 +39,9 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
   p_codice_iso_regione         IN localita_avvistamento.codice_iso_regione%TYPE,
   p_nome_regione               IN regione.nome_regione%TYPE,
   p_paese                      IN regione.paese%TYPE,
-  p_maturita                   IN tbe_maturita,
-  p_condizioni_salute          IN tbe_condizioni_salute,
-  p_sesso                      IN tbe_sesso,
+  p_maturita                   IN tb_esp_maturita,
+  p_condizioni_salute          IN tb_esp_condizioni_salute,
+  p_sesso                      IN tb_esp_sesso,
   p_nome_scientifico_specie    IN esemplare.nome_scientifico_specie%TYPE
 ) AS
   var_codice_avvistamento  avvistamento.codice_avvistamento%TYPE;
@@ -138,7 +140,7 @@ BEGIN
                p_maturita(i),
                p_condizioni_salute(i),
                p_sesso(i),
-               p_nome_scientifico_specie(i) );
+               p_nome_scientifico_specie );
   END LOOP;
   COMMIT;
 EXCEPTION
@@ -155,3 +157,4 @@ EXCEPTION
     );
     ROLLBACK;
 END;
+/

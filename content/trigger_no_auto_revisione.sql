@@ -19,3 +19,4 @@ EXCEPTION
       'Il revisore non può validare i propri avvistamenti.'
     );
 END;
+/

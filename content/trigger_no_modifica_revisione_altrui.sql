@@ -20,3 +20,4 @@ EXCEPTION
       'Il revisore non può modificare le valutazioni di un avvistamento già validato da un altro revisore.'
     );
 END;
+/

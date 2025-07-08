@@ -27,3 +27,4 @@ EXCEPTION
       'Un pattern migratorio stanziale deve coprire l''intero anno.'
     );
 END;
+/

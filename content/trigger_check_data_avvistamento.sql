@@ -34,3 +34,4 @@ EXCEPTION
       socio osservatore.'
     );
 END;
+/

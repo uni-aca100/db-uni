@@ -16,7 +16,6 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
 # vincoli di integrità:
 ## vincoli dinamici:
 - Non è consentito registrare un avvistamento se la località non rientra tra gli habitat tipici della specie in quel periodo dell'anno.
-- Un badge non può essere assegnato a un socio se non sono stati soddisfatti i requisiti specifici per quel badge.
 - Per le specie non migratorie (ovvero 'stanziali'), è possibile registrare al massimo un solo pattern migratorio per habitat.
 - Per le specie non migratorie, il periodo di migrazione deve coprire l'intero arco dell'anno
 - Un Revisore non può validare i propri avvistamenti.
