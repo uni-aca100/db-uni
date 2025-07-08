@@ -1,23 +1,3 @@
---  DBMS: Oracle 19c 
-/*
-  Vista per mostrare le specie che vivono in un habitat specifico,
-  nei vari periodi dell'anno, includendo il motivo.
-*/
-CREATE OR REPLACE VIEW specie_vive_in_habitat AS
-  SELECT s.nome_scientifico AS nome_scientifico_specie,
-         s.nome_comune AS nome_comune_specie,
-         h.nome_habitat,
-         h.codice_eunis,
-         h.url_descrizione AS url_habitat,
-         p.motivo_migrazione AS motivo,
-         p.periodo_inizio,
-         p.periodo_fine
-    FROM specie s
-    JOIN pattern_migratori p
-  ON s.nome_scientifico = p.nome_scientifico_specie
-    JOIN habitat h
-  ON p.codice_eunis_habitat = h.codice_eunis;
-
 /*
   procedura per validare un avvistamento da parte di un revisore
   la gestione dei vincoli dinamici è effettuata tramite trigger (trg_prevent_revisione)

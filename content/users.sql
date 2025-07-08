@@ -1,3 +1,5 @@
+--  DBMS: Oracle 19c 
+
 CREATE USER socio IDENTIFIED BY socio
   DEFAULT TABLESPACE users
   TEMPORARY TABLESPACE temp;
