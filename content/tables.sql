@@ -170,6 +170,14 @@ DROP TABLE revisore CASCADE CONSTRAINTS;
 DROP TABLE osservatore CASCADE CONSTRAINTS;
 DROP TABLE socio CASCADE CONSTRAINTS;
 
+-- CREAZIONE TABELLE IN ORDINE DI DIPENDENZA
+
+CREATE TABLE regione (
+  codice_iso   VARCHAR2(3) NOT NULL,
+  nome_regione VARCHAR2(40) NOT NULL,
+  paese        VARCHAR2(40) NOT NULL,
+  CONSTRAINT pk_regione PRIMARY KEY ( codice_iso )
+);
 
 CREATE TABLE socio (
   codice_tessera  VARCHAR2(16),
@@ -201,6 +209,41 @@ CREATE TABLE revisore (
   CONSTRAINT pk_revisore PRIMARY KEY ( codice_tessera )
 );
 
+CREATE TABLE specie (
+  nome_scientifico    VARCHAR2(40) NOT NULL,
+  nome_comune         VARCHAR2(40) NOT NULL,
+  stato_conservazione VARCHAR2(20) CHECK ( stato_conservazione IN ( 'LC',
+                                                                    'NT',
+                                                                    'VU',
+                                                                    'EN',
+                                                                    'CR' ) ) NOT NULL,
+  famiglia            VARCHAR2(40) NOT NULL,
+  url_verso           VARCHAR2(100),
+  url_immagine        VARCHAR2(100),
+  CONSTRAINT pk_specie PRIMARY KEY ( nome_scientifico )
+);
+
+CREATE TABLE habitat (
+  codice_eunis    VARCHAR2(10) NOT NULL,
+  nome_habitat    VARCHAR2(40) NOT NULL,
+  url_descrizione VARCHAR2(100),
+  CONSTRAINT pk_habitat PRIMARY KEY ( codice_eunis )
+);
+
+CREATE TABLE localita_avvistamento (
+  plus_code          VARCHAR2(12) NOT NULL,
+  nome               VARCHAR2(40) NOT NULL,
+  area_protetta      NUMBER(1) CHECK ( area_protetta IN ( 0,
+                                                     1 ) ),
+  url_mappa          VARCHAR2(100),
+  codice_iso_regione VARCHAR2(3) NOT NULL,
+  codice_eunis       VARCHAR2(10) NOT NULL,
+  CONSTRAINT pk_localita_avvistamento PRIMARY KEY ( plus_code ),
+  CONSTRAINT fk_localita_regione FOREIGN KEY ( codice_iso_regione )
+    REFERENCES regione ( codice_iso )
+      ON DELETE CASCADE
+);
+
 CREATE TABLE avvistamento (
   codice_avvistamento        VARCHAR2(29) NOT NULL,
   data_avvistamento          DATE NOT NULL,
@@ -224,48 +267,6 @@ CREATE TABLE avvistamento (
   CONSTRAINT fk_avvistamento_localita FOREIGN KEY ( plus_code )
     REFERENCES localita_avvistamento ( plus_code )
       ON DELETE CASCADE
-);
-
-CREATE TABLE specie (
-  nome_scientifico    VARCHAR2(40) NOT NULL,
-  nome_comune         VARCHAR2(40) NOT NULL,
-  stato_conservazione VARCHAR2(20) CHECK ( stato_conservazione IN ( 'LC',
-                                                                    'NT',
-                                                                    'VU',
-                                                                    'EN',
-                                                                    'CR' ) ) NOT NULL,
-  famiglia            VARCHAR2(40) NOT NULL,
-  url_verso           VARCHAR2(100),
-  url_immagine        VARCHAR2(100),
-  CONSTRAINT pk_specie PRIMARY KEY ( nome_scientifico )
-);
-
-CREATE TABLE regione (
-  codice_iso   VARCHAR2(3) NOT NULL,
-  nome_regione VARCHAR2(40) NOT NULL,
-  paese        VARCHAR2(40) NOT NULL,
-  CONSTRAINT pk_regione PRIMARY KEY ( codice_iso )
-);
-
-CREATE TABLE localita_avvistamento (
-  plus_code          VARCHAR2(12) NOT NULL,
-  nome               VARCHAR2(40) NOT NULL,
-  area_protetta      NUMBER(1) CHECK ( area_protetta IN ( 0,
-                                                     1 ) ),
-  url_mappa          VARCHAR2(100),
-  codice_iso_regione VARCHAR2(3) NOT NULL,
-  codice_eunis       VARCHAR2(10) NOT NULL,
-  CONSTRAINT pk_localita_avvistamento PRIMARY KEY ( plus_code ),
-  CONSTRAINT fk_localita_regione FOREIGN KEY ( codice_iso_regione )
-    REFERENCES regione ( codice_iso )
-      ON DELETE CASCADE
-);
-
-CREATE TABLE habitat (
-  codice_eunis    VARCHAR2(10) NOT NULL,
-  nome_habitat    VARCHAR2(40) NOT NULL,
-  url_descrizione VARCHAR2(100),
-  CONSTRAINT pk_habitat PRIMARY KEY ( codice_eunis )
 );
 
 CREATE TABLE esemplare (
@@ -327,7 +328,6 @@ CREATE TABLE condizioni_ambientali (
       ON DELETE CASCADE
 );
 
--- periodo è espresso in mesi
 CREATE TABLE pattern_migratori (
   nome_scientifico_specie VARCHAR2(40) NOT NULL,
   codice_eunis_habitat    VARCHAR2(10) NOT NULL,
