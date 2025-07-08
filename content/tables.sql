@@ -94,10 +94,10 @@
     - Osservatore(Socio) (1,1) [effettua] (1,N) Avvistamento
       Un osservatore può effettuare più avvistamenti, ma ogni avvistamento
       è effettuato da un solo osservatore.
-    
-    - Revisore(Socio) (0,1) [valida] (0,N) Avvistamento 
-      Un revisore può validare più avvistamenti, ma ogni avvistamento può essere
-      validato da un solo revisore.
+
+    - Revisore(Socio) (0,1) [revisore] (0,N) Avvistamento
+      Un revisore può revisionare più avvistamenti, ma ogni avvistamento può essere
+      revisionato da un solo revisore.
 
     - Avvistamento (1,1) [contiene] (1,N) Esemplare
       Un avvistamento può contenere più esemplari, ma ogni esemplare è associato
@@ -121,16 +121,20 @@
       Una località_avvistamento può appartenere a una sola regione,
       ma una regione può avere più località_avvistamento associate.
 
+    - Esemplare (0,N) [rappresenta] (1,1) Specie
+      Un esemplare rappresenta una sola specie,
+      ma una specie può essere rappresentata da più esemplari.
+
     - Specie (1,1) [possiede] (1,N) pattern_migratori
       Una specie può possedere più pattern migratori.
       Ogni pattern migratorio è associato a una sola specie.
 
-    - Habitat (1,N) [è_associato_a] (1,N) pattern_migratori
-      Un habitat può essere associato a più pattern migratori,
-      ma un pattern migratorio è associato a un solo habitat.
+    - Habitat (1,1) [è_destinazione] (1,N) pattern_migratori
+      Un habitat può essere destinazione di più pattern migratori,
+      ma un pattern migratorio ha come destinazione un solo habitat.
 
-    - Habitat (1,N) [è_presentato_in] (0,N) località_avvistamento
-      Un habitat può essere presentato in più località_avvistamento,
+    - Habitat (1,N) [è_presente_in] (0,N) località_avvistamento
+      Un habitat può essere presente in più località_avvistamento,
       ma una località_avvistamento può presentare più habitat.
 
     - osservatore (1,1) [ha_ottenuto] (0,N) badge
