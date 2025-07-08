@@ -89,7 +89,7 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
   è l'entità che rappresenta l'habitat in cui vive la specie di uccello.
   Le informazioni sugli habitat sono registrate dai Responsabili dell'associazione,
   e provengono dalla banca dati Europe Nature Information System (EUNIS).
-  Ogni habitat è associato a una o più specie di uccelli.
+  nel database esistano habitat solo se vi è almeno un pattern migratorio associato.
 
 - regione:
   è l'entità che rappresenta una regione geografica parte di un paese.

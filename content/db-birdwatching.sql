@@ -1,383 +1,4 @@
 --  DBMS: Oracle 19c 
-
-/* Modello concettuale :
-
-  Entità forti:
-    - Socio:
-      PK: codice_tessera
-      Attributi: nome, cognome, email, telefono, data_nascita, data_iscrizione
-      Specializzazioni totale e non disgiunta nei sottotipi:
-      - Osservatore:
-        PK: codice_tessera (ereditato da Socio)
-        Attributi: nessuno specifico
-      - Revisore:
-        PK: codice_tessera (ereditato da Socio)
-        Attributi: data_attribuzione.
-
-    - Avvistamento:
-      PK: codice_avvistamento
-      Attributi:
-        data_avvistamento,
-        ora_avvistamento
-        valutazione (confermato, possibile, non confermato),
-        data_revisione (opzionale),
-      FK: codice_tessera_osservatore (riferimento a Socio)
-      FK: codice_tessera_revisore (riferimento a Socio, opzionale)
-      FK: plus_code (riferimento a località_avvistamento)
-
-    - Specie:
-      PK: nome_scientifico
-      Attributi:
-        nome_comune,
-        stato_conservazione,
-        famiglia,
-        url_verso,
-        url_immagine
-
-    - Regione:
-      PK: codice_iso
-      Attributi:
-        nome_regione,
-        paese,
-
-    - località_avvistamento:
-      PK: plus_code
-      Attributi:
-        nome,
-        area_protetta (booleano),
-        url_mappa,
-      FK: codice_iso_regione (riferimento a Regione)
-
-    - Habitat:
-      PK: codice_EUNIS
-      Attributi:
-        nome_habitat,
-        url_descrizione,
-      
-  Entità deboli:
-    - Esemplare:
-      PK: (codice_avvistamento, numero_esemplare)
-      Attributi:
-        maturità (adulto, giovane), 
-        condizioni_salute (salute, ferito, malato),
-        sesso (maschio, femmina, sconosciuto),
-      FK: codice_avvistamento (riferimento a Avvistamento)
-      FK: nome_scientifico_specie (riferimento a Specie)
-    
-    - Media:
-      PK: (codice_avvistamento, titolo_media)
-      Attributi:
-        tipo_media (foto, video, audio),
-        url_media,
-        formato_media (jpg, png, mp4, mp3, wav),
-        titolo_media,
-      FK: codice_avvistamento (riferimento a Avvistamento)
-
-    - Condizioni_Ambientali:
-      PK: codice_avvistamento
-      Attributi:
-        meteo (sole, nuvoloso, pioggia, neve),
-        temperatura (in gradi Celsius),
-        umidità (percentuale),
-        vento (veloce, moderato, debole, assente),
-      FK: codice_avvistamento (riferimento a Avvistamento)
-
-    - badge:
-      PK: (nome_badge, codice_tessera_socio)
-      Attributi:
-        data_assegnazione,
-        criterio_assegnazione (es: primo avvistamento, decimo avvistamento, prima osservazione di una specie in stato CR o EN),
-        url_badge (opzionale, per badge con immagini),
-      FK: codice_tessera_socio (riferimento a Socio)
-
-  Relazioni:
-    - Osservatore(Socio) (1,1) [effettua] (1,N) Avvistamento
-      Un osservatore può effettuare più avvistamenti, ma ogni avvistamento
-      è effettuato da un solo osservatore.
-    
-    - Revisore(Socio) (0,1) [valida] (0,N) Avvistamento 
-      Un revisore può validare più avvistamenti, ma ogni avvistamento può essere
-      validato da un solo revisore.
-
-    - Avvistamento (1,1) [contiene] (1,N) Esemplare
-      Un avvistamento può contenere più esemplari, ma ogni esemplare è associato
-      a un solo avvistamento.
-
-    - Avvistamento (1,1) [ha] (0,N) Media
-      Un avvistamento può avere più media associati, ma ogni media è associato
-      a un solo avvistamento.
-
-    - Avvistamento (1,1) [ha] (0,1) Condizioni_Ambientali
-      Un avvistamento può avere condizioni ambientali associate, ma non è obbligatorio.
-      Ogni avvistamento può avere al massimo una condizione ambientale associata.
-
-    - Avvistamento (1,N) [avviene_in] (1,1) località_avvistamento
-      Un avvistamento può avvenire in una sola località_avvistamento, ma una località_avvistamento può
-      essere associata a più avvistamenti.
-
-    - località_avvistamento (1,N) [appartiene_a] (1,1) Regione
-      Una località_avvistamento può appartenere a una sola regione, ma una regione può
-      avere più località_avvistamento associate.
-
-    - Specie (1,1) [possiede] (1,N) pattern_migratori
-      Una specie può possedere più pattern migratori.
-      Ogni pattern migratorio è associato a una sola specie.
-
-    - Habitat (1,N) [è_associato_a] (0,N) pattern_migratori
-      Un habitat può essere associato a più pattern migratori, ma un pattern migratorio è associato a un solo habitat.
-
-    - Habitat (1,N) [è_presentato_in] (0,N) località_avvistamento
-      Un habitat può essere presentato in più località_avvistamento,
-      ma una località_avvistamento può presentare più habitat.
-
-    - osservatore (1,1) [ha_ottenuto] (0,N) badge
-      Un osservatore può ottenere più badge,
-      ma ogni badge è associato a un solo osservatore.
-
-
-  Entità di associazione:
-    - pattern_migratori: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
-      PK: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
-      FK: nome_scientifico_specie (riferimento a Specie)
-      FK: codice_EUNIS_habitat (riferimento a Habitat)
-      Attributi:
-        motivo_migrazione (es: nidificazione, svernamento, migrazione, stanziale)
-        periodo_inizio (mese)
-        periodo_fine (mese)
-
-    - associazione_località_habitat (tra località_avvistamento e habitat)
-      PK: (plus_code, codice_eunis)
-      FK: plus_code (riferimento a località_avvistamento)
-      FK: codice_eunis (riferimento a Habitat)
- */
-
-CREATE USER socio IDENTIFIED BY socio
-  DEFAULT TABLESPACE users
-  TEMPORARY TABLESPACE temp;
-
-GRANT connect,resource TO socio;
-
-CREATE USER socio_revisore IDENTIFIED BY socio_revisore
-  DEFAULT TABLESPACE users
-  TEMPORARY TABLESPACE temp;
-
-GRANT connect,resource TO socio_revisore;
-
-CREATE USER responsabile IDENTIFIED BY responsabile
-  DEFAULT TABLESPACE users
-  TEMPORARY TABLESPACE temp;
-
-GRANT connect,resource TO responsabile;
-
-
-CREATE TABLE socio (
-  codice_tessera  VARCHAR2(16),
-  nome            VARCHAR2(30) NOT NULL,
-  cognome         VARCHAR2(30) NOT NULL,
-  email           VARCHAR2(60) UNIQUE NOT NULL,
-  telefono        VARCHAR2(15),
-  data_nascita    DATE NOT NULL,
-  data_iscrizione DATE DEFAULT sysdate NOT NULL,
-  CONSTRAINT fm_cd_tessera CHECK ( REGEXP_LIKE ( codice_tessera,
-                                                 '^ABW[A-Z]{2,3}[0-9]{4}[A-Z]{2}[0-9]{4}$' ) ),
-  CONSTRAINT pk_socio PRIMARY KEY ( codice_tessera )
-);
-
-CREATE TABLE osservatore (
-  codice_tessera VARCHAR2(16) NOT NULL,
-  CONSTRAINT fk_osservatore_socio FOREIGN KEY ( codice_tessera )
-    REFERENCES socio ( codice_tessera )
-      ON DELETE CASCADE,
-  CONSTRAINT pk_osservatore PRIMARY KEY ( codice_tessera )
-);
-
-CREATE TABLE revisore (
-  codice_tessera    VARCHAR2(16) NOT NULL,
-  data_attribuzione DATE DEFAULT sysdate NOT NULL,
-  CONSTRAINT fk_revisore_socio FOREIGN KEY ( codice_tessera )
-    REFERENCES socio ( codice_tessera )
-      ON DELETE CASCADE,
-  CONSTRAINT pk_revisore PRIMARY KEY ( codice_tessera )
-);
-
-CREATE TABLE avvistamento (
-  codice_avvistamento        VARCHAR2(29) NOT NULL,
-  data_avvistamento          DATE NOT NULL,
-  ora_avvistamento           VARCHAR2(5) NOT NULL,
-  valutazione                VARCHAR2(20) CHECK ( valutazione IN ( 'confermato',
-                                                    'possibile',
-                                                    'non confermato' ) ),
-  data_revisione             DATE,
-  codice_tessera_osservatore VARCHAR2(16) NOT NULL,
-  codice_tessera_revisore    VARCHAR2(16),
-  plus_code                  VARCHAR2(12) NOT NULL,
-  CONSTRAINT fm_cd_avvistamento CHECK ( REGEXP_LIKE ( codice_avvistamento,
-                                                      '^[A-Z0-9]{16}-[0-9]{12}-[0-9]{3}$' ) ),
-  CONSTRAINT pk_avvistamento PRIMARY KEY ( codice_avvistamento ),
-  CONSTRAINT fk_avvistamento_osservatore FOREIGN KEY ( codice_tessera_osservatore )
-    REFERENCES osservatore ( codice_tessera )
-      ON DELETE CASCADE,
-  CONSTRAINT fk_avvistamento_revisore FOREIGN KEY ( codice_tessera_revisore )
-    REFERENCES revisore ( codice_tessera )
-      ON DELETE SET NULL,
-  CONSTRAINT fk_avvistamento_localita FOREIGN KEY ( plus_code )
-    REFERENCES localita_avvistamento ( plus_code )
-      ON DELETE CASCADE
-);
-
-CREATE TABLE specie (
-  nome_scientifico    VARCHAR2(40) NOT NULL,
-  nome_comune         VARCHAR2(40) NOT NULL,
-  stato_conservazione VARCHAR2(20) CHECK ( stato_conservazione IN ( 'LC',
-                                                                    'NT',
-                                                                    'VU',
-                                                                    'EN',
-                                                                    'CR' ) ) NOT NULL,
-  famiglia            VARCHAR2(40) NOT NULL,
-  url_verso           VARCHAR2(100),
-  url_immagine        VARCHAR2(100),
-  CONSTRAINT pk_specie PRIMARY KEY ( nome_scientifico )
-);
-
-CREATE TABLE regione (
-  codice_iso   VARCHAR2(3) NOT NULL,
-  nome_regione VARCHAR2(40) NOT NULL,
-  paese        VARCHAR2(40) NOT NULL,
-  CONSTRAINT pk_regione PRIMARY KEY ( codice_iso )
-);
-
-CREATE TABLE localita_avvistamento (
-  plus_code          VARCHAR2(12) NOT NULL,
-  nome               VARCHAR2(40) NOT NULL,
-  area_protetta      NUMBER(1) CHECK ( area_protetta IN ( 0,
-                                                     1 ) ),
-  url_mappa          VARCHAR2(100),
-  codice_iso_regione VARCHAR2(3) NOT NULL,
-  codice_eunis       VARCHAR2(10) NOT NULL,
-  CONSTRAINT pk_localita_avvistamento PRIMARY KEY ( plus_code ),
-  CONSTRAINT fk_localita_regione FOREIGN KEY ( codice_iso_regione )
-    REFERENCES regione ( codice_iso )
-      ON DELETE CASCADE
-);
-
-CREATE TABLE habitat (
-  codice_eunis    VARCHAR2(10) NOT NULL,
-  nome_habitat    VARCHAR2(40) NOT NULL,
-  url_descrizione VARCHAR2(100),
-  CONSTRAINT pk_habitat PRIMARY KEY ( codice_eunis )
-);
-
-CREATE TABLE esemplare (
-  codice_avvistamento     VARCHAR2(28) NOT NULL,
-  numero_esemplare        NUMBER(3) NOT NULL,
-  maturita                VARCHAR2(8) CHECK ( maturita IN ( 'adulto',
-                                             'giovane',
-                                             'pulcino' ) ),
-  condizioni_salute       VARCHAR2(8) CHECK ( condizioni_salute IN ( 'sano',
-                                                               'malato',
-                                                               'ferito' ) ),
-  sesso                   VARCHAR2(12) CHECK ( sesso IN ( 'maschio',
-                                        'femmina',
-                                        'sconosciuto' ) ),
-  nome_scientifico_specie VARCHAR2(40) NOT NULL,
-  CONSTRAINT pk_esemplare PRIMARY KEY ( codice_avvistamento,
-                                        numero_esemplare ),
-  CONSTRAINT fk_esemplare_avvistamento FOREIGN KEY ( codice_avvistamento )
-    REFERENCES avvistamento ( codice_avvistamento )
-      ON DELETE CASCADE,
-  CONSTRAINT fk_esemplare_specie FOREIGN KEY ( nome_scientifico_specie )
-    REFERENCES specie ( nome_scientifico )
-      ON DELETE CASCADE
-);
-
-CREATE TABLE media (
-  codice_avvistamento VARCHAR2(28) NOT NULL,
-  titolo_media        VARCHAR2(40) NOT NULL,
-  tipo_media          VARCHAR2(6) CHECK ( tipo_media IN ( 'foto',
-                                                 'video',
-                                                 'audio' ) ),
-  url_media           VARCHAR2(100) NOT NULL,
-  formato_media       VARCHAR2(4) CHECK ( formato_media IN ( 'jpg',
-                                                       'png',
-                                                       'mp4',
-                                                       'mp3',
-                                                       'wav' ) ),
-  CONSTRAINT pk_media PRIMARY KEY ( codice_avvistamento,
-                                    titolo_media ),
-  CONSTRAINT fk_media_avvistamento FOREIGN KEY ( codice_avvistamento )
-    REFERENCES avvistamento ( codice_avvistamento )
-);
-
-CREATE TABLE condizioni_ambientali (
-  codice_avvistamento VARCHAR2(28) NOT NULL,
-  meteo               VARCHAR2(10) CHECK ( meteo IN ( 'sole',
-                                        'nuvoloso',
-                                        'pioggia',
-                                        'neve' ) ),
-  temperatura         NUMBER(3,1),
-  umidita             NUMBER(3,1),
-  vento               VARCHAR2(10) CHECK ( vento IN ( 'veloce',
-                                        'moderato',
-                                        'debole',
-                                        'assente' ) ),
-  CONSTRAINT pk_condizioni_ambientali PRIMARY KEY ( codice_avvistamento ),
-  CONSTRAINT fk_condizioni_avvistamento FOREIGN KEY ( codice_avvistamento )
-    REFERENCES avvistamento ( codice_avvistamento )
-      ON DELETE CASCADE
-);
-
--- periodo è espresso in mesi
-CREATE TABLE pattern_migratori (
-  nome_scientifico_specie VARCHAR2(40) NOT NULL,
-  codice_eunis_habitat    VARCHAR2(10) NOT NULL,
-  motivo_migrazione       VARCHAR2(15) CHECK ( motivo_migrazione IN ( 'stanziale',
-                                                                'nidificazione',
-                                                                'svernamento',
-                                                                'migrazione' ) ),
-  periodo_inizio          NUMERIC(2) CHECK ( periodo_inizio BETWEEN 1 AND 12 ) NOT NULL,
-  periodo_fine            NUMERIC(2) CHECK ( periodo_fine BETWEEN 1 AND 12 ) NOT NULL,
-  CONSTRAINT pk_pattern_migratori PRIMARY KEY ( nome_scientifico_specie,
-                                                codice_eunis_habitat,
-                                                motivo_migrazione ),
-  CONSTRAINT fk_pattern_migratori_specie FOREIGN KEY ( nome_scientifico_specie )
-    REFERENCES specie ( nome_scientifico )
-      ON DELETE CASCADE,
-  CONSTRAINT fk_pattern_migratori_habitat FOREIGN KEY ( codice_eunis_habitat )
-    REFERENCES habitat ( codice_eunis )
-      ON DELETE CASCADE
-);
-
-CREATE TABLE badge (
-  nome_badge            VARCHAR2(25) CHECK ( nome_badge IN ( 'occhio di Kakapo',
-                                                  'occhio di Colibrì',
-                                                  'custode della natura' ) ) NOT NULL,
-  codice_tessera_socio  VARCHAR2(16) NOT NULL,
-  data_assegnazione     DATE DEFAULT sysdate NOT NULL,
-  criterio_assegnazione VARCHAR2(50) CHECK ( criterio_assegnazione IN ( 'primo avvistamento confermato',
-                                                                        'decimo avvistamento confermato',
-                                                                        'prima osservazione di una specie CR o EN' ) ) NOT NULL
-                                                                        ,
-  url_badge             VARCHAR2(100),
-  CONSTRAINT pk_badge PRIMARY KEY ( nome_badge,
-                                    codice_tessera_socio ),
-  CONSTRAINT fk_badge_socio FOREIGN KEY ( codice_tessera_socio )
-    REFERENCES socio ( codice_tessera )
-      ON DELETE CASCADE
-);
-
-CREATE TABLE associazione_localita_habitat (
-  plus_code    VARCHAR2(12) NOT NULL,
-  codice_eunis VARCHAR2(10) NOT NULL,
-  CONSTRAINT pk_associazione_localita_habitat PRIMARY KEY ( plus_code,
-                                                            codice_eunis ),
-  CONSTRAINT fk_associazione_localita FOREIGN KEY ( plus_code )
-    REFERENCES localita_avvistamento ( plus_code )
-      ON DELETE CASCADE,
-  CONSTRAINT fk_associazione_habitat FOREIGN KEY ( codice_eunis )
-    REFERENCES habitat ( codice_eunis )
-      ON DELETE CASCADE
-);
-
 /*
   Vista per mostrare le specie che vivono in un habitat specifico,
   nei vari periodi dell'anno, includendo il motivo.
@@ -838,7 +459,7 @@ CREATE OR REPLACE TYPE tbe_condizioni_salute AS
 /*  
   Procedura Automatica di Inserimento Avvistamenti Questa procedura automatizza
   l'inserimento degli avvistamenti, gestendo anche le tabelle correlate. Vengono coinvolte:
-    - Avvistamento
+    - Avvistamento (inserito sempre)
     - Osservatore (inserito solo se non già esistente)
     - Esemplare (sempre inserito)
     - Località_avvistamento (inserita solo se non già esistente)
@@ -1025,43 +646,47 @@ EXCEPTION
     );
 END;
 
-/*  Procedura per inserire una nuova specie (coinvolge 3 tabelle).
-  La procedura verifica che il nome_scientifico non esista già nella tabella specie.
-  Se esiste, viene sollevata un'eccezione. inoltre, si inserisce l'habitat (se non esiste già)
-  
-*/
-CREATE OR REPLACE PROCEDURE insert_specie (
-  p_nome_scientifico     IN specie.nome_scientifico%TYPE,
-  p_nome_comune          IN specie.nome_comune%TYPE,
-  p_stato_conservazione  IN specie.stato_conservazione%TYPE,
-  p_famiglia             IN specie.famiglia%TYPE,
-  p_url_verso            IN specie.url_verso%TYPE,
-  p_url_immagine         IN specie.url_immagine%TYPE,
-  p_pattern_migratorio   IN pattern_migratorio%TYPE,
-  p_codice_eunis_habitat IN pattern_migratorio.codice_eunis_habitat%TYPE,
-  p_motivo_migrazione    IN pattern_migratorio.motivo_migrazione%TYPE,
-  p_periodo_inizio       IN pattern_migratorio.periodo_inizio%TYPE,
-  p_periodo_fine         IN pattern_migratorio.periodo_fine%TYPE,
-  p_habitat              IN habitat%TYPE,
-  p_codice_eunis         IN habitat.codice_eunis%TYPE,
-  p_nome_habitat         IN habitat.nome_habitat%TYPE,
-  p_url_descrizione      IN habitat.url_descrizione%TYPE
-) IS
-  specie_exists NUMBER;
-BEGIN
-  -- Verifica che il nome_scientifico non esista già
-  SELECT COUNT(*)
-    INTO specie_exists
-    FROM specie
-   WHERE nome_scientifico = p_nome_scientifico;
 
-  -- Inserimento della nuova specie
-  IF specie_exists > 0 THEN
-    raise_application_error(
-      -20001,
-      'La specie con il nome scientifico specificato esiste già.'
-    );
-  END IF;
+/*
+  Questa procedura automatizza l'inserimento di pattern migratori e degli
+  habitat ad essi associati per una data specie.
+  La procedura gestisce l'inserimento di:
+    - Pattern Migratori: Viene inserito un nuovo pattern migratorio
+    associato a una specie e a un habitat specifico.
+    - Habitat: Un nuovo habitat viene inserito e associato al pattern
+    migratorio specificato, solo se non esiste già.
+    - Specie: Una nuova specie viene inserita, solo se non è già presente.
+
+  Vengono costruiti automaticamente i pattern migratori e gli habitat
+  di destinazione associati alle diverse specie.
+
+  Per le specie stanziali, il pattern migratorio deve coprire l'intero anno.
+  Questo significa che il periodo_inizio deve essere 1 (gennaio)
+  e il periodo_fine deve essere 12 (dicembre).
+  Tale vincolo è gestito dal trigger trg_check_year_pattern_migratori_stanziali.
+
+  Se il pattern migratorio esiste già (duplicato), viene sollevata specificamente
+  un'eccezione.
+*/
+CREATE OR REPLACE PROCEDURE add_pattern_migratorio (
+  p_nome_scientifico    IN specie.nome_scientifico%TYPE,
+  p_nome_comune         IN specie.nome_comune%TYPE,
+  p_stato_conservazione IN specie.stato_conservazione%TYPE,
+  p_famiglia            IN specie.famiglia%TYPE,
+  p_url_verso           IN specie.url_verso%TYPE,
+  p_url_immagine        IN specie.url_immagine%TYPE,
+  p_motivo_migrazione   IN pattern_migratorio.motivo_migrazione%TYPE,
+  p_periodo_inizio      IN pattern_migratorio.periodo_inizio%TYPE,
+  p_periodo_fine        IN pattern_migratorio.periodo_fine%TYPE,
+  p_codice_eunis        IN habitat.codice_eunis%TYPE,
+  p_nome_habitat        IN habitat.nome_habitat%TYPE,
+  p_url_descrizione     IN habitat.url_descrizione%TYPE
+) IS
+  specie_exists  NUMBER;
+  pattern_exists NUMBER;
+  duplicate_pattern_migratorio EXCEPTION;
+BEGIN
+  -- Se la specie non esiste, la inseriamo
   INSERT INTO specie (
     nome_scientifico,
     nome_comune,
@@ -1069,14 +694,21 @@ BEGIN
     famiglia,
     url_verso,
     url_immagine
-  ) VALUES ( p_nome_scientifico,
-             p_nome_comune,
-             p_stato_conservazione,
-             p_famiglia,
-             p_url_verso,
-             p_url_immagine );
-  
-  -- Inserimento dell'habitat se non esiste
+  )
+    SELECT p_nome_scientifico,
+           p_nome_comune,
+           p_stato_conservazione,
+           p_famiglia,
+           p_url_verso,
+           p_url_immagine
+      FROM dual
+     WHERE NOT EXISTS (
+      SELECT 1
+        FROM specie
+       WHERE nome_scientifico = p_nome_scientifico
+    );
+
+  -- se l'habitat non esiste, lo inseriamo
   INSERT INTO habitat (
     codice_eunis,
     nome_habitat,
@@ -1092,32 +724,217 @@ BEGIN
        WHERE codice_eunis = p_codice_eunis
     );
 
-  -- Inserimento dei pattern migratori associati (se non esistono già)
+  -- verifica che il pattern migratorio non esista già
+  SELECT COUNT(*)
+    INTO pattern_exists
+    FROM pattern_migratori
+   WHERE nome_scientifico_specie = p_nome_scientifico
+     AND codice_eunis_habitat = p_codice_eunis
+     AND motivo_migrazione = p_motivo_migrazione;
+
+  IF pattern_exists > 0 THEN
+    RAISE duplicate_pattern_migratorio;
+  END IF;
+
+  -- Inserimento dei pattern migratori associati
   INSERT INTO pattern_migratori (
     nome_scientifico_specie,
     codice_eunis_habitat,
     motivo_migrazione,
     periodo_inizio,
     periodo_fine
-  )
-    SELECT p_nome_scientifico,
-           p_codice_eunis_habitat,
-           p_motivo_migrazione,
-           p_periodo_inizio,
-           p_periodo_fine
-      FROM dual
-     WHERE NOT EXISTS (
-      SELECT 1
-        FROM pattern_migratori
-       WHERE ( nome_scientifico_specie = p_nome_scientifico
-         AND codice_eunis_habitat = p_codice_eunis_habitat
-         AND motivo_migrazione = p_motivo_migrazione )
-    );
+  ) VALUES ( p_nome_scientifico,
+             p_codice_eunis,
+             p_motivo_migrazione,
+             p_periodo_inizio,
+             p_periodo_fine );
 
+  COMMIT;
 EXCEPTION
+  WHEN duplicate_pattern_migratorio THEN
+    raise_application_error(
+      -20002,
+      'Esiste già un pattern migratorio per questa specie e habitat.'
+    );
+    ROLLBACK;
   WHEN OTHERS THEN
     raise_application_error(
       -20003,
       'Errore durante l''inserimento della specie o dei pattern migratori'
     );
+    ROLLBACK;
+END;
+
+
+/*
+  Questa procedura permette a un revisore effettuare la valutazione di
+  un avvistamento. Durante l'operazione, vengono registrate
+  la data della revisione (se non specificata, viene usata la data corrente)
+  e il codice della tessera del revisore che ha eseguito la revisione.
+
+La procedura verifica innanzitutto che l'avvistamento e il revisore esistano.
+Inoltre, controlla che la data di revisione sia successiva sia alla data
+dell'avvistamento che a quella di designazione del revisore.
+Se queste condizioni non sono rispettate, verrà generata un'eccezione.
+
+Requisiti per la Revisione:
+Vengono imposti i seguenti requisiti per la valutazione:
+    - Se all'avvistamento non sono associati media o condizioni ambientali
+      e la specie si trova in stato di conservazione Criticamente Minacciata (CR) o In Pericolo (EN),
+      la valutazione della revisione non può essere diversa da "non confermato".
+    - Se all'avvistamento non è associato alcun contenuto multimediale,
+      la valutazione della revisione non può essere "confermato".
+
+Ricordiamo che i possibili stati di valutazione sono: "confermato", "possibile" e "non confermato".
+  */
+
+CREATE OR REPLACE PROCEDURE revisione_avvistamento (
+  p_codice_avvistamento     IN avvistamento.codice_avvistamento%TYPE,
+  p_codice_tessera_revisore IN revisore.codice_tessera%TYPE,
+  p_valutazione             IN avvistamento.valutazione%TYPE,
+  p_data_revisione          IN avvistamento.data_revisione%TYPE DEFAULT sysdate
+) AS
+  var_exists_avvistamento         NUMBER := 0;
+  avvistamento_not_found EXCEPTION;
+  revisore_not_found EXCEPTION;
+  revisore_precedente_designazione EXCEPTION;
+  revisore_precedente_avvistamento EXCEPTION;
+  revisione_cannot_be_confirmed EXCEPTION;
+  revisione_must_be_not_confirmed EXCEPTION;
+  var_data_designazione_revisore  revisore.data_assegnazione%TYPE;
+  var_media_count                 NUMBER := 0;
+  var_condizioni_ambientali_count NUMBER := 0;
+  var_stato_conservazione         specie.stato_conservazione%TYPE;
+BEGIN
+  -- Verifica se l'avvistamento esiste
+  SELECT COUNT(*)
+    INTO var_exists_avvistamento
+    FROM avvistamento
+   WHERE codice_avvistamento = p_codice_avvistamento;
+
+  IF var_exists_avvistamento = 0 THEN
+    RAISE avvistamento_not_found;
+  END IF;
+
+  -- Verifica se il revisore esiste e recupera la data di designazione
+  SELECT COUNT(*)
+    INTO var_revisore_exists
+    FROM revisore
+   WHERE codice_tessera = p_codice_tessera_revisore;
+
+  IF var_revisore_exists = 0 THEN
+    RAISE revisore_not_found;
+  END IF;
+
+  -- Verifica che la revisione non sia precedente alla designazione
+  SELECT data_assegnazione
+    INTO var_data_designazione_revisore
+    FROM revisore
+   WHERE codice_tessera = p_codice_tessera_revisore;
+
+  IF p_data_revisione < var_data_designazione_revisore THEN
+    RAISE revisore_precedente_designazione;
+  END IF;
+
+  -- Verifica se l'avvistamento è stato effettuato prima della data di revisione
+  SELECT COUNT(*)
+    INTO var_exists_avvistamento
+    FROM avvistamento
+   WHERE codice_avvistamento = p_codice_avvistamento
+     AND data_avvistamento <= p_data_revisione;
+
+  IF var_exists_avvistamento = 0 THEN
+    RAISE revisione_precedente_avvistamento;
+  END IF;
+
+  -- Recupera lo stato di conservazione della specie associata all'avvistamento
+  -- tutti gli esemplari di un avvistamento si riferiscono alla stessa specie
+  SELECT stato_conservazione
+    INTO var_stato_conservazione
+    FROM specie s
+   WHERE s.nome_scientifico = (
+    SELECT MIN(e.nome_scientifico_specie)
+      FROM esemplare e
+     WHERE e.codice_avvistamento = p_codice_avvistamento
+  );
+
+  -- Controlla se l'avvistamento ha media associati
+  SELECT COUNT(*)
+    INTO var_media_count
+    FROM media
+   WHERE codice_avvistamento = p_codice_avvistamento;
+
+  -- Controlla se l'avvistamento ha condizioni ambientali associate
+  SELECT COUNT(*)
+    INTO var_condizioni_ambientali_count
+    FROM condizioni_ambientali
+   WHERE codice_avvistamento = p_codice_avvistamento;
+
+  -- Verifica i requisiti per la valutazione
+  IF
+    var_media_count = 0
+    AND p_valutazione = 'confermato'
+  THEN
+    RAISE revisione_cannot_be_confirmed;
+  ELSIF
+    var_media_count = 0
+    AND var_condizioni_ambientali_count = 0
+    AND var_stato_conservazione IN ( 'CR',
+                                     'EN' )
+    AND p_valutazione = 'confermato'
+  THEN
+    RAISE revisione_cannot_be_confirmed;
+  END IF;
+
+  -- Aggiorna l'avvistamento con la valutazione e la data di revisione
+  -- una volta che sono stati verificati i requisiti
+  UPDATE avvistamento
+     SET valutazione = p_valutazione,
+         data_revisione = p_data_revisione,
+         codice_tessera_revisore = p_codice_tessera_revisore
+   WHERE codice_avvistamento = p_codice_avvistamento;
+  COMMIT;
+EXCEPTION
+  WHEN avvistamento_not_found THEN
+    raise_application_error(
+      -20007,
+      'L''avvistamento specificato non esiste.'
+    );
+    ROLLBACK;
+  WHEN revisore_not_found THEN
+    raise_application_error(
+      -20008,
+      'Il revisore specificato non esiste.'
+    );
+    ROLLBACK;
+  WHEN revisore_precedente_designazione THEN
+    raise_application_error(
+      -20009,
+      'La data di revisione non può essere precedente alla data di designazione del revisore.'
+    );
+    ROLLBACK;
+  WHEN revisore_precedente_avvistamento THEN
+    raise_application_error(
+      -20010,
+      'La data di revisione non può essere precedente alla data dell''avvistamento.'
+    );
+    ROLLBACK;
+  WHEN revisione_cannot_be_confirmed THEN
+    raise_application_error(
+      -20018,
+      'La revisione non può essere confermata se non sono associati media o condizioni ambientali, o se la specie è in stato di conservazione Criticamente Minacciata (CR) o In Pericolo (EN).'
+    );
+    ROLLBACK;
+  WHEN revisione_must_be_not_confirmed THEN
+    raise_application_error(
+      -20021,
+      'La revisione deve essere "non confermato" se non sono associati media o condizioni ambientali e la specie è in stato di conservazione Criticamente Minacciata (CR) o In Pericolo (EN).'
+    );
+    ROLLBACK;
+  WHEN OTHERS THEN
+    raise_application_error(
+      -20020,
+      'Errore durante la revisione dell''avvistamento.'
+    );
+    ROLLBACK;
 END;
