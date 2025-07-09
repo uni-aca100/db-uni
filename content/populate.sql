@@ -1179,11 +1179,6 @@ INSERT INTO media VALUES ( 'ABWFI2015IT0001-20210509-001',
                            'audio',
                            'https://cloud.it/media/nbcjd.wav',
                            'wav' );
-INSERT INTO media VALUES ( 'ABWFI2015IT0001-20220814-001',
-                           'audio1',
-                           'audio',
-                           'https://cloud.it/media/kcj.wav',
-                           'wav' );
 INSERT INTO media VALUES ( 'ABWBO2000DV0001-20220323-001',
                            'foto1',
                            'foto',
@@ -1209,8 +1204,65 @@ INSERT INTO media VALUES ( 'ABWBA2001RR0001-20230718-001',
                            'audio',
                            'https://cloud.it/media/lcj.wav',
                            'wav' );
-INSERT INTO media VALUES ( 'ABWRM2000SM0002-20230720-001',
-                           'audio1',
-                           'audio',
-                           'https://cloud.it/media/lkck.wav',
-                           'wav' );
+                           
+-- Popolamento tabella dispositivo_richiamo
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWMI2010LR0001-20230701-001',
+                                          'Echo1',
+                                          'BirdCo',
+                                          'territoriale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWRM2003MB0001-20201005-001',
+                                          'SongX',
+                                          'FlyTech',
+                                          'corteggiamento' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWTO2000NG0001-20200113-001',
+                                          'CallMini',
+                                          'Avia',
+                                          'sociale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWPA2007FR0001-20201104-001',
+                                          'Whistle',
+                                          'Orni',
+                                          'territoriale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWVE2001LB0001-20200606-001',
+                                          'Chirp',
+                                          'Birdy',
+                                          'corteggiamento' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2010SE0003-20210222-001',
+                                          'Tweet',
+                                          'Sky',
+                                          'sociale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2005DC0001-20210418-001',
+                                          'Echo2',
+                                          'BirdCo',
+                                          'territoriale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2015IT0001-20210509-001',
+                                          'CallPro',
+                                          'Avia',
+                                          'corteggiamento' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBA2008SG0001-20210612-001',
+                                          'WhistlX',
+                                          'Orni',
+                                          'territoriale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001-20210703-001',
+                                          'Chirp2',
+                                          'Birdy',
+                                          'sociale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWRM2000MC0001-20210711-001',
+                                          'SongY',
+                                          'FlyTech',
+                                          'corteggiamento' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001-20220812-001',
+                                          'EchoMini',
+                                          'BirdCo',
+                                          'territoriale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001-20220323-001',
+                                          'CallLite',
+                                          'Avia',
+                                          'sociale' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2015IT0001-20220814-001',
+                                          'WhistlZ',
+                                          'Orni',
+                                          'corteggiamento' );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2010FB0005-20220725-001',
+                                          'Chirp3',
+                                          'Birdy',
+                                          'territoriale' );
