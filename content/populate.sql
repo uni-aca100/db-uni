@@ -1,52 +1,20 @@
 -- Popolamento tabella regione
-INSERT INTO regione VALUES ( 'IT-25',
-                             'Lombardia',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-62',
-                             'Lazio',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-34',
-                             'Veneto',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-82',
-                             'Sicilia',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-52',
-                             'Toscana',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-21',
-                             'Piemonte',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-45',
-                             'Emilia-Romagna',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-72',
-                             'Campania',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'IT-75',
-                             'Puglia',
-                             'Italia' );
-INSERT INTO regione VALUES ( 'FR-ARA',
-                             'Alvernia-Rodano-Alpi',
-                             'Francia' );
-INSERT INTO regione VALUES ( 'DE-BY',
-                             'Baviera',
-                             'Germania' );
-INSERT INTO regione VALUES ( 'ES-AN',
-                             'Andalusia',
-                             'Spagna' );
-INSERT INTO regione VALUES ( 'FR-BFC',
-                             'Borgogna-Franca Contea',
-                             'Francia' );
-INSERT INTO regione VALUES ( 'NL-NH',
-                             'Noord-Holland',
-                             'Paesi Bassi' );
-INSERT INTO regione VALUES ( 'SE-AB',
-                             'Stockholm',
-                             'Svezia' );
-INSERT INTO regione VALUES ( 'PT-11',
-                             'Lisboa',
-                             'Portogallo' );
+INSERT INTO regione VALUES ('Lombardia', 'Italia', 0);
+INSERT INTO regione VALUES ('Lazio', 'Italia', 0);
+INSERT INTO regione VALUES ('Veneto', 'Italia', 0);
+INSERT INTO regione VALUES ('Sicilia', 'Italia', 0);
+INSERT INTO regione VALUES ('Toscana', 'Italia', 0);
+INSERT INTO regione VALUES ('Piemonte', 'Italia', 0);
+INSERT INTO regione VALUES ('Emilia-Romagna', 'Italia', 0);
+INSERT INTO regione VALUES ('Campania', 'Italia', 0);
+INSERT INTO regione VALUES ('Puglia', 'Italia', 0);
+INSERT INTO regione VALUES ('Alvernia-Rodano-Alpi', 'Francia', 0);
+INSERT INTO regione VALUES ('Borgogna-Franca Contea', 'Francia', 0);
+INSERT INTO regione VALUES ('Baviera', 'Germania', 0);
+INSERT INTO regione VALUES ('Andalusia', 'Spagna', 0);
+INSERT INTO regione VALUES ('Noord-Holland', 'Paesi Bassi', 0);
+INSERT INTO regione VALUES ('Stockholm', 'Svezia', 0);
+INSERT INTO regione VALUES ('Lisboa', 'Portogallo', 0);
 
 -- Popolamento tabella socio
 INSERT INTO socio VALUES ( 'ABWMI2010LR0001',
@@ -405,106 +373,26 @@ INSERT INTO habitat VALUES ( 'B2.4',
                              'https://cloud.it/habitat/dune_costiere' );
 
 -- Popolamento tabella localita_avvistamento
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G8F+5V',
-                                           'Parco Nazionale del Gran Paradiso',
-                                           1,
-                                           'https://cloud.it/maps/gran_paradiso',
-                                           'IT-21' );
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G7F+2W',
-                                           'Lago di Garda',
-                                           0,
-                                           'https://cloud.it/maps/lago_garda',
-                                           'IT-25' );
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G6F+3X',
-                                           'Parco Regionale della Maremma',
-                                           1,
-                                           'https://cloud.it/maps/maremma',
-                                           'IT-52' );
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G5F+4Y',
-                                           'Oasi di Vendicari',
-                                           1,
-                                           'https://cloud.it/maps/vendicari',
-                                           'IT-82' );
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G4F+5Z',
-                                           'Parco Nazionale del Circeo',
-                                           1,
-                                           'https://cloud.it/maps/circeo',
-                                           'IT-62' );
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G3F+6A',
-                                           'Delta del Po',
-                                           1,
-                                           'https://cloud.it/maps/delta_po',
-                                           'IT-45' );
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G2F+7B',
-                                           'Vesuvio',
-                                           0,
-                                           'https://cloud.it/maps/vesuvio',
-                                           'IT-72' );
-INSERT INTO localita_avvistamento VALUES ( '8FVC9G1F+8C',
-                                           'Gargano',
-                                           1,
-                                           'https://cloud.it/maps/gargano',
-                                           'IT-75' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G8F+9D',
-                                           'Parc national de la Vanoise',
-                                           1,
-                                           'https://cloud.it/maps/vanoise',
-                                           'FR-ARA' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G7F+0E',
-                                           'Réserve naturelle de Camargue',
-                                           1,
-                                           'https://cloud.it/maps/camargue',
-                                           'FR-BFC' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G6F+1F',
-                                           'Lac Léman',
-                                           0,
-                                           'https://cloud.it/maps/lac_leman',
-                                           'FR-ARA' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G5F+2G',
-                                           'Bayerischer Wald',
-                                           1,
-                                           'https://cloud.it/maps/bayerischer_wald',
-                                           'DE-BY' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G4F+3H',
-                                           'Donauauen',
-                                           0,
-                                           'https://cloud.it/maps/donauauen',
-                                           'DE-BY' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G3F+4I',
-                                           'Doñana',
-                                           1,
-                                           'https://cloud.it/maps/donana',
-                                           'ES-AN' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G2F+5J',
-                                           'Parque Natural de las Marismas',
-                                           1,
-                                           'https://cloud.it/maps/marismas',
-                                           'ES-AN' );
-INSERT INTO localita_avvistamento VALUES ( '8FWC9G1F+6K',
-                                           'Noordhollands Duinreservaat',
-                                           1,
-                                           'https://cloud.it/maps/noordholland_dune',
-                                           'NL-NH' );
-INSERT INTO localita_avvistamento VALUES ( '8GWC9G8F+7L',
-                                           'Stockholm Skärgård',
-                                           0,
-                                           'https://cloud.it/maps/stockholm_skargard',
-                                           'SE-AB' );
-INSERT INTO localita_avvistamento VALUES ( '8GWC9G7F+8M',
-                                           'Parque Natural da Arrábida',
-                                           1,
-                                           'https://cloud.it/maps/arrabida',
-                                           'PT-11' );
-INSERT INTO localita_avvistamento VALUES ( '8GWC9G6F+9N',
-                                           'Parque Natural do Tejo',
-                                           1,
-                                           'https://cloud.it/maps/tejo',
-                                           'PT-11' );
-INSERT INTO localita_avvistamento VALUES ( '8GWC9G5F+0O',
-                                           'Zuid-Kennemerland',
-                                           1,
-                                           'https://cloud.it/maps/zuid_kennemerland',
-                                           'NL-NH' );
+INSERT INTO localita_avvistamento VALUES ('8FVC9G8F+5V', 'Parco Nazionale del Gran Paradiso', 1, 'https://cloud.it/maps/gran_paradiso', 'Piemonte', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FVC9G7F+2W', 'Lago di Garda', 0, 'https://cloud.it/maps/lago_garda', 'Lombardia', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FVC9G6F+3X', 'Parco Regionale della Maremma', 1, 'https://cloud.it/maps/maremma', 'Toscana', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FVC9G5F+4Y', 'Oasi di Vendicari', 1, 'https://cloud.it/maps/vendicari', 'Sicilia', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FVC9G4F+5Z', 'Parco Nazionale del Circeo', 1, 'https://cloud.it/maps/circeo', 'Lazio', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FVC9G3F+6A', 'Delta del Po', 1, 'https://cloud.it/maps/delta_po', 'Emilia-Romagna', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FVC9G2F+7B', 'Vesuvio', 0, 'https://cloud.it/maps/vesuvio', 'Campania', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FVC9G1F+8C', 'Gargano', 1, 'https://cloud.it/maps/gargano', 'Puglia', 'Italia');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G8F+9D', 'Parc national de la Vanoise', 1, 'https://cloud.it/maps/vanoise', 'Alvernia-Rodano-Alpi', 'Francia');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G7F+0E', 'Réserve naturelle de Camargue', 1, 'https://cloud.it/maps/camargue', 'Borgogna-Franca Contea', 'Francia');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G6F+1F', 'Lac Léman', 0, 'https://cloud.it/maps/lac_leman', 'Alvernia-Rodano-Alpi', 'Francia');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G5F+2G', 'Bayerischer Wald', 1, 'https://cloud.it/maps/bayerischer_wald', 'Baviera', 'Germania');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G4F+3H', 'Donauauen', 0, 'https://cloud.it/maps/donauauen', 'Baviera', 'Germania');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G3F+4I', 'Doñana', 1, 'https://cloud.it/maps/donana', 'Andalusia', 'Spagna');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G2F+5J', 'Parque Natural de las Marismas', 1, 'https://cloud.it/maps/marismas', 'Andalusia', 'Spagna');
+INSERT INTO localita_avvistamento VALUES ('8FWC9G1F+6K', 'Noordhollands Duinreservaat', 1, 'https://cloud.it/maps/noordholland_dune', 'Noord-Holland', 'Paesi Bassi');
+INSERT INTO localita_avvistamento VALUES ('8GWC9G8F+7L', 'Stockholm Skärgård', 0, 'https://cloud.it/maps/stockholm_skargard', 'Stockholm', 'Svezia');
+INSERT INTO localita_avvistamento VALUES ('8GWC9G7F+8M', 'Parque Natural da Arrábida', 1, 'https://cloud.it/maps/arrabida', 'Lisboa', 'Portogallo');
+INSERT INTO localita_avvistamento VALUES ('8GWC9G6F+9N', 'Parque Natural do Tejo', 1, 'https://cloud.it/maps/tejo', 'Lisboa', 'Portogallo');
+INSERT INTO localita_avvistamento VALUES ('8GWC9G5F+0O', 'Zuid-Kennemerland', 1, 'https://cloud.it/maps/zuid_kennemerland', 'Noord-Holland', 'Paesi Bassi');
 
 -- Popolamento tabella pattern_migratori
 INSERT INTO pattern_migratori VALUES ( 'Aquila chrysaetos',
