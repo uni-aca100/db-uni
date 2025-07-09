@@ -6,7 +6,7 @@
     - Socio:
       PK: codice_tessera
       Attributi: nome, cognome, email, telefono, data_nascita, data_iscrizione
-      Specializzazioni totale e non disgiunta nei sottotipi:
+      Specializzazioni parziale e non disgiunta nei sottotipi:
       - Osservatore:
         PK: codice_tessera (ereditato da Socio)
         Attributi: nessuno specifico
@@ -180,6 +180,13 @@ DROP TABLE osservatore CASCADE CONSTRAINTS;
 DROP TABLE socio CASCADE CONSTRAINTS;
 
 -- creazione delle tabelle in ordine di dipendenza
+
+/*
+  Regione, indica una regione geografica (solitamente) europea
+  una regione è contenuta nel database solo se ha almeno una località di avvistamento
+  associata.
+  il codice_iso rappresenta il codice ISO 3166-2 della regione
+*/
 CREATE TABLE regione (
   codice_iso   VARCHAR2(3) NOT NULL,
   nome_regione VARCHAR2(40) NOT NULL,
@@ -187,6 +194,13 @@ CREATE TABLE regione (
   CONSTRAINT pk_regione PRIMARY KEY ( codice_iso )
 );
 
+/*
+  Socio, indica un socio dell'associazione di birdwatching.
+  il codice_tessera rappresenta il codice di tesserino del socio.
+  il database contiene tutti i soci iscritti all'associazione,
+  anche se non hanno effettuato avvistamenti.
+  Il formato del codice_tessera è descritto dalla funzione genera_codice_tessera.
+*/
 CREATE TABLE socio (
   codice_tessera  VARCHAR2(16),
   nome            VARCHAR2(30) NOT NULL,
@@ -200,6 +214,7 @@ CREATE TABLE socio (
   CONSTRAINT pk_socio PRIMARY KEY ( codice_tessera )
 );
 
+-- Osservatore, indica un socio che ha effettuato almeno un avvistamento.
 CREATE TABLE osservatore (
   codice_tessera VARCHAR2(16) NOT NULL,
   CONSTRAINT fk_osservatore_socio FOREIGN KEY ( codice_tessera )
@@ -208,6 +223,7 @@ CREATE TABLE osservatore (
   CONSTRAINT pk_osservatore PRIMARY KEY ( codice_tessera )
 );
 
+-- Revisore, indica un socio designato come revisore degli avvistamenti.
 CREATE TABLE revisore (
   codice_tessera    VARCHAR2(16) NOT NULL,
   data_attribuzione DATE DEFAULT sysdate NOT NULL,
@@ -217,6 +233,10 @@ CREATE TABLE revisore (
   CONSTRAINT pk_revisore PRIMARY KEY ( codice_tessera )
 );
 
+/*
+  Indica una specifica specie di uccello.
+  Il database contiene diverse specie di uccelli presenti in Europa.
+*/
 CREATE TABLE specie (
   nome_scientifico    VARCHAR2(40) NOT NULL,
   nome_comune         VARCHAR2(40) NOT NULL,
@@ -231,6 +251,12 @@ CREATE TABLE specie (
   CONSTRAINT pk_specie PRIMARY KEY ( nome_scientifico )
 );
 
+/* 
+  Habitat, Indica un ambiente naturale in cui possono essere avvistate specie di uccelli.
+  Il database include esclusivamente habitat associati a pattern migratori di specie di
+  uccelli già presenti nel database.
+  Il codice_eunis rappresenta il codice EUNIS dell'habitat.
+*/
 CREATE TABLE habitat (
   codice_eunis    VARCHAR2(10) NOT NULL,
   nome_habitat    VARCHAR2(40) NOT NULL,
@@ -238,6 +264,13 @@ CREATE TABLE habitat (
   CONSTRAINT pk_habitat PRIMARY KEY ( codice_eunis )
 );
 
+/*
+  Località di avvistamento, indica una località geografica in cui sono stati effettuati
+  avvistamenti di uccelli.
+  Il plus_code rappresenta un codice unico per la località, utilizzando il sistema
+  Open Location Code (OLC).
+  Il database contiene solo località con almeno un avvistamento associato.
+*/
 CREATE TABLE localita_avvistamento (
   plus_code          VARCHAR2(12) NOT NULL,
   nome               VARCHAR2(40) NOT NULL,
@@ -252,6 +285,12 @@ CREATE TABLE localita_avvistamento (
       ON DELETE CASCADE
 );
 
+/*
+  Avvistamento, indica un avvistamento di un esemplare di uccello in una specifica località.
+  Il codice_avvistamento rappresenta un identificatore unico per l'avvistamento,
+  fornito dall'associazione di birdwatching.
+  (il formato è decritto dalla funzione genera_codice_avvistamento)
+*/
 CREATE TABLE avvistamento (
   codice_avvistamento        VARCHAR2(29) NOT NULL,
   data_avvistamento          DATE NOT NULL,
@@ -284,6 +323,12 @@ CREATE TABLE avvistamento (
       ON DELETE CASCADE
 );
 
+
+/*
+  Esemplare, indica un esemplare di uccello avvistato in una specifica località.
+  Il numero_esemplare rappresenta l'N-esimo esemplare all'interno dello stesso avvistamento.
+  Un avvistamento può includere più esemplari della medesima specie.
+*/
 CREATE TABLE esemplare (
   codice_avvistamento     VARCHAR2(29) NOT NULL,
   numero_esemplare        NUMBER(3) NOT NULL,
@@ -307,6 +352,10 @@ CREATE TABLE esemplare (
       ON DELETE CASCADE
 );
 
+/*
+  Media, Rappresenta un contenuto multimediale associato a un avvistamento.
+  È possibile allegare più elementi multimediali allo stesso avvistamento.
+  */
 CREATE TABLE media (
   codice_avvistamento VARCHAR2(29) NOT NULL,
   titolo_media        VARCHAR2(40) NOT NULL,
@@ -325,7 +374,11 @@ CREATE TABLE media (
     REFERENCES avvistamento ( codice_avvistamento )
 );
 
--- tipo_richiamo (es: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, etc.),
+/*
+  Dispositivo_Richiamo, indica un dispositivo utilizzato per richiamare gli uccelli
+  durante l'avvistamento.
+  tipo_richiamo (es: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, etc.)
+*/
 CREATE TABLE dispositivo_richiamo (
   codice_avvistamento VARCHAR2(29) NOT NULL,
   modello             VARCHAR2(40) NOT NULL,
@@ -359,6 +412,7 @@ CREATE TABLE pattern_migratori (
       ON DELETE CASCADE
 );
 
+-- Badge, indica un badge assegnato a un socio per riconoscimenti specifici.
 CREATE TABLE badge (
   nome_badge            VARCHAR2(25) CHECK ( nome_badge IN ( 'occhio di Kakapo',
                                                   'occhio di Colibrì',
@@ -377,6 +431,7 @@ CREATE TABLE badge (
       ON DELETE CASCADE
 );
 
+-- Associazione tra località di avvistamento e habitat.
 CREATE TABLE associazione_localita_habitat (
   plus_code    VARCHAR2(12) NOT NULL,
   codice_eunis VARCHAR2(10) NOT NULL,
