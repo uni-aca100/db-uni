@@ -18,7 +18,6 @@
       PK: codice_avvistamento
       Attributi:
         data_avvistamento,
-        ora_avvistamento
         valutazione (confermato, possibile, non confermato),
         data_revisione (opzionale),
         condizioni_ambientali (opzionale):
@@ -267,7 +266,7 @@ CREATE TABLE habitat (
   Località di avvistamento, indica una località geografica in cui sono stati effettuati
   avvistamenti di uccelli.
   Il plus_code rappresenta un codice unico per la località, utilizzando il sistema
-  Open Location Code (OLC), impiegato per la geolocalizzazionein Google Maps.
+  Open Location Code (OLC), impiegato per la geolocalizzazione in Google Maps.
   Il database contiene solo località con almeno un avvistamento associato.
 */
 CREATE TABLE localita_avvistamento (
@@ -296,7 +295,6 @@ CREATE TABLE localita_avvistamento (
 CREATE TABLE avvistamento (
   codice_avvistamento        VARCHAR2(29) NOT NULL,
   data_avvistamento          DATE NOT NULL,
-  ora_avvistamento           VARCHAR2(5) NOT NULL,
   valutazione                VARCHAR2(20) CHECK ( valutazione IN ( 'confermato',
                                                     'possibile',
                                                     'non confermato' ) ),

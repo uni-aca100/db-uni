@@ -1,0 +1,16 @@
+# prima forma normale
+Il database rispetta la prima forma normale (1NF) perché tutte le tabelle sono progettate in modo che tutti gli attributi sono atomici.
+L’unico caso di attributo strutturato riguarda le condizioni ambientali di un avvistamento, che sono state opportunamente scomposte in più colonne distinte (temperatura, umidità, meteo), così da garantire l’atomicità.
+Inoltre, anche attributi come il plus_code (codice di geolocalizzazione Google Maps), il codice_tessera associativo e il codice_avvistamento (che deriva dalla composizione di più informazioni) sono trattati come atomici. Pur essendo codici composti, secondo le convenzioni vengono considerati attributi indivisibili, evitando così violazioni della 1NF.
+La stessa convenzione si applica agli attributi di tipo data, che viene considerata atomica ai fini della progettazione.
+
+# Seconda forma normale
+Il database rispetta la seconda forma normale (2NF) perché, in tutte le tabelle con chiave primaria composta da più attributi (come media, dispositivo_richiamo, badge, esemplare, regione, pattern_migratori e associazione_localita_habitat), ogni attributo non chiave dipende sempre dall’intera chiave primaria e non solo da una sua parte.
+Quindi non esistono attributi che dipendono solo da una parte della chiave composta, evitando così anomalie di aggiornamento, inserimento o cancellazione.
+Inoltre la prima forma normale è rispettata come abbiamo verificato precedentemente.
+
+# Terza forma normale e forma normale di Boyce-Codd
+Il database rispetta sia la terza forma normale (3NF) che la forma normale di Boyce-Codd (BCNF).
+Soddisfa la 3NF perché ogni attributo non chiave dipende direttamente e solo dalla chiave primaria della sua tabella, senza dipendenze transitive attraverso altri attributi non chiave.
+Ad esempio, nella tabella regione, l'attributo numero_sedi dipende esclusivamente dalla chiave composta (nome_regione, paese), evitando dipendenze transitive.
+Il database rispetta anche la BCNF perché, in ogni tabella, tutti i determinanti sono superchiavi: 

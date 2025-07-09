@@ -1,20 +1,52 @@
 -- Popolamento tabella regione
-INSERT INTO regione VALUES ('Lombardia', 'Italia', 0);
-INSERT INTO regione VALUES ('Lazio', 'Italia', 0);
-INSERT INTO regione VALUES ('Veneto', 'Italia', 0);
-INSERT INTO regione VALUES ('Sicilia', 'Italia', 0);
-INSERT INTO regione VALUES ('Toscana', 'Italia', 0);
-INSERT INTO regione VALUES ('Piemonte', 'Italia', 0);
-INSERT INTO regione VALUES ('Emilia-Romagna', 'Italia', 0);
-INSERT INTO regione VALUES ('Campania', 'Italia', 0);
-INSERT INTO regione VALUES ('Puglia', 'Italia', 0);
-INSERT INTO regione VALUES ('Alvernia-Rodano-Alpi', 'Francia', 0);
-INSERT INTO regione VALUES ('Borgogna-Franca Contea', 'Francia', 0);
-INSERT INTO regione VALUES ('Baviera', 'Germania', 0);
-INSERT INTO regione VALUES ('Andalusia', 'Spagna', 0);
-INSERT INTO regione VALUES ('Noord-Holland', 'Paesi Bassi', 0);
-INSERT INTO regione VALUES ('Stockholm', 'Svezia', 0);
-INSERT INTO regione VALUES ('Lisboa', 'Portogallo', 0);
+INSERT INTO regione VALUES ( 'Lombardia',
+                             'Italia',
+                             4 );
+INSERT INTO regione VALUES ( 'Lazio',
+                             'Italia',
+                             3 );
+INSERT INTO regione VALUES ( 'Veneto',
+                             'Italia',
+                             2 );
+INSERT INTO regione VALUES ( 'Sicilia',
+                             'Italia',
+                             1 );
+INSERT INTO regione VALUES ( 'Toscana',
+                             'Italia',
+                             2 );
+INSERT INTO regione VALUES ( 'Piemonte',
+                             'Italia',
+                             2 );
+INSERT INTO regione VALUES ( 'Emilia-Romagna',
+                             'Italia',
+                             3 );
+INSERT INTO regione VALUES ( 'Campania',
+                             'Italia',
+                             2 );
+INSERT INTO regione VALUES ( 'Puglia',
+                             'Italia',
+                             1 );
+INSERT INTO regione VALUES ( 'Alvernia-Rodano-Alpi',
+                             'Francia',
+                             0 );
+INSERT INTO regione VALUES ( 'Borgogna-Franca Contea',
+                             'Francia',
+                             0 );
+INSERT INTO regione VALUES ( 'Baviera',
+                             'Germania',
+                             0 );
+INSERT INTO regione VALUES ( 'Andalusia',
+                             'Spagna',
+                             0 );
+INSERT INTO regione VALUES ( 'Noord-Holland',
+                             'Paesi Bassi',
+                             0 );
+INSERT INTO regione VALUES ( 'Stockholm',
+                             'Svezia',
+                             0 );
+INSERT INTO regione VALUES ( 'Lisboa',
+                             'Portogallo',
+                             0 );
 
 -- Popolamento tabella socio
 INSERT INTO socio VALUES ( 'ABWMI2010LR0001',
@@ -373,26 +405,126 @@ INSERT INTO habitat VALUES ( 'B2.4',
                              'https://cloud.it/habitat/dune_costiere' );
 
 -- Popolamento tabella localita_avvistamento
-INSERT INTO localita_avvistamento VALUES ('8FVC9G8F+5V', 'Parco Nazionale del Gran Paradiso', 1, 'https://cloud.it/maps/gran_paradiso', 'Piemonte', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FVC9G7F+2W', 'Lago di Garda', 0, 'https://cloud.it/maps/lago_garda', 'Lombardia', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FVC9G6F+3X', 'Parco Regionale della Maremma', 1, 'https://cloud.it/maps/maremma', 'Toscana', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FVC9G5F+4Y', 'Oasi di Vendicari', 1, 'https://cloud.it/maps/vendicari', 'Sicilia', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FVC9G4F+5Z', 'Parco Nazionale del Circeo', 1, 'https://cloud.it/maps/circeo', 'Lazio', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FVC9G3F+6A', 'Delta del Po', 1, 'https://cloud.it/maps/delta_po', 'Emilia-Romagna', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FVC9G2F+7B', 'Vesuvio', 0, 'https://cloud.it/maps/vesuvio', 'Campania', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FVC9G1F+8C', 'Gargano', 1, 'https://cloud.it/maps/gargano', 'Puglia', 'Italia');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G8F+9D', 'Parc national de la Vanoise', 1, 'https://cloud.it/maps/vanoise', 'Alvernia-Rodano-Alpi', 'Francia');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G7F+0E', 'Réserve naturelle de Camargue', 1, 'https://cloud.it/maps/camargue', 'Borgogna-Franca Contea', 'Francia');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G6F+1F', 'Lac Léman', 0, 'https://cloud.it/maps/lac_leman', 'Alvernia-Rodano-Alpi', 'Francia');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G5F+2G', 'Bayerischer Wald', 1, 'https://cloud.it/maps/bayerischer_wald', 'Baviera', 'Germania');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G4F+3H', 'Donauauen', 0, 'https://cloud.it/maps/donauauen', 'Baviera', 'Germania');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G3F+4I', 'Doñana', 1, 'https://cloud.it/maps/donana', 'Andalusia', 'Spagna');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G2F+5J', 'Parque Natural de las Marismas', 1, 'https://cloud.it/maps/marismas', 'Andalusia', 'Spagna');
-INSERT INTO localita_avvistamento VALUES ('8FWC9G1F+6K', 'Noordhollands Duinreservaat', 1, 'https://cloud.it/maps/noordholland_dune', 'Noord-Holland', 'Paesi Bassi');
-INSERT INTO localita_avvistamento VALUES ('8GWC9G8F+7L', 'Stockholm Skärgård', 0, 'https://cloud.it/maps/stockholm_skargard', 'Stockholm', 'Svezia');
-INSERT INTO localita_avvistamento VALUES ('8GWC9G7F+8M', 'Parque Natural da Arrábida', 1, 'https://cloud.it/maps/arrabida', 'Lisboa', 'Portogallo');
-INSERT INTO localita_avvistamento VALUES ('8GWC9G6F+9N', 'Parque Natural do Tejo', 1, 'https://cloud.it/maps/tejo', 'Lisboa', 'Portogallo');
-INSERT INTO localita_avvistamento VALUES ('8GWC9G5F+0O', 'Zuid-Kennemerland', 1, 'https://cloud.it/maps/zuid_kennemerland', 'Noord-Holland', 'Paesi Bassi');
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G8F+5V',
+                                           'Parco Nazionale del Gran Paradiso',
+                                           1,
+                                           'https://cloud.it/maps/gran_paradiso',
+                                           'Piemonte',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G7F+2W',
+                                           'Lago di Garda',
+                                           0,
+                                           'https://cloud.it/maps/lago_garda',
+                                           'Lombardia',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G6F+3X',
+                                           'Parco Regionale della Maremma',
+                                           1,
+                                           'https://cloud.it/maps/maremma',
+                                           'Toscana',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G5F+4Y',
+                                           'Oasi di Vendicari',
+                                           1,
+                                           'https://cloud.it/maps/vendicari',
+                                           'Sicilia',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G4F+5Z',
+                                           'Parco Nazionale del Circeo',
+                                           1,
+                                           'https://cloud.it/maps/circeo',
+                                           'Lazio',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G3F+6A',
+                                           'Delta del Po',
+                                           1,
+                                           'https://cloud.it/maps/delta_po',
+                                           'Emilia-Romagna',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G2F+7B',
+                                           'Vesuvio',
+                                           0,
+                                           'https://cloud.it/maps/vesuvio',
+                                           'Campania',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G1F+8C',
+                                           'Gargano',
+                                           1,
+                                           'https://cloud.it/maps/gargano',
+                                           'Puglia',
+                                           'Italia' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G8F+9D',
+                                           'Parc national de la Vanoise',
+                                           1,
+                                           'https://cloud.it/maps/vanoise',
+                                           'Alvernia-Rodano-Alpi',
+                                           'Francia' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G7F+0E',
+                                           'Réserve naturelle de Camargue',
+                                           1,
+                                           'https://cloud.it/maps/camargue',
+                                           'Borgogna-Franca Contea',
+                                           'Francia' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G6F+1F',
+                                           'Lac Léman',
+                                           0,
+                                           'https://cloud.it/maps/lac_leman',
+                                           'Alvernia-Rodano-Alpi',
+                                           'Francia' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G5F+2G',
+                                           'Bayerischer Wald',
+                                           1,
+                                           'https://cloud.it/maps/bayerischer_wald',
+                                           'Baviera',
+                                           'Germania' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G4F+3H',
+                                           'Donauauen',
+                                           0,
+                                           'https://cloud.it/maps/donauauen',
+                                           'Baviera',
+                                           'Germania' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G3F+4I',
+                                           'Doñana',
+                                           1,
+                                           'https://cloud.it/maps/donana',
+                                           'Andalusia',
+                                           'Spagna' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G2F+5J',
+                                           'Parque Natural de las Marismas',
+                                           1,
+                                           'https://cloud.it/maps/marismas',
+                                           'Andalusia',
+                                           'Spagna' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G1F+6K',
+                                           'Noordhollands Duinreservaat',
+                                           1,
+                                           'https://cloud.it/maps/noordholland_dune',
+                                           'Noord-Holland',
+                                           'Paesi Bassi' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G8F+7L',
+                                           'Stockholm Skärgård',
+                                           0,
+                                           'https://cloud.it/maps/stockholm_skargard',
+                                           'Stockholm',
+                                           'Svezia' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G7F+8M',
+                                           'Parque Natural da Arrábida',
+                                           1,
+                                           'https://cloud.it/maps/arrabida',
+                                           'Lisboa',
+                                           'Portogallo' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G6F+9N',
+                                           'Parque Natural do Tejo',
+                                           1,
+                                           'https://cloud.it/maps/tejo',
+                                           'Lisboa',
+                                           'Portogallo' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G5F+0O',
+                                           'Zuid-Kennemerland',
+                                           1,
+                                           'https://cloud.it/maps/zuid_kennemerland',
+                                           'Noord-Holland',
+                                           'Paesi Bassi' );
 
 -- Popolamento tabella pattern_migratori
 INSERT INTO pattern_migratori VALUES ( 'Aquila chrysaetos',
@@ -600,7 +732,6 @@ INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G5F+0O',
 -- Popolamento tabella avvistamento
 INSERT INTO avvistamento VALUES ( 'ABWMI2010LR0001-20230701-001',
                                   DATE '2023-07-01',
-                                  '08:00',
                                   'confermato',
                                   DATE '2023-07-10',
                                   'ABWMI2010LR0001',
@@ -611,7 +742,6 @@ INSERT INTO avvistamento VALUES ( 'ABWMI2010LR0001-20230701-001',
                                   60.0 );
 INSERT INTO avvistamento VALUES ( 'ABWRM2003MB0001-20201005-001',
                                   DATE '2020-10-05',
-                                  '09:00',
                                   'possibile',
                                   DATE '2020-10-15',
                                   'ABWRM2003MB0001',
@@ -622,7 +752,6 @@ INSERT INTO avvistamento VALUES ( 'ABWRM2003MB0001-20201005-001',
                                   70.0 );
 INSERT INTO avvistamento VALUES ( 'ABWTO2000NG0001-20200113-001',
                                   DATE '2020-01-13',
-                                  '10:00',
                                   'possibile',
                                   DATE '2020-02-03',
                                   'ABWTO2000NG0001',
@@ -633,7 +762,6 @@ INSERT INTO avvistamento VALUES ( 'ABWTO2000NG0001-20200113-001',
                                   80.0 );
 INSERT INTO avvistamento VALUES ( 'ABWPA2007FR0001-20201104-001',
                                   DATE '2020-11-04',
-                                  '11:00',
                                   'confermato',
                                   DATE '2020-11-27',
                                   'ABWPA2007FR0001',
@@ -644,7 +772,6 @@ INSERT INTO avvistamento VALUES ( 'ABWPA2007FR0001-20201104-001',
                                   55.0 );
 INSERT INTO avvistamento VALUES ( 'ABWVE2001LB0001-20200606-001',
                                   DATE '2020-06-06',
-                                  '12:00',
                                   'confermato',
                                   DATE '2020-06-21',
                                   'ABWVE2001LB0001',
@@ -655,7 +782,6 @@ INSERT INTO avvistamento VALUES ( 'ABWVE2001LB0001-20200606-001',
                                   50.0 );
 INSERT INTO avvistamento VALUES ( 'ABWFI2010SE0003-20210222-001',
                                   DATE '2021-02-22',
-                                  '13:00',
                                   'possibile',
                                   DATE '2021-04-08',
                                   'ABWFI2010SE0003',
@@ -666,7 +792,6 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2010SE0003-20210222-001',
                                   65.0 );
 INSERT INTO avvistamento VALUES ( 'ABWBO2005DC0001-20210418-001',
                                   DATE '2021-04-18',
-                                  '14:00',
                                   'confermato',
                                   DATE '2021-04-29',
                                   'ABWBO2005DC0001',
@@ -677,7 +802,6 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2005DC0001-20210418-001',
                                   48.0 );
 INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20210509-001',
                                   DATE '2021-05-09',
-                                  '15:00',
                                   'confermato',
                                   DATE '2021-09-01',
                                   'ABWFI2015IT0001',
@@ -688,7 +812,6 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20210509-001',
                                   52.0 );
 INSERT INTO avvistamento VALUES ( 'ABWBA2008SG0001-20210612-001',
                                   DATE '2021-06-12',
-                                  '16:00',
                                   'possibile',
                                   DATE '2021-06-20',
                                   'ABWBA2008SG0001',
@@ -699,7 +822,6 @@ INSERT INTO avvistamento VALUES ( 'ABWBA2008SG0001-20210612-001',
                                   44.0 );
 INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20210703-001',
                                   DATE '2021-07-03',
-                                  '17:00',
                                   'confermato',
                                   DATE '2021-07-10',
                                   'ABWBO2000DV0001',
@@ -710,7 +832,6 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20210703-001',
                                   40.0 );
 INSERT INTO avvistamento VALUES ( 'ABWRM2000MC0001-20210711-001',
                                   DATE '2021-07-11',
-                                  '12:00',
                                   'confermato',
                                   DATE '2021-07-21',
                                   'ABWRM2000MC0001',
@@ -721,7 +842,6 @@ INSERT INTO avvistamento VALUES ( 'ABWRM2000MC0001-20210711-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220812-001',
                                   DATE '2022-08-12',
-                                  '12:00',
                                   'non confermato',
                                   DATE '2022-10-20',
                                   'ABWBO2000DV0001',
@@ -732,7 +852,6 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220812-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220323-001',
                                   DATE '2022-03-23',
-                                  '13:00',
                                   NULL,
                                   NULL,
                                   'ABWBO2000DV0001',
@@ -743,7 +862,6 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220323-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20220814-001',
                                   DATE '2022-08-14',
-                                  '13:00',
                                   NULL,
                                   NULL,
                                   'ABWFI2015IT0001',
@@ -754,7 +872,6 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20220814-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWFI2010FB0005-20220725-001',
                                   DATE '2022-07-25',
-                                  '13:00',
                                   NULL,
                                   NULL,
                                   'ABWFI2010FB0005',
@@ -765,7 +882,6 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2010FB0005-20220725-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWBO2002PF0001-20230716-001',
                                   DATE '2023-07-16',
-                                  '13:00',
                                   NULL,
                                   NULL,
                                   'ABWBO2002PF0001',
@@ -776,7 +892,6 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2002PF0001-20230716-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20230717-001',
                                   DATE '2023-07-17',
-                                  '14:00',
                                   NULL,
                                   NULL,
                                   'ABWFI2015IT0001',
@@ -787,7 +902,6 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20230717-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWBA2001RR0001-20230718-001',
                                   DATE '2023-07-18',
-                                  '14:00',
                                   NULL,
                                   NULL,
                                   'ABWBA2001RR0001',
@@ -798,7 +912,6 @@ INSERT INTO avvistamento VALUES ( 'ABWBA2001RR0001-20230718-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWMI2010GF0006-20230719-001',
                                   DATE '2023-07-19',
-                                  '15:00',
                                   NULL,
                                   NULL,
                                   'ABWMI2010GF0006',
@@ -809,7 +922,6 @@ INSERT INTO avvistamento VALUES ( 'ABWMI2010GF0006-20230719-001',
                                   NULL );
 INSERT INTO avvistamento VALUES ( 'ABWRM2000SM0002-20230720-001',
                                   DATE '2023-07-20',
-                                  '16:00',
                                   NULL,
                                   NULL,
                                   'ABWRM2000SM0002',
