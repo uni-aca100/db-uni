@@ -305,12 +305,6 @@ INSERT INTO specie VALUES ( 'Turdus merula',
                             'Turdidae',
                             'https://cloud.it/versi/merlo.mp3',
                             'https://cloud.it/img/merlo.jpg' );
-INSERT INTO specie VALUES ( 'Fringilla coelebs',
-                            'Fringuello',
-                            'LC',
-                            'Fringillidae',
-                            'https://cloud.it/versi/fringuello.mp3',
-                            'https://cloud.it/img/fringuello.jpg' );
 INSERT INTO specie VALUES ( 'Delichon urbicum',
                             'Rondine montana',
                             'LC',
@@ -473,3 +467,153 @@ INSERT INTO specie VALUES ( 'Pica pica',
                             'Corvidae',
                             'https://cloud.it/versi/gazza.mp3',
                             'https://cloud.it/img/gazza.jpg' );
+
+
+-- Popolamento tabella habitat
+INSERT INTO habitat VALUES ( 'C1.1',
+                             'Laghi prealpini',
+                             'https://cloud.it/habitat/laghi_prealpini' );
+INSERT INTO habitat VALUES ( 'C2.2',
+                             'Stagni temporanei mediterranei',
+                             'https://cloud.it/habitat/stagni_mediterranei' );
+INSERT INTO habitat VALUES ( 'E1.2',
+                             'Praterie secche continentali',
+                             'https://cloud.it/habitat/praterie_continentali' );
+INSERT INTO habitat VALUES ( 'F3.2',
+                             'Boschi di latifoglie planiziali',
+                             'https://cloud.it/habitat/boschi_latifoglie_planiziali' );
+INSERT INTO habitat VALUES ( 'G1.1',
+                             'Foreste di conifere alpine',
+                             'https://cloud.it/habitat/foreste_conifere_alpine' );
+INSERT INTO habitat VALUES ( 'D5.2',
+                             'Paludi salmastre costiere',
+                             'https://cloud.it/habitat/paludi_salmastre_costiere' );
+INSERT INTO habitat VALUES ( 'B1.3',
+                             'Spiagge sabbiose atlantiche',
+                             'https://cloud.it/habitat/spiagge_sabbiose_atlantiche' );
+INSERT INTO habitat VALUES ( 'A2.5',
+                             'Scogliere marine mediterranee',
+                             'https://cloud.it/habitat/scogliere_mediterranee' );
+INSERT INTO habitat VALUES ( 'C3.4',
+                             'Fiumi alpini',
+                             'https://cloud.it/habitat/fiumi_alpini' );
+INSERT INTO habitat VALUES ( 'E4.1',
+                             'Steppe iberiche',
+                             'https://cloud.it/habitat/steppe_iberiche' );
+INSERT INTO habitat VALUES ( 'F2.2',
+                             'Boschi misti subatlantici',
+                             'https://cloud.it/habitat/boschi_misti_subatlantici' );
+INSERT INTO habitat VALUES ( 'G2.1',
+                             'Foreste di latifoglie boreali',
+                             'https://cloud.it/habitat/foreste_latifoglie_boreali' );
+INSERT INTO habitat VALUES ( 'D1.1',
+                             'Torbiere di pianura',
+                             'https://cloud.it/habitat/torbiere_pianura' );
+INSERT INTO habitat VALUES ( 'C6.3',
+                             'Zone umide artificiali',
+                             'https://cloud.it/habitat/zone_umide_artificiali' );
+INSERT INTO habitat VALUES ( 'B2.4',
+                             'Dune costiere',
+                             'https://cloud.it/habitat/dune_costiere' );
+
+-- Popolamento tabella localita_avvistamento
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G8F+5V',
+                                           'Parco Nazionale del Gran Paradiso',
+                                           1,
+                                           'https://cloud.it/maps/gran_paradiso',
+                                           'IT-21' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G7F+2W',
+                                           'Lago di Garda',
+                                           0,
+                                           'https://cloud.it/maps/lago_garda',
+                                           'IT-25' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G6F+3X',
+                                           'Parco Regionale della Maremma',
+                                           1,
+                                           'https://cloud.it/maps/maremma',
+                                           'IT-52' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G5F+4Y',
+                                           'Oasi di Vendicari',
+                                           1,
+                                           'https://cloud.it/maps/vendicari',
+                                           'IT-82' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G4F+5Z',
+                                           'Parco Nazionale del Circeo',
+                                           1,
+                                           'https://cloud.it/maps/circeo',
+                                           'IT-62' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G3F+6A',
+                                           'Delta del Po',
+                                           1,
+                                           'https://cloud.it/maps/delta_po',
+                                           'IT-45' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G2F+7B',
+                                           'Vesuvio',
+                                           0,
+                                           'https://cloud.it/maps/vesuvio',
+                                           'IT-72' );
+INSERT INTO localita_avvistamento VALUES ( '8FVC9G1F+8C',
+                                           'Gargano',
+                                           1,
+                                           'https://cloud.it/maps/gargano',
+                                           'IT-75' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G8F+9D',
+                                           'Parc national de la Vanoise',
+                                           1,
+                                           'https://cloud.it/maps/vanoise',
+                                           'FR-ARA' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G7F+0E',
+                                           'Réserve naturelle de Camargue',
+                                           1,
+                                           'https://cloud.it/maps/camargue',
+                                           'FR-BFC' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G6F+1F',
+                                           'Lac Léman',
+                                           0,
+                                           'https://cloud.it/maps/lac_leman',
+                                           'FR-ARA' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G5F+2G',
+                                           'Bayerischer Wald',
+                                           1,
+                                           'https://cloud.it/maps/bayerischer_wald',
+                                           'DE-BY' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G4F+3H',
+                                           'Donauauen',
+                                           0,
+                                           'https://cloud.it/maps/donauauen',
+                                           'DE-BY' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G3F+4I',
+                                           'Doñana',
+                                           1,
+                                           'https://cloud.it/maps/donana',
+                                           'ES-AN' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G2F+5J',
+                                           'Parque Natural de las Marismas',
+                                           1,
+                                           'https://cloud.it/maps/marismas',
+                                           'ES-AN' );
+INSERT INTO localita_avvistamento VALUES ( '8FWC9G1F+6K',
+                                           'Noordhollands Duinreservaat',
+                                           1,
+                                           'https://cloud.it/maps/noordholland_dune',
+                                           'NL-NH' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G8F+7L',
+                                           'Stockholm Skärgård',
+                                           0,
+                                           'https://cloud.it/maps/stockholm_skargard',
+                                           'SE-AB' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G7F+8M',
+                                           'Parque Natural da Arrábida',
+                                           1,
+                                           'https://cloud.it/maps/arrabida',
+                                           'PT-11' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G6F+9N',
+                                           'Parque Natural do Tejo',
+                                           1,
+                                           'https://cloud.it/maps/tejo',
+                                           'PT-11' );
+INSERT INTO localita_avvistamento VALUES ( '8GWC9G5F+0O',
+                                           'Zuid-Kennemerland',
+                                           1,
+                                           'https://cloud.it/maps/zuid_kennemerland',
+                                           'NL-NH' );

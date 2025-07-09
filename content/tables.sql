@@ -188,7 +188,7 @@ DROP TABLE socio CASCADE CONSTRAINTS;
   il codice_iso rappresenta il codice ISO 3166-2 della regione
 */
 CREATE TABLE regione (
-  codice_iso   VARCHAR2(3) NOT NULL,
+  codice_iso   VARCHAR2(6) NOT NULL,
   nome_regione VARCHAR2(40) NOT NULL,
   paese        VARCHAR2(40) NOT NULL,
   CONSTRAINT pk_regione PRIMARY KEY ( codice_iso )
@@ -277,7 +277,7 @@ CREATE TABLE localita_avvistamento (
   area_protetta      NUMBER(1) CHECK ( area_protetta IN ( 0,
                                                      1 ) ),
   url_mappa          VARCHAR2(100),
-  codice_iso_regione VARCHAR2(3) NOT NULL,
+  codice_iso_regione VARCHAR2(6) NOT NULL,
   CONSTRAINT pk_localita_avvistamento PRIMARY KEY ( plus_code ),
   CONSTRAINT fk_localita_regione FOREIGN KEY ( codice_iso_regione )
     REFERENCES regione ( codice_iso )
