@@ -15,7 +15,6 @@ BEGIN
     p_nome_localita              => 'Parco Nord',
     p_area_protetta              => 1,
     p_url_mappa                  => 'https://maps.example.com/parco-nord',
-    p_codice_eunis               => 'EUNIS123',
     p_codice_iso_regione         => 'ITC',
     p_nome_regione               => 'Lombardia',
     p_paese                      => 'Italia',

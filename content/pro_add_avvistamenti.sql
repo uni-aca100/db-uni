@@ -31,7 +31,6 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
     - p_nome_localita: Nome della località di avvistamento
     - p_area_protetta: Area protetta della località di avvistamento
     - p_url_mappa: URL della mappa della località di avvistamento
-    - p_codice_eunis: Codice EUNIS della località di avvistamento
     - p_codice_iso_regione: Codice ISO della regione della località di avvistamento
     - p_nome_regione: Nome della regione della località di avvistamento
     - p_paese: Paese della regione della località di avvistamento
@@ -52,7 +51,6 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
   p_nome_localita              IN localita_avvistamento.nome%TYPE,
   p_area_protetta              IN localita_avvistamento.area_protetta%TYPE,
   p_url_mappa                  IN localita_avvistamento.url_mappa%TYPE,
-  p_codice_eunis               IN localita_avvistamento.codice_eunis%TYPE,
   p_codice_iso_regione         IN localita_avvistamento.codice_iso_regione%TYPE,
   p_nome_regione               IN regione.nome_regione%TYPE,
   p_paese                      IN regione.paese%TYPE,
@@ -109,15 +107,13 @@ BEGIN
     nome,
     area_protetta,
     url_mappa,
-    codice_iso_regione,
-    codice_eunis
+    codice_iso_regione
   )
     SELECT p_plus_code,
            p_nome_localita,
            p_area_protetta,
            p_url_mappa,
-           p_codice_iso_regione,
-           p_codice_eunis
+           p_codice_iso_regione
       FROM dual
      WHERE NOT EXISTS (
       SELECT 1

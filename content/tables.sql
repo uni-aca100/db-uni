@@ -278,7 +278,6 @@ CREATE TABLE localita_avvistamento (
                                                      1 ) ),
   url_mappa          VARCHAR2(100),
   codice_iso_regione VARCHAR2(3) NOT NULL,
-  codice_eunis       VARCHAR2(10) NOT NULL,
   CONSTRAINT pk_localita_avvistamento PRIMARY KEY ( plus_code ),
   CONSTRAINT fk_localita_regione FOREIGN KEY ( codice_iso_regione )
     REFERENCES regione ( codice_iso )
