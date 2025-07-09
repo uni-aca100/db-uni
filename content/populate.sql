@@ -662,3 +662,49 @@ INSERT INTO pattern_migratori VALUES ( 'Regulus regulus',
                                        'svernamento',
                                        11,
                                        2 );
+                                       
+-- Popolamento tabella associazione_localita_habitat
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G8F+5V',
+                                                   'C1.1' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G7F+2W',
+                                                   'C2.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G6F+3X',
+                                                   'E1.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G5F+4Y',
+                                                   'F3.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G4F+5Z',
+                                                   'G1.1' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G3F+6A',
+                                                   'D5.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G2F+7B',
+                                                   'B1.3' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FVC9G1F+8C',
+                                                   'A2.5' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G8F+9D',
+                                                   'C3.4' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G7F+0E',
+                                                   'E4.1' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G6F+1F',
+                                                   'F2.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G5F+2G',
+                                                   'G2.1' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G4F+3H',
+                                                   'D1.1' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G3F+4I',
+                                                   'C6.3' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G2F+5J',
+                                                   'B2.4' );
+INSERT INTO associazione_localita_habitat VALUES ( '8FWC9G1F+6K',
+                                                   'C1.1' );
+INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G8F+7L',
+                                                   'C2.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G7F+8M',
+                                                   'E1.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G7F+8M',
+                                                   'F2.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G6F+9N',
+                                                   'F3.2' );
+INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G6F+9N',
+                                                   'G1.1' );
+INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G5F+0O',
+                                                   'G1.1' );
