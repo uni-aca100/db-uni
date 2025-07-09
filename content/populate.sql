@@ -1075,42 +1075,34 @@ INSERT INTO esemplare VALUES ( 'ABWRM2000SM0002-20230720-001',
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
                            'ABWMI2010LR0001',
                            DATE '2024-01-15',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWMI2010LR0001' );
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
                            'ABWPA2007FR0001',
                            DATE '2024-02-20',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWPA2007FR0001' );
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
                            'ABWVE2001LB0001',
                            DATE '2024-03-10',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWVE2001LB0001' );
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
                            'ABWBO2005DC0001',
                            DATE '2024-04-05',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWBO2005DC0001' );
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
                            'ABWFI2015IT0001',
                            DATE '2024-05-18',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWFI2015IT0001' );
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
                            'ABWBO2000DV0001',
                            DATE '2024-06-22',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWBO2000DV0001' );
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
                            'ABWRM2000MC0001',
                            DATE '2025-05-15',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWRM2000MC0001' );
 INSERT INTO badge VALUES ( 'custode della natura',
                            'ABWRM2000MC0001',
                            DATE '2025-05-15',
-                           'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWRM2000MC0001' );
 
 -- Popolamento tabella media

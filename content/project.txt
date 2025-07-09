@@ -107,4 +107,4 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
   - Badge:
   I badge sono riconoscimenti assegnati ai soci, l'assegnazione può avvenire da parte dei Responsabili dell'associazione solo dopo che un avvistamento è stato confermato da un Revisore.
   Uno stesso badge non può essere assegnato più volte a un socio, quindi l'assegnazione di un badge è univoca per ogni socio.
-  Ogni badge ha un nome e un criterio di assegnazione. Il nome del badge combinato con il codice tessera del socio forma un identificatore univoco per il badge assegnato.
+  Ogni badge ha un nome. Il nome del badge combinato con il codice tessera del socio forma un identificatore univoco per il badge assegnato.

@@ -81,7 +81,6 @@
       PK: (nome_badge, codice_tessera_socio)
       Attributi:
         data_assegnazione,
-        criterio_assegnazione (es: primo avvistamento, decimo avvistamento, prima osservazione di una specie in stato CR o EN),
         url_badge (opzionale, per badge con immagini),
       FK: codice_tessera_socio (riferimento a Socio)
 
@@ -413,16 +412,12 @@ CREATE TABLE pattern_migratori (
 
 -- Badge, indica un badge assegnato a un socio per riconoscimenti specifici.
 CREATE TABLE badge (
-  nome_badge            VARCHAR2(25) CHECK ( nome_badge IN ( 'occhio di Kakapo',
+  nome_badge           VARCHAR2(25) CHECK ( nome_badge IN ( 'occhio di Kakapo',
                                                   'occhio di Colibrì',
                                                   'custode della natura' ) ) NOT NULL,
-  codice_tessera_socio  VARCHAR2(16) NOT NULL,
-  data_assegnazione     DATE DEFAULT sysdate NOT NULL,
-  criterio_assegnazione VARCHAR2(50) CHECK ( criterio_assegnazione IN ( 'primo avvistamento confermato',
-                                                                        'decimo avvistamento confermato',
-                                                                        'prima osservazione di una specie CR o EN' ) ) NOT NULL
-                                                                        ,
-  url_badge             VARCHAR2(100),
+  codice_tessera_socio VARCHAR2(16) NOT NULL,
+  data_assegnazione    DATE DEFAULT sysdate NOT NULL,
+  url_badge            VARCHAR2(100),
   CONSTRAINT pk_badge PRIMARY KEY ( nome_badge,
                                     codice_tessera_socio ),
   CONSTRAINT fk_badge_socio FOREIGN KEY ( codice_tessera_socio )

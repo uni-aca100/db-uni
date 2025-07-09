@@ -28,7 +28,6 @@ END;
     - p_codice_tessera_socio: il codice della tessera del socio a cui assegnare il badge (solo se esistente).
     - p_nome_badge: il nome del badge da assegnare.
     - p_data_assegnazione: la data in cui il badge viene assegnato (default è la data corrente).
-    - p_criterio: il criterio di assegnazione del badge.
     - p_badge_url: l'URL del badge.
 
   Per l'assegnazione dei badge, la procedura considera le tabelle dei badge e del revisore,
@@ -42,7 +41,6 @@ CREATE OR REPLACE PROCEDURE assegnazione_badge (
   p_codice_tessera_socio IN socio.codice_tessera%TYPE,
   p_nome_badge           IN badge.nome_badge%TYPE,
   p_data_assegnazione    IN badge.data_assegnazione%TYPE DEFAULT sysdate,
-  p_criterio             IN badge.criterio_assegnazione%TYPE,
   p_badge_url            IN badge.url_badge%TYPE
 ) IS
   var_avvistamenti_confermati NUMBER := 0;
@@ -112,12 +110,10 @@ BEGIN
       codice_tessera_socio,
       nome_badge,
       data_assegnazione,
-      criterio_assegnazione,
       url_badge
     ) VALUES ( p_codice_tessera_socio,
                p_nome_badge,
                p_data_assegnazione,
-               p_criterio,
                p_badge_url );
     COMMIT;
   END IF;
