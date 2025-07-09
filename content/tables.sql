@@ -39,7 +39,7 @@
         url_immagine
 
     - Regione:
-      PK: codice_iso
+      PK: (nome_regione, paese)
       Attributi:
         nome_regione,
         paese,
@@ -50,7 +50,7 @@
         nome,
         area_protetta (booleano),
         url_mappa,
-      FK: codice_iso_regione (riferimento a Regione)
+      FK: (nome_regione, paese) (riferimento a Regione)
 
     - Habitat:
       PK: codice_EUNIS
@@ -184,13 +184,13 @@ DROP TABLE socio CASCADE CONSTRAINTS;
   Regione, indica una regione geografica (solitamente) europea
   una regione è contenuta nel database solo se ha almeno una località di avvistamento
   associata.
-  il codice_iso rappresenta il codice ISO 3166-2 della regione
 */
 CREATE TABLE regione (
-  codice_iso   VARCHAR2(6) NOT NULL,
   nome_regione VARCHAR2(40) NOT NULL,
   paese        VARCHAR2(40) NOT NULL,
-  CONSTRAINT pk_regione PRIMARY KEY ( codice_iso )
+  numero_sedi  NUMBER(2) DEFAULT 0 NOT NULL CHECK ( numero_sedi >= 0 ),
+  CONSTRAINT pk_regione PRIMARY KEY ( nome_regione,
+                                      paese )
 );
 
 /*
@@ -267,20 +267,24 @@ CREATE TABLE habitat (
   Località di avvistamento, indica una località geografica in cui sono stati effettuati
   avvistamenti di uccelli.
   Il plus_code rappresenta un codice unico per la località, utilizzando il sistema
-  Open Location Code (OLC).
+  Open Location Code (OLC), impiegato per la geolocalizzazionein Google Maps.
   Il database contiene solo località con almeno un avvistamento associato.
 */
 CREATE TABLE localita_avvistamento (
-  plus_code          VARCHAR2(12) NOT NULL,
-  nome               VARCHAR2(40) NOT NULL,
-  area_protetta      NUMBER(1) CHECK ( area_protetta IN ( 0,
+  plus_code     VARCHAR2(12) NOT NULL,
+  nome          VARCHAR2(40) NOT NULL,
+  area_protetta NUMBER(1) CHECK ( area_protetta IN ( 0,
                                                      1 ) ),
-  url_mappa          VARCHAR2(100),
-  codice_iso_regione VARCHAR2(6) NOT NULL,
+  url_mappa     VARCHAR2(100),
+  nome_regione  VARCHAR2(40) NOT NULL,
+  paese         VARCHAR2(40) NOT NULL,
   CONSTRAINT pk_localita_avvistamento PRIMARY KEY ( plus_code ),
-  CONSTRAINT fk_localita_regione FOREIGN KEY ( codice_iso_regione )
-    REFERENCES regione ( codice_iso )
-      ON DELETE CASCADE
+  CONSTRAINT fk_localita_regione
+    FOREIGN KEY ( nome_regione,
+                  paese )
+      REFERENCES regione ( nome_regione,
+                           paese )
+        ON DELETE CASCADE
 );
 
 /*

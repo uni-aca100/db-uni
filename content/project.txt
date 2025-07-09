@@ -95,7 +95,6 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
 
 - regione:
   è l'entità che rappresenta una regione geografica parte di un paese.
-  Ogni regione è identificata da un codice ISO 3166-2.
   Le regioni possono essere associate a una o più località_avvistamento.
   è spesso impiegata per analizzare la distribuzione delle specie di uccelli avvistati.
 

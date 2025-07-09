@@ -31,7 +31,6 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
     - p_nome_localita: Nome della località di avvistamento
     - p_area_protetta: Area protetta della località di avvistamento
     - p_url_mappa: URL della mappa della località di avvistamento
-    - p_codice_iso_regione: Codice ISO della regione della località di avvistamento
     - p_nome_regione: Nome della regione della località di avvistamento
     - p_paese: Paese della regione della località di avvistamento
     - p_maturita: Tabella con le maturità degli esemplari (può contenere più valori)
@@ -51,7 +50,6 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
   p_nome_localita              IN localita_avvistamento.nome%TYPE,
   p_area_protetta              IN localita_avvistamento.area_protetta%TYPE,
   p_url_mappa                  IN localita_avvistamento.url_mappa%TYPE,
-  p_codice_iso_regione         IN localita_avvistamento.codice_iso_regione%TYPE,
   p_nome_regione               IN regione.nome_regione%TYPE,
   p_paese                      IN regione.paese%TYPE,
   p_maturita                   IN tb_esp_maturita,
@@ -87,18 +85,17 @@ BEGIN
     
   -- Inserimento della regione se non esiste
   INSERT INTO regione (
-    codice_iso,
     nome_regione,
     paese
   )
-    SELECT p_codice_iso_regione,
-           p_nome_regione,
+    SELECT p_nome_regione,
            p_paese
       FROM dual
      WHERE NOT EXISTS (
       SELECT 1
         FROM regione
-       WHERE codice_iso = p_codice_iso_regione
+       WHERE nome_regione = p_nome_regione
+         AND paese = p_paese
     );
 
   -- Inserimento della località di avvistamento se non esiste
@@ -107,13 +104,15 @@ BEGIN
     nome,
     area_protetta,
     url_mappa,
-    codice_iso_regione
+    nome_regione,
+    paese
   )
     SELECT p_plus_code,
            p_nome_localita,
            p_area_protetta,
            p_url_mappa,
-           p_codice_iso_regione
+           p_nome_regione,
+           p_paese
       FROM dual
      WHERE NOT EXISTS (
       SELECT 1
