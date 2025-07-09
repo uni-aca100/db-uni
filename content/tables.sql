@@ -85,6 +85,13 @@
         url_badge (opzionale, per badge con immagini),
       FK: codice_tessera_socio (riferimento a Socio)
 
+    - Dispositivo_Richiamo:
+      PK: (codice_avvistamento, modello, marca)
+      Attributi:
+        tipo_richiamo (es: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, etc.),
+      FK: codice_avvistamento (riferimento a Avvistamento)
+      Descrizione: Dispositivo utilizzato per richiamare gli uccelli durante l'avvistamento.
+
   Relazioni:
     - Osservatore(Socio) (1,1) [effettua] (1,N) Avvistamento
       Un osservatore può effettuare più avvistamenti, ma ogni avvistamento
@@ -135,7 +142,10 @@
     - osservatore (1,1) [ha_ottenuto] (0,N) badge
       Un osservatore può ottenere più badge,
       ma ogni badge è associato a un solo osservatore.
-
+    
+    - Dispositivo_Richiamo (1,1) [utilizza] (0,N) Avvistamento
+      Un dispositivo di richiamo può essere utilizzato in più avvistamenti,
+      ma ogni avvistamento può utilizzare un solo dispositivo di richiamo.
 
   Entità di associazione:
     - pattern_migratori: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
@@ -153,11 +163,12 @@
       FK: codice_eunis (riferimento a Habitat)
  */
 
--- DROP delle tabelle in ordine di dipendenza
+-- DROP delle tabelle
 DROP TABLE associazione_localita_habitat CASCADE CONSTRAINTS;
 DROP TABLE badge CASCADE CONSTRAINTS;
 DROP TABLE pattern_migratori CASCADE CONSTRAINTS;
 DROP TABLE media CASCADE CONSTRAINTS;
+DROP TABLE dispositivo_richiamo CASCADE CONSTRAINTS;
 DROP TABLE esemplare CASCADE CONSTRAINTS;
 DROP TABLE avvistamento CASCADE CONSTRAINTS;
 DROP TABLE habitat CASCADE CONSTRAINTS;
@@ -312,6 +323,20 @@ CREATE TABLE media (
                                     titolo_media ),
   CONSTRAINT fk_media_avvistamento FOREIGN KEY ( codice_avvistamento )
     REFERENCES avvistamento ( codice_avvistamento )
+);
+
+-- tipo_richiamo (es: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, etc.),
+CREATE TABLE dispositivo_richiamo (
+  codice_avvistamento VARCHAR2(29) NOT NULL,
+  modello             VARCHAR2(40) NOT NULL,
+  marca               VARCHAR2(40) NOT NULL,
+  tipo_richiamo       VARCHAR2(30) NOT NULL,
+  CONSTRAINT pk_dispositivo_richiamo PRIMARY KEY ( codice_avvistamento,
+                                                   modello,
+                                                   marca ),
+  CONSTRAINT fk_dispositivo_avvistamento FOREIGN KEY ( codice_avvistamento )
+    REFERENCES avvistamento ( codice_avvistamento )
+      ON DELETE CASCADE
 );
 
 CREATE TABLE pattern_migratori (

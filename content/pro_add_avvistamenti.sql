@@ -23,7 +23,24 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
 
   La procedura fallisce se l'osservatore non è un socio già iscritto.
 
-  Le informazioni relative a media e condizioni_ambientali sono opzionali e
+  La procedura accetta i seguenti parametri:
+    - p_data_avvistamento: Data dell'avvistamento
+    - p_ora_avvistamento: Ora dell'avvistamento
+    - p_codice_tessera_osservatore: Codice della tessera del socio osservatore
+    - p_plus_code: Plus code della località di avvistamento
+    - p_nome_localita: Nome della località di avvistamento
+    - p_area_protetta: Area protetta della località di avvistamento
+    - p_url_mappa: URL della mappa della località di avvistamento
+    - p_codice_eunis: Codice EUNIS della località di avvistamento
+    - p_codice_iso_regione: Codice ISO della regione della località di avvistamento
+    - p_nome_regione: Nome della regione della località di avvistamento
+    - p_paese: Paese della regione della località di avvistamento
+    - p_maturita: Tabella con le maturità degli esemplari (può contenere più valori)
+    - p_condizioni_salute: Tabella con le condizioni di salute degli esemplari (può contenere più valori)
+    - p_sesso: Tabella con i sessi degli esemplari (può contenere più valori)
+    - p_nome_scientifico_specie: Nome scientifico della specie degli esemplari
+
+  Le informazioni relative a media, dispositivo di richiamo e condizioni_ambientali sono opzionali e
   possono essere aggiunte in un secondo momento tramite inserimento manuale,
   evitando così di appesantire ulteriormente questa procedura.
 */

@@ -1,8 +1,8 @@
 /*
   Questa procedura permette a un revisore effettuare la valutazione di
   un avvistamento. Durante l'operazione, vengono registrate
-  la data della revisione (se non specificata, viene usata la data corrente)
-  e il codice della tessera del revisore che ha eseguito la revisione.
+  la data della revisione e il codice della tessera del
+  revisore che ha eseguito la revisione.
 
 La procedura verifica innanzitutto che l'avvistamento e il revisore esistano.
 Inoltre, controlla che la data di revisione sia successiva sia alla data
@@ -17,7 +17,11 @@ Vengono imposti i seguenti requisiti per la valutazione:
     - Se all'avvistamento non è associato alcun contenuto multimediale,
       la valutazione della revisione non può essere "confermato".
 
-Ricordiamo che i possibili stati di valutazione sono: "confermato", "possibile" e "non confermato".
+  La procedura accetta i seguenti parametri:
+    - p_codice_avvistamento: Codice dell'avvistamento da valutare.
+    - p_codice_tessera_revisore: Codice della tessera del revisore che effettua la valutazione.
+    - p_valutazione: Valutazione dell'avvistamento (confermato, possibile, non confermato).
+    - p_data_revisione: Data della revisione (opzionale, se non specificata viene usata la data corrente).
   */
 
 CREATE OR REPLACE PROCEDURE revisione_avvistamento (

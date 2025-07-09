@@ -11,6 +11,20 @@
   Vengono costruiti automaticamente i pattern migratori e gli habitat
   di destinazione associati alle diverse specie.
 
+  La procedura accetta i seguenti parametri:
+    - p_nome_scientifico: Nome scientifico della specie.
+    - p_nome_comune: Nome comune della specie.
+    - p_stato_conservazione: Stato di conservazione della specie.
+    - p_famiglia: Famiglia della specie.
+    - p_url_verso: URL verso la pagina della specie.
+    - p_url_immagine: URL dell'immagine della specie.
+    - p_motivo_migrazione: Motivo della migrazione (es. riproduzione, alimentazione, etc.).
+    - p_periodo_inizio: Periodo di inizio della migrazione (1-12).
+    - p_periodo_fine: Periodo di fine della migrazione (1-12).
+    - p_codice_eunis: Codice EUNIS dell'habitat associato.
+    - p_nome_habitat: Nome dell'habitat associato.
+    - p_url_descrizione: URL di descrizione dell'habitat.
+
   Per le specie stanziali, il pattern migratorio deve coprire l'intero anno.
   Questo significa che il periodo_inizio deve essere 1 (gennaio)
   e il periodo_fine deve essere 12 (dicembre).
