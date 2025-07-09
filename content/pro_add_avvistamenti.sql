@@ -25,7 +25,6 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
 
   La procedura accetta i seguenti parametri:
     - p_data_avvistamento: Data dell'avvistamento
-    - p_ora_avvistamento: Ora dell'avvistamento
     - p_codice_tessera_osservatore: Codice della tessera del socio osservatore
     - p_plus_code: Plus code della località di avvistamento
     - p_nome_localita: Nome della località di avvistamento
@@ -44,7 +43,6 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
 */
 CREATE OR REPLACE PROCEDURE add_avvistamento (
   p_data_avvistamento          IN avvistamento.data_avvistamento%TYPE,
-  p_ora_avvistamento           IN avvistamento.ora_avvistamento%TYPE,
   p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
   p_plus_code                  IN avvistamento.plus_code%TYPE,
   p_nome_localita              IN localita_avvistamento.nome%TYPE,
@@ -129,12 +127,10 @@ BEGIN
   INSERT INTO avvistamento (
     codice_avvistamento,
     data_avvistamento,
-    ora_avvistamento,
     codice_tessera_osservatore,
     plus_code
   ) VALUES ( var_codice_avvistamento,
              p_data_avvistamento,
-             p_ora_avvistamento,
              p_codice_tessera_osservatore,
              p_plus_code );
 
