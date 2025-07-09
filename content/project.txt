@@ -1,3 +1,5 @@
+Autore: Davide Duraccio.
+
 # Requisiti:
 L'obiettivo di questo progetto è creare un database per la gestione di un'associazione di birdwatching.Il database permette di gestire sia le informazioni relative alle varie specie di uccelli, solitamente avvistate in Europa (ma non solo), sia quelle riguardanti le attività osservative e revisionali dei soci dell'associazione.
 
@@ -21,6 +23,7 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
 - Un Revisore non può validare i propri avvistamenti.
 - Un Revisore non può modificare le revisioni effettuate da altri Revisori.
 - Non è possibile inserire avvistamento che sia stato effettuato prima della data di iscrizione del socio.
+- Non è possibile aggiungere dispositivi di richiamo se l'avvistamento è stato effettuato in un'area protetta. 
 
 
 # Descrizione del generale del database e sistema di gestione associazioni di birdwatching:
