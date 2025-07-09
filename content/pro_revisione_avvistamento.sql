@@ -26,18 +26,18 @@ CREATE OR REPLACE PROCEDURE revisione_avvistamento (
   p_valutazione             IN avvistamento.valutazione%TYPE,
   p_data_revisione          IN avvistamento.data_revisione%TYPE DEFAULT sysdate
 ) AS
-  var_exists_avvistamento         NUMBER := 0;
+  var_exists_avvistamento        NUMBER := 0;
   avvistamento_not_found EXCEPTION;
   revisore_not_found EXCEPTION;
   revisore_precedente_designazione EXCEPTION;
   revisione_precedente_avvistamento EXCEPTION;
   revisione_cannot_be_confirmed EXCEPTION;
   revisione_must_be_not_confirmed EXCEPTION;
-  var_data_designazione_revisore  revisore.data_attribuzione%TYPE;
-  var_media_count                 NUMBER := 0;
-  var_condizioni_ambientali_count NUMBER := 0;
-  var_revisore_exists             NUMBER := 0;
-  var_stato_conservazione         specie.stato_conservazione%TYPE;
+  var_data_designazione_revisore revisore.data_attribuzione%TYPE;
+  var_media_count                NUMBER := 0;
+  var_has_condizioni_ambientali  NUMBER := 0;
+  var_revisore_exists            NUMBER := 0;
+  var_stato_conservazione        specie.stato_conservazione%TYPE;
 BEGIN
   -- Verifica se l'avvistamento esiste
   SELECT COUNT(*)
@@ -97,10 +97,16 @@ BEGIN
     FROM media
    WHERE codice_avvistamento = p_codice_avvistamento;
 
-  -- Controlla se l'avvistamento ha condizioni ambientali associate
-  SELECT COUNT(*)
-    INTO var_condizioni_ambientali_count
-    FROM condizioni_ambientali
+  -- Controlla se almeno un campo delle condizioni ambientali è valorizzato
+  SELECT CASE
+           WHEN meteo IS NOT NULL
+               OR temperatura IS NOT NULL THEN
+             1
+           ELSE
+             0
+         END
+    INTO var_has_condizioni_ambientali
+    FROM avvistamento
    WHERE codice_avvistamento = p_codice_avvistamento;
 
   -- Verifica i requisiti per la valutazione
@@ -111,7 +117,7 @@ BEGIN
     RAISE revisione_cannot_be_confirmed;
   ELSIF
     var_media_count = 0
-    AND var_condizioni_ambientali_count = 0
+    AND var_has_condizioni_ambientali = 0
     AND var_stato_conservazione IN ( 'CR',
                                      'EN' )
     AND p_valutazione = 'confermato'
@@ -171,4 +177,3 @@ EXCEPTION
     );
     ROLLBACK;
 END;
-/

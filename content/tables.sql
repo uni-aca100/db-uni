@@ -21,6 +21,10 @@
         ora_avvistamento
         valutazione (confermato, possibile, non confermato),
         data_revisione (opzionale),
+        condizioni_ambientali (opzionale):
+          umidita (opzionale),
+          temperatura (opzionale),
+          meteo (opzionale),
       FK: codice_tessera_osservatore (riferimento a Socio)
       FK: codice_tessera_revisore (riferimento a Socio, opzionale)
       FK: plus_code (riferimento a località_avvistamento)
@@ -71,15 +75,6 @@
         url_media,
         formato_media (jpg, png, mp4, mp3, wav),
         titolo_media,
-      FK: codice_avvistamento (riferimento a Avvistamento)
-
-    - Condizioni_Ambientali:
-      PK: codice_avvistamento
-      Attributi:
-        meteo (sole, nuvoloso, pioggia, neve),
-        temperatura (in gradi Celsius),
-        umidità (percentuale),
-        vento (veloce, moderato, debole, assente),
       FK: codice_avvistamento (riferimento a Avvistamento)
 
     - badge:
@@ -158,11 +153,10 @@
       FK: codice_eunis (riferimento a Habitat)
  */
 
--- DROP delle tabelle in ordine di dipendenza per evitare errori di vincoli
+-- DROP delle tabelle in ordine di dipendenza
 DROP TABLE associazione_localita_habitat CASCADE CONSTRAINTS;
 DROP TABLE badge CASCADE CONSTRAINTS;
 DROP TABLE pattern_migratori CASCADE CONSTRAINTS;
-DROP TABLE condizioni_ambientali CASCADE CONSTRAINTS;
 DROP TABLE media CASCADE CONSTRAINTS;
 DROP TABLE esemplare CASCADE CONSTRAINTS;
 DROP TABLE avvistamento CASCADE CONSTRAINTS;
@@ -174,8 +168,7 @@ DROP TABLE revisore CASCADE CONSTRAINTS;
 DROP TABLE osservatore CASCADE CONSTRAINTS;
 DROP TABLE socio CASCADE CONSTRAINTS;
 
--- CREAZIONE TABELLE IN ORDINE DI DIPENDENZA
-
+-- creazione delle tabelle in ordine di dipendenza
 CREATE TABLE regione (
   codice_iso   VARCHAR2(3) NOT NULL,
   nome_regione VARCHAR2(40) NOT NULL,
@@ -259,6 +252,13 @@ CREATE TABLE avvistamento (
   codice_tessera_osservatore VARCHAR2(16) NOT NULL,
   codice_tessera_revisore    VARCHAR2(16),
   plus_code                  VARCHAR2(12) NOT NULL,
+  -- Attributi condizioni ambientali
+  meteo                      VARCHAR2(10) CHECK ( meteo IN ( 'sole',
+                                        'nuvoloso',
+                                        'pioggia',
+                                        'neve' ) ),
+  temperatura                NUMBER(3,1),
+  umidita                    NUMBER(3,1),
   CONSTRAINT fm_cd_avvistamento CHECK ( REGEXP_LIKE ( codice_avvistamento,
                                                       '^[A-Z0-9]{16}-[0-9]{12}-[0-9]{3}$' ) ),
   CONSTRAINT pk_avvistamento PRIMARY KEY ( codice_avvistamento ),
@@ -312,24 +312,6 @@ CREATE TABLE media (
                                     titolo_media ),
   CONSTRAINT fk_media_avvistamento FOREIGN KEY ( codice_avvistamento )
     REFERENCES avvistamento ( codice_avvistamento )
-);
-
-CREATE TABLE condizioni_ambientali (
-  codice_avvistamento VARCHAR2(29) NOT NULL,
-  meteo               VARCHAR2(10) CHECK ( meteo IN ( 'sole',
-                                        'nuvoloso',
-                                        'pioggia',
-                                        'neve' ) ),
-  temperatura         NUMBER(3,1),
-  umidita             NUMBER(3,1),
-  vento               VARCHAR2(10) CHECK ( vento IN ( 'veloce',
-                                        'moderato',
-                                        'debole',
-                                        'assente' ) ),
-  CONSTRAINT pk_condizioni_ambientali PRIMARY KEY ( codice_avvistamento ),
-  CONSTRAINT fk_condizioni_avvistamento FOREIGN KEY ( codice_avvistamento )
-    REFERENCES avvistamento ( codice_avvistamento )
-      ON DELETE CASCADE
 );
 
 CREATE TABLE pattern_migratori (
