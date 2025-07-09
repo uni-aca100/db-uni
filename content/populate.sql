@@ -234,31 +234,21 @@ INSERT INTO socio VALUES ( 'ABWNA2016MS0001',
 
 -- Popolamento tabella osservatore
 INSERT INTO osservatore VALUES ( 'ABWMI2010LR0001' );
-INSERT INTO osservatore VALUES ( 'ABWRM2003MB0001' );
-INSERT INTO osservatore VALUES ( 'ABWVE2010GV0002' );
 INSERT INTO osservatore VALUES ( 'ABWPA2007FR0001' );
-INSERT INTO osservatore VALUES ( 'ABWTO2014AF0001' );
-INSERT INTO osservatore VALUES ( 'ABWFI2010SE0003' );
 INSERT INTO osservatore VALUES ( 'ABWBO2005DC0001' );
-INSERT INTO osservatore VALUES ( 'ABWNA2012ER0001' );
 INSERT INTO osservatore VALUES ( 'ABWBA2008SG0001' );
-INSERT INTO osservatore VALUES ( 'ABWMI2013VG0004' );
 INSERT INTO osservatore VALUES ( 'ABWRM2000MC0001' );
-INSERT INTO osservatore VALUES ( 'ABWVE2016CM0001' );
-INSERT INTO osservatore VALUES ( 'ABWPA2004SL0001' );
-INSERT INTO osservatore VALUES ( 'ABWTO2017MM0001' );
 INSERT INTO osservatore VALUES ( 'ABWFI2010FB0005' );
 INSERT INTO osservatore VALUES ( 'ABWBO2002PF0001' );
-INSERT INTO osservatore VALUES ( 'ABWNA2010AM0002' );
 INSERT INTO osservatore VALUES ( 'ABWBA2001RR0001' );
 INSERT INTO osservatore VALUES ( 'ABWMI2010GF0006' );
 INSERT INTO osservatore VALUES ( 'ABWRM2000SM0002' );
 INSERT INTO osservatore VALUES ( 'ABWVE2001LB0001' );
-INSERT INTO osservatore VALUES ( 'ABWPA2012FL0002' );
 INSERT INTO osservatore VALUES ( 'ABWTO2000NG0001' );
 INSERT INTO osservatore VALUES ( 'ABWFI2015IT0001' );
+INSERT INTO osservatore VALUES ( 'ABWFI2010SE0003' );
+INSERT INTO osservatore VALUES ( 'ABWRM2003MB0001' );
 INSERT INTO osservatore VALUES ( 'ABWBO2000DV0001' );
-INSERT INTO osservatore VALUES ( 'ABWNA2016MS0001' );
 
 -- Popolamento tabella revisore (solo 3 perché non avrebbe nessun senso aggiungere 15 revisori)
 INSERT INTO revisore VALUES ( 'ABWBO2000DV0001',
@@ -287,12 +277,6 @@ INSERT INTO specie VALUES ( 'Aythya nyroca',
                             'Anatidae',
                             'https://cloud.it/versi/nyroca.mp3',
                             'https://cloud.it/img/nyroca.jpg' );
-INSERT INTO specie VALUES ( 'Cettia cetti',
-                            'Usignolo di fiume',
-                            'LC',
-                            'Cettiidae',
-                            'https://cloud.it/versi/usignolo.mp3',
-                            'https://cloud.it/img/usignolo.jpg' );
 INSERT INTO specie VALUES ( 'Corvus corone',
                             'Cornacchia nera',
                             'LC',
@@ -305,12 +289,6 @@ INSERT INTO specie VALUES ( 'Turdus merula',
                             'Turdidae',
                             'https://cloud.it/versi/merlo.mp3',
                             'https://cloud.it/img/merlo.jpg' );
-INSERT INTO specie VALUES ( 'Delichon urbicum',
-                            'Rondine montana',
-                            'LC',
-                            'Hirundinidae',
-                            'https://cloud.it/versi/rondinemontana.mp3',
-                            'https://cloud.it/img/rondinemontana.jpg' );
 INSERT INTO specie VALUES ( 'Aquila adalberti',
                             'Aquila imperiale iberica',
                             'EN',
@@ -323,42 +301,18 @@ INSERT INTO specie VALUES ( 'Corvus corax',
                             'Corvidae',
                             'https://cloud.it/versi/corvo.mp3',
                             'https://cloud.it/img/corvo.jpg' );
-INSERT INTO specie VALUES ( 'Streptopelia decaocto',
-                            'Tortora dal collare',
-                            'LC',
-                            'Columbidae',
-                            'https://cloud.it/versi/tortora.mp3',
-                            'https://cloud.it/img/tortora.jpg' );
 INSERT INTO specie VALUES ( 'Lanius collurio',
                             'Averla piccola',
                             'LC',
                             'Laniidae',
                             'https://cloud.it/versi/averla.mp3',
                             'https://cloud.it/img/averla.jpg' );
-INSERT INTO specie VALUES ( 'Columba livia',
-                            'Piccione',
-                            'LC',
-                            'Columbidae',
-                            'https://cloud.it/versi/piccione.mp3',
-                            'https://cloud.it/img/piccione.jpg' );
-INSERT INTO specie VALUES ( 'Pyrrhula pyrrhula',
-                            'Ciuffolotto',
-                            'LC',
-                            'Fringillidae',
-                            'https://cloud.it/versi/ciuffolotto.mp3',
-                            'https://cloud.it/img/ciuffolotto.jpg' );
 INSERT INTO specie VALUES ( 'Picus viridis',
                             'Picchio verde',
                             'LC',
                             'Picidae',
                             'https://cloud.it/versi/picchioverde.mp3',
                             'https://cloud.it/img/picchioverde.jpg' );
-INSERT INTO specie VALUES ( 'Apus apus',
-                            'Rondone',
-                            'LC',
-                            'Apodidae',
-                            'https://cloud.it/versi/rondone.mp3',
-                            'https://cloud.it/img/rondone.jpg' );
 INSERT INTO specie VALUES ( 'Motacilla alba',
                             'Ballerina bianca',
                             'LC',
@@ -371,84 +325,18 @@ INSERT INTO specie VALUES ( 'Numenius tenuirostris',
                             'Scolopacidae',
                             'https://cloud.it/versi/numenius.mp3',
                             'https://cloud.it/img/numenius.jpg' );
-INSERT INTO specie VALUES ( 'Phoenicurus ochruros',
-                            'Codirosso spazzacamino',
-                            'LC',
-                            'Muscicapidae',
-                            'https://cloud.it/versi/codirosso.mp3',
-                            'https://cloud.it/img/codirosso.jpg' );
-INSERT INTO specie VALUES ( 'Sturnus vulgaris',
-                            'Storno',
-                            'LC',
-                            'Sturnidae',
-                            'https://cloud.it/versi/storno.mp3',
-                            'https://cloud.it/img/storno.jpg' );
-INSERT INTO specie VALUES ( 'Sylvia atricapilla',
-                            'Capinera',
-                            'LC',
-                            'Sylviidae',
-                            'https://cloud.it/versi/capinera.mp3',
-                            'https://cloud.it/img/capinera.jpg' );
-INSERT INTO specie VALUES ( 'Fringilla coelebs',
-                            'Fringuello',
-                            'LC',
-                            'Fringillidae',
-                            'https://cloud.it/versi/fringuello.mp3',
-                            'https://cloud.it/img/fringuello.jpg' );
-INSERT INTO specie VALUES ( 'Buteo buteo',
-                            'Poiana',
-                            'LC',
-                            'Accipitridae',
-                            'https://cloud.it/versi/poiana.mp3',
-                            'https://cloud.it/img/poiana.jpg' );
 INSERT INTO specie VALUES ( 'Cyanistes caeruleus',
                             'Cinciarella',
                             'LC',
                             'Paridae',
                             'https://cloud.it/versi/cinciarella.mp3',
                             'https://cloud.it/img/cinciarella.jpg' );
-INSERT INTO specie VALUES ( 'Dendrocopos major',
-                            'Picchio rosso maggiore',
-                            'LC',
-                            'Picidae',
-                            'https://cloud.it/versi/picchiorosso.mp3',
-                            'https://cloud.it/img/picchiorosso.jpg' );
 INSERT INTO specie VALUES ( 'Tetrax tetrax',
                             'Gallina prataiola',
                             'NT',
                             'Otididae',
                             'https://cloud.it/versi/tetrax.mp3',
                             'https://cloud.it/img/tetrax.jpg' );
-INSERT INTO specie VALUES ( 'Carduelis carduelis',
-                            'Cardellino',
-                            'LC',
-                            'Fringillidae',
-                            'https://cloud.it/versi/cardellino.mp3',
-                            'https://cloud.it/img/cardellino.jpg' );
-INSERT INTO specie VALUES ( 'Passer montanus',
-                            'Passera mattugia',
-                            'LC',
-                            'Passeridae',
-                            'https://cloud.it/versi/mattugia.mp3',
-                            'https://cloud.it/img/mattugia.jpg' );
-INSERT INTO specie VALUES ( 'Upupa epops',
-                            'Upupa',
-                            'LC',
-                            'Upupidae',
-                            'https://cloud.it/versi/upupa.mp3',
-                            'https://cloud.it/img/upupa.jpg' );
-INSERT INTO specie VALUES ( 'Parus major',
-                            'Cinciallegra',
-                            'LC',
-                            'Paridae',
-                            'https://cloud.it/versi/cinciallegra.mp3',
-                            'https://cloud.it/img/cinciallegra.jpg' );
-INSERT INTO specie VALUES ( 'Accipiter nisus',
-                            'Sparviere',
-                            'LC',
-                            'Accipitridae',
-                            'https://cloud.it/versi/sparviere.mp3',
-                            'https://cloud.it/img/sparviere.jpg' );
 INSERT INTO specie VALUES ( 'Erithacus rubecula',
                             'Pettirosso',
                             'LC',
@@ -617,3 +505,160 @@ INSERT INTO localita_avvistamento VALUES ( '8GWC9G5F+0O',
                                            1,
                                            'https://cloud.it/maps/zuid_kennemerland',
                                            'NL-NH' );
+
+-- Popolamento tabella pattern_migratori
+INSERT INTO pattern_migratori VALUES ( 'Aquila chrysaetos',
+                                       'C1.1',
+                                       'nidificazione',
+                                       4,
+                                       7 );
+INSERT INTO pattern_migratori VALUES ( 'Passer italiae',
+                                       'C2.2',
+                                       'stanziale',
+                                       1,
+                                       12 );
+INSERT INTO pattern_migratori VALUES ( 'Aythya nyroca',
+                                       'E1.2',
+                                       'svernamento',
+                                       11,
+                                       2 );
+INSERT INTO pattern_migratori VALUES ( 'Corvus corone',
+                                       'F3.2',
+                                       'migrazione',
+                                       3,
+                                       5 );
+INSERT INTO pattern_migratori VALUES ( 'Turdus merula',
+                                       'G1.1',
+                                       'stanziale',
+                                       1,
+                                       12 );
+INSERT INTO pattern_migratori VALUES ( 'Aquila adalberti',
+                                       'D5.2',
+                                       'nidificazione',
+                                       5,
+                                       8 );
+INSERT INTO pattern_migratori VALUES ( 'Corvus corax',
+                                       'B1.3',
+                                       'svernamento',
+                                       10,
+                                       2 );
+INSERT INTO pattern_migratori VALUES ( 'Lanius collurio',
+                                       'A2.5',
+                                       'migrazione',
+                                       4,
+                                       9 );
+INSERT INTO pattern_migratori VALUES ( 'Picus viridis',
+                                       'C3.4',
+                                       'stanziale',
+                                       1,
+                                       12 );
+INSERT INTO pattern_migratori VALUES ( 'Motacilla alba',
+                                       'E4.1',
+                                       'nidificazione',
+                                       5,
+                                       7 );
+INSERT INTO pattern_migratori VALUES ( 'Numenius tenuirostris',
+                                       'F2.2',
+                                       'svernamento',
+                                       11,
+                                       2 );
+INSERT INTO pattern_migratori VALUES ( 'Cyanistes caeruleus',
+                                       'G2.1',
+                                       'stanziale',
+                                       1,
+                                       12 );
+INSERT INTO pattern_migratori VALUES ( 'Tetrax tetrax',
+                                       'D1.1',
+                                       'migrazione',
+                                       3,
+                                       6 );
+INSERT INTO pattern_migratori VALUES ( 'Erithacus rubecula',
+                                       'C6.3',
+                                       'svernamento',
+                                       10,
+                                       3 );
+INSERT INTO pattern_migratori VALUES ( 'Regulus regulus',
+                                       'B2.4',
+                                       'nidificazione',
+                                       6,
+                                       8 );
+INSERT INTO pattern_migratori VALUES ( 'Pica pica',
+                                       'C1.1',
+                                       'stanziale',
+                                       1,
+                                       12 );
+INSERT INTO pattern_migratori VALUES ( 'Aquila chrysaetos',
+                                       'F3.2',
+                                       'svernamento',
+                                       11,
+                                       2 );
+INSERT INTO pattern_migratori VALUES ( 'Passer italiae',
+                                       'G1.1',
+                                       'nidificazione',
+                                       4,
+                                       7 );
+INSERT INTO pattern_migratori VALUES ( 'Aythya nyroca',
+                                       'D5.2',
+                                       'migrazione',
+                                       8,
+                                       10 );
+INSERT INTO pattern_migratori VALUES ( 'Corvus corone',
+                                       'C2.2',
+                                       'nidificazione',
+                                       5,
+                                       8 );
+INSERT INTO pattern_migratori VALUES ( 'Turdus merula',
+                                       'E1.2',
+                                       'svernamento',
+                                       10,
+                                       2 );
+INSERT INTO pattern_migratori VALUES ( 'Aquila adalberti',
+                                       'B1.3',
+                                       'migrazione',
+                                       3,
+                                       5 );
+INSERT INTO pattern_migratori VALUES ( 'Corvus corax',
+                                       'A2.5',
+                                       'nidificazione',
+                                       6,
+                                       8 );
+INSERT INTO pattern_migratori VALUES ( 'Lanius collurio',
+                                       'C3.4',
+                                       'svernamento',
+                                       11,
+                                       2 );
+INSERT INTO pattern_migratori VALUES ( 'Picus viridis',
+                                       'E4.1',
+                                       'migrazione',
+                                       9,
+                                       11 );
+INSERT INTO pattern_migratori VALUES ( 'Motacilla alba',
+                                       'F2.2',
+                                       'stanziale',
+                                       1,
+                                       12 );
+INSERT INTO pattern_migratori VALUES ( 'Numenius tenuirostris',
+                                       'G2.1',
+                                       'nidificazione',
+                                       5,
+                                       7 );
+INSERT INTO pattern_migratori VALUES ( 'Cyanistes caeruleus',
+                                       'D1.1',
+                                       'svernamento',
+                                       10,
+                                       2 );
+INSERT INTO pattern_migratori VALUES ( 'Tetrax tetrax',
+                                       'C6.3',
+                                       'nidificazione',
+                                       4,
+                                       7 );
+INSERT INTO pattern_migratori VALUES ( 'Erithacus rubecula',
+                                       'B2.4',
+                                       'migrazione',
+                                       8,
+                                       10 );
+INSERT INTO pattern_migratori VALUES ( 'Regulus regulus',
+                                       'C2.2',
+                                       'svernamento',
+                                       11,
+                                       2 );
