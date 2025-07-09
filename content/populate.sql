@@ -1112,3 +1112,105 @@ INSERT INTO badge VALUES ( 'custode della natura',
                            DATE '2025-05-15',
                            'primo avvistamento confermato',
                            'https://cloud.it/badge/ABWRM2000MC0001' );
+
+-- Popolamento tabella media
+INSERT INTO media VALUES ( 'ABWMI2010LR0001-20230701-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/adasdad.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWRM2003MB0001-20201005-001',
+                           'video1',
+                           'video',
+                           'https://cloud.it/media/sxca.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWPA2007FR0001-20201104-001',
+                           'audio1',
+                           'audio',
+                           'https://cloud.it/media/xxas.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWVE2001LB0001-20200606-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/xasxw.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWFI2010SE0003-20210222-001',
+                           'video1',
+                           'video',
+                           'https://cloud.it/media/xaxmm.mp4',
+                           'mp4' );
+INSERT INTO media VALUES ( 'ABWTO2000NG0001-20200113-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/jkkjh.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWBO2005DC0001-20210418-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/povs.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWBA2008SG0001-20210612-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/jdc.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWBO2000DV0001-20210703-001',
+                           'audio1',
+                           'audio',
+                           'https://cloud.it/media/nbd.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWRM2000MC0001-20210711-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/ash.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWBO2000DV0001-20220812-001',
+                           'audio1',
+                           'audio',
+                           'https://cloud.it/media/mnasj.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWMI2010GF0006-20230719-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/nkd.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWFI2015IT0001-20210509-001',
+                           'audio1',
+                           'audio',
+                           'https://cloud.it/media/nbcjd.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWFI2015IT0001-20220814-001',
+                           'audio1',
+                           'audio',
+                           'https://cloud.it/media/kcj.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWBO2000DV0001-20220323-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/knc.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWFI2010FB0005-20220725-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/jbjc.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWFI2015IT0001-20230717-001',
+                           'foto1',
+                           'foto',
+                           'https://cloud.it/media/bcd.jpg',
+                           'jpg' );
+INSERT INTO media VALUES ( 'ABWBO2002PF0001-20230716-001',
+                           'video1',
+                           'video',
+                           'https://cloud.it/media/nnkx.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWBA2001RR0001-20230718-001',
+                           'audio1',
+                           'audio',
+                           'https://cloud.it/media/lcj.wav',
+                           'wav' );
+INSERT INTO media VALUES ( 'ABWRM2000SM0002-20230720-001',
+                           'audio1',
+                           'audio',
+                           'https://cloud.it/media/lkck.wav',
+                           'wav' );
