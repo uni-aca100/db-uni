@@ -210,7 +210,7 @@ CREATE TABLE socio (
   data_nascita    DATE NOT NULL,
   data_iscrizione DATE DEFAULT sysdate NOT NULL,
   CONSTRAINT fm_cd_tessera CHECK ( REGEXP_LIKE ( codice_tessera,
-                                                 '^ABW[A-Z]{2,3}[0-9]{4}[A-Z]{2}[0-9]{4}$' ) ),
+                                                 '^ABW[A-Z]{2}[0-9]{4}[A-Z]{2}[0-9]{4}$' ) ),
   CONSTRAINT pk_socio PRIMARY KEY ( codice_tessera )
 );
 
@@ -309,7 +309,7 @@ CREATE TABLE avvistamento (
   temperatura                NUMBER(3,1),
   umidita                    NUMBER(3,1),
   CONSTRAINT fm_cd_avvistamento CHECK ( REGEXP_LIKE ( codice_avvistamento,
-                                                      '^[A-Z0-9]{16}-[0-9]{12}-[0-9]{3}$' ) ),
+                                                      '^[A-Z0-9]{15}-[0-9]{8}-[0-9]{3}$' ) ),
   CONSTRAINT pk_avvistamento PRIMARY KEY ( codice_avvistamento ),
   CONSTRAINT fk_avvistamento_osservatore FOREIGN KEY ( codice_tessera_osservatore )
     REFERENCES osservatore ( codice_tessera )
