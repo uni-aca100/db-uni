@@ -1,9 +1,11 @@
 /*
   Funzione per generare un codice avvistamento univoco.
   Pattern codice avvistamento:
-    codice tessera dell'osservatore (lunghezza 16)
-    data dell'avvistamento (YYYYMMDD)
-    numero progressivo (3 cifre, con zeri iniziali)
+    [A-Z0-9]{15} codice tessera dell'osservatore
+    -
+    [0-9]{8} data dell'avvistamento (YYYYMMDD)
+    -
+    [0-9]{3} numero progressivo degli avvistamenti effettuati dall'osservatore nella stessa data
     esempio: ABWMI2020AB0001-20221012-001
     dove ABWMI2020AB0001 è il codice tessera dell'osservatore
     e 20221012-001 è la data dell'avvistamento (12 ottobre 2022) con il numero progressivo 001.
@@ -42,12 +44,13 @@ END;
 /*
   funzione per la generazione univoca del codice di tessera per un socio.
   Pattern codice tessera:
-    prefisso fisso ABW
-    Sigla città (2–3 lettere maiuscole)
-    anno da cui è stato iscritto il socio (4 cifre)
-    iniziale del nome (1 lettera maiuscola) e iniziale del cognome (1 lettera maiuscola)
-    numero progressivo (4 cifre, con zeri iniziali)
-    esempio: ABWMI2020AB0001
+    ABW (fisso)
+    [A-Z]{2}: es. MI, RO ecc. (sigla città)
+    [0-9]{4}: anno di iscrizione es. 2020
+    [A-Z]: iniziale nome es. M (Marco)
+    [A-Z]: iniziale cognome es. A (Ambrosio)
+    [0-9]{4}: numero progressivo dei soci iscritti nell'anno corrente (4 cifre)
+    esempio: ABWMI2020MA0001
 */
 CREATE OR REPLACE FUNCTION genera_codice_tessera (
   p_nome        IN socio.nome%TYPE,
