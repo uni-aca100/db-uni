@@ -78,7 +78,7 @@ BEGIN
     INTO var_exists_avvistamento
     FROM avvistamento
    WHERE codice_avvistamento = p_codice_avvistamento
-     AND data_avvistamento <= p_data_revisione;
+     AND data_e_ora <= p_data_revisione;
 
   IF var_exists_avvistamento = 0 THEN
     RAISE revisione_precedente_avvistamento;

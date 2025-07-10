@@ -25,7 +25,7 @@ BEGIN
     Contiamo quante corrispondenze esistono tra gli habitat della
     località avvistamento (:new.plus_code) e gli habitat della specie
     osservata (var_specie_nome_scientifico) per il periodo dell'anno
-    in cui è stato effettuato l'avvistamento (:new.data_avvistamento).
+    in cui è stato effettuato l'avvistamento (:new.data_e_ora).
     In pratica, verifica se esiste almeno un habitat associato a quella
     località che sia anche un habitat tipico per la specie in quel periodo.
   */
@@ -39,7 +39,7 @@ BEGIN
      WHERE v.nome_scientifico_specie = var_specie_nome_scientifico
        AND v.codice_eunis = l.codice_eunis
        AND TO_NUMBER(to_char(
-      :new.data_avvistamento,
+      :new.data_e_ora,
       'MM'
     )) BETWEEN v.periodo_inizio AND v.periodo_fine
   );

@@ -24,7 +24,7 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
   La procedura fallisce se l'osservatore non è un socio già iscritto.
 
   La procedura accetta i seguenti parametri:
-    - p_data_avvistamento: Data dell'avvistamento
+    - p_data_e_ora: Data e ora dell'avvistamento
     - p_codice_tessera_osservatore: Codice della tessera del socio osservatore
     - p_plus_code: Plus code della località di avvistamento
     - p_nome_localita: Nome della località di avvistamento
@@ -42,7 +42,7 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
   evitando così di appesantire ulteriormente questa procedura.
 */
 CREATE OR REPLACE PROCEDURE add_avvistamento (
-  p_data_avvistamento          IN avvistamento.data_avvistamento%TYPE,
+  p_data_e_ora                 IN avvistamento.data_e_ora%TYPE,
   p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
   p_plus_code                  IN avvistamento.plus_code%TYPE,
   p_nome_localita              IN localita_avvistamento.nome%TYPE,
@@ -120,17 +120,17 @@ BEGIN
 
   var_codice_avvistamento := genera_codice_avvistamento(
     p_codice_tessera_osservatore,
-    p_data_avvistamento
+    p_data_e_ora
   );
 
   -- Inserimento dell'avvistamento
   INSERT INTO avvistamento (
     codice_avvistamento,
-    data_avvistamento,
+    data_e_ora,
     codice_tessera_osservatore,
     plus_code
   ) VALUES ( var_codice_avvistamento,
-             p_data_avvistamento,
+             p_data_e_ora,
              p_codice_tessera_osservatore,
              p_plus_code );
 

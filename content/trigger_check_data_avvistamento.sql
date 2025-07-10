@@ -4,7 +4,7 @@
   Non è consentito ai soci l'inserimento di avvistamenti precedenti alla loro data di iscrizione.
   Un Socio può contribuire alle attività dell'associazione solo dopo essersi iscritto.
 */
-CREATE OR REPLACE TRIGGER trg_check_data_avvistamento BEFORE
+CREATE OR REPLACE TRIGGER trg_check_data_e_ora BEFORE
   INSERT OR UPDATE ON avvistamento
   FOR EACH ROW
 DECLARE
@@ -18,7 +18,7 @@ BEGIN
    WHERE codice_tessera = :new.codice_tessera_osservatore;
 
   -- Se la data dell'avvistamento è precedente alla data di iscrizione, solleva errore
-  IF :new.data_avvistamento < var_data_iscrizione THEN
+  IF :new.data_e_ora < var_data_iscrizione THEN
     RAISE date_avvistamento_precedente;
   END IF;
 EXCEPTION

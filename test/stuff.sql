@@ -7,8 +7,8 @@ DECLARE
   v_sesso             tb_esp_sesso := tb_esp_sesso('maschio');
 BEGIN
   add_avvistamento(
-    p_data_avvistamento          => TO_DATE('2025-07-09',
-                   'YYYY-MM-DD'),
+    p_data_e_ora                 => TO_DATE('2025-07-09 10',
+                   'YYYY-MM-DD HH24'),
     p_codice_tessera_osservatore => 'ABWMI2020AB0001',
     p_plus_code                  => '8FVC9G8F+5W',
     p_nome_localita              => 'Parco Nord',

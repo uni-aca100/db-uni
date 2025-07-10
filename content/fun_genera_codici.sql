@@ -5,14 +5,14 @@
     -
     [0-9]{8} data dell'avvistamento (YYYYMMDD)
     -
-    [0-9]{3} numero progressivo degli avvistamenti effettuati dall'osservatore nella stessa data
+    [0-9]{3} n-esimo avvistamento effettuato dall'osservatore nella stessa data
     esempio: ABWMI2020AB0001-20221012-001
     dove ABWMI2020AB0001 è il codice tessera dell'osservatore
-    e 20221012-001 è la data dell'avvistamento (12 ottobre 2022) con il numero progressivo 001.
+    e 20221012-001 è la data dell'avvistamento (12 ottobre 2022) con il numero di avvistamenti 001.
 */
 CREATE OR REPLACE FUNCTION genera_codice_avvistamento (
   p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
-  p_data_avvistamento          IN avvistamento.data_avvistamento%TYPE
+  p_data_ora                   IN avvistamento.data_e_ora%TYPE
 ) RETURN avvistamento.codice_avvistamento%TYPE AS
   var_count_avvistamento_today NUMBER := 0;
   var_codice                   avvistamento.codice_avvistamento%TYPE;
@@ -22,13 +22,13 @@ BEGIN
     INTO var_count_avvistamento_today
     FROM avvistamento
    WHERE codice_tessera_osservatore = p_codice_tessera_osservatore
-     AND trunc(data_avvistamento) = trunc(p_data_avvistamento);
+     AND trunc(data_e_ora) = trunc(p_data_ora);
 
   -- generazione del codice avvistamento
   var_codice := p_codice_tessera_osservatore
                 || '-'
                 || to_char(
-    p_data_avvistamento,
+    p_data_ora,
     'YYYYMMDD'
   )
                 || '-'
@@ -49,7 +49,7 @@ END;
     [0-9]{4}: anno di iscrizione es. 2020
     [A-Z]: iniziale nome es. M (Marco)
     [A-Z]: iniziale cognome es. A (Ambrosio)
-    [0-9]{4}: numero progressivo dei soci iscritti nell'anno corrente (4 cifre)
+    [0-9]{4}: n-esimo socio iscritto nell'anno corrente (4 cifre)
     esempio: ABWMI2020MA0001
 */
 CREATE OR REPLACE FUNCTION genera_codice_tessera (

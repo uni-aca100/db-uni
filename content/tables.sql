@@ -17,7 +17,7 @@
     - Avvistamento:
       PK: codice_avvistamento
       Attributi:
-        data_avvistamento,
+        data_e_ora,
         valutazione (confermato, possibile, non confermato),
         data_revisione (opzionale),
         condizioni_ambientali (opzionale):
@@ -294,7 +294,7 @@ CREATE TABLE localita_avvistamento (
 */
 CREATE TABLE avvistamento (
   codice_avvistamento        VARCHAR2(29) NOT NULL,
-  data_avvistamento          DATE NOT NULL,
+  data_e_ora                 TIMESTAMP NOT NULL,
   valutazione                VARCHAR2(20) CHECK ( valutazione IN ( 'confermato',
                                                     'possibile',
                                                     'non confermato' ) ),

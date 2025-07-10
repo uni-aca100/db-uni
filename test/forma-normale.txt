@@ -1,6 +1,6 @@
 # prima forma normale
 Il database rispetta la prima forma normale (1NF) perché tutte le tabelle sono progettate in modo che tutti gli attributi sono atomici.
-L’unico caso di attributo strutturato riguarda le condizioni ambientali di un avvistamento, che sono state opportunamente scomposte in più colonne distinte (temperatura, umidità, meteo), così da garantire l’atomicità.
+L’unico caso di attributo strutturato riguarda le condizioni ambientali di un avvistamento, che sono state opportunamente scomposte in più colonne distinte (temperatura, umidità, meteo), così da garantire l’atomicità (l'associazione richiede un solo recapito telefonico).
 Inoltre, anche attributi come il plus_code (codice di geolocalizzazione Google Maps), il codice_tessera associativo e il codice_avvistamento (che deriva dalla composizione di più informazioni) sono trattati come atomici. Pur essendo codici composti, secondo le convenzioni vengono considerati attributi indivisibili, evitando così violazioni della 1NF.
 La stessa convenzione si applica agli attributi di tipo data, che viene considerata atomica ai fini della progettazione.
 
@@ -10,7 +10,6 @@ Quindi non esistono attributi che dipendono solo da una parte della chiave compo
 Inoltre la prima forma normale è rispettata come abbiamo verificato precedentemente.
 
 # Terza forma normale e forma normale di Boyce-Codd
-Il database rispetta sia la terza forma normale (3NF) che la forma normale di Boyce-Codd (BCNF).
-Soddisfa la 3NF perché ogni attributo non chiave dipende direttamente e solo dalla chiave primaria della sua tabella, senza dipendenze transitive attraverso altri attributi non chiave.
-Ad esempio, nella tabella regione, l'attributo numero_sedi dipende esclusivamente dalla chiave composta (nome_regione, paese), evitando dipendenze transitive.
-Il database rispetta anche la BCNF perché, in ogni tabella, tutti i determinanti sono superchiavi: 
+Il database rispetta la terza forma normale (3NF) perché, in tutte le tabelle, ogni attributo non chiave dipende direttamente e unicamente dalla chiave primaria, senza dipendenze transitive attraverso altri attributi non chiave.
+Inoltre, il modello è conforme anche alla forma normale di Boyce-Codd (BCNF): per ogni dipendenza funzionale, il determinante è sempre una superchiave.
+Questo vale sia per le tabelle con chiave semplice che per quelle con chiave composta.
