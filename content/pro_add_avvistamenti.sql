@@ -20,6 +20,7 @@ CREATE OR REPLACE TYPE tb_esp_condizioni_salute AS
     - Esemplare (inserito sempre, con molteplici valori per maturità, sesso e condizioni di salute)
     - Località_avvistamento (inserita solo se non già esistente)
     - Regione (inserita solo se non già esistente).
+  Il codice generato è quindi stampato a video.
 
   La procedura fallisce se l'osservatore non è un socio già iscritto.
 
@@ -150,6 +151,7 @@ BEGIN
                p_sesso(i),
                p_nome_scientifico_specie );
   END LOOP;
+  dbms_output.put_line('Avvistamento inserito con successo: ' || var_codice_avvistamento);
   COMMIT;
 EXCEPTION
   WHEN socio_non_esistente THEN
