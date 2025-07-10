@@ -4,7 +4,7 @@
   Non è consentito ai soci l'inserimento di avvistamenti precedenti alla loro data di iscrizione.
   Un Socio può contribuire alle attività dell'associazione solo dopo essersi iscritto.
 */
-CREATE OR REPLACE TRIGGER trg_check_data_e_ora BEFORE
+CREATE OR REPLACE TRIGGER trg_check_data BEFORE
   INSERT OR UPDATE ON avvistamento
   FOR EACH ROW
 DECLARE

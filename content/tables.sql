@@ -183,6 +183,8 @@ DROP TABLE socio CASCADE CONSTRAINTS;
   Regione, indica una regione geografica (solitamente) europea
   una regione è contenuta nel database solo se ha almeno una località di avvistamento
   associata.
+  La regione è inserita dal responsabile, tramite l'operazione add_avvistamento.
+  ma può essere modificata o eliminata manualmente dal responsabile.
 */
 CREATE TABLE regione (
   nome_regione VARCHAR2(40) NOT NULL,
@@ -194,6 +196,7 @@ CREATE TABLE regione (
 
 /*
   Socio, indica un socio dell'associazione di birdwatching.
+  Tale tabella è popolata tramite la procedura iscrivi_nuovo_socio.
   il codice_tessera rappresenta il codice di tesserino del socio.
   il database contiene tutti i soci iscritti all'associazione,
   anche se non hanno effettuato avvistamenti.
@@ -213,6 +216,7 @@ CREATE TABLE socio (
 );
 
 -- Osservatore, indica un socio che ha effettuato almeno un avvistamento.
+-- 
 CREATE TABLE osservatore (
   codice_tessera VARCHAR2(16) NOT NULL,
   CONSTRAINT fk_osservatore_socio FOREIGN KEY ( codice_tessera )
@@ -234,6 +238,9 @@ CREATE TABLE revisore (
 /*
   Indica una specifica specie di uccello.
   Il database contiene diverse specie di uccelli presenti in Europa.
+  Il Responsabile ha il compito del poplamento della tabella specie avviene tramite la procedura add_pattern_migratorio,
+  inoltre le altre operazioni di modifica ed eliminazione vengono effettuate manualmente dal responsabile.
+
 */
 CREATE TABLE specie (
   nome_scientifico    VARCHAR2(40) NOT NULL,
