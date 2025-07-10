@@ -23,3 +23,17 @@ BEGIN
   );
 END;
 /
+
+DECLARE BEGIN
+  -- Esempio di utilizzo della procedura iscrivi_nuovo_socio
+  iscrivi_nuovo_socio(
+    p_nome         => 'Carlo',
+    p_cognome      => 'Mattei',
+    p_email        => 'carlo.mattei@example.com',
+    p_data_nascita => TO_DATE('1999-05-15',
+                      'YYYY-MM-DD'),
+    p_telefono     => '1234567890',
+    p_sigla_citta  => 'NA'
+  );
+END;
+/

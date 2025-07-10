@@ -310,7 +310,7 @@ CREATE TABLE avvistamento (
   temperatura                NUMBER(3,1),
   umidita                    NUMBER(3,1),
   CONSTRAINT fm_cd_avvistamento CHECK ( REGEXP_LIKE ( codice_avvistamento,
-                                                      '^[A-Z0-9]{15}-[0-9]{8}-[0-9]{3}$' ) ),
+                                                      '^ABW[A-Z]{2}[0-9]{4}[A-Z]{2}[0-9]{4}-[0-9]{8}-[0-9]{3}$' ) ),
   CONSTRAINT pk_avvistamento PRIMARY KEY ( codice_avvistamento ),
   CONSTRAINT fk_avvistamento_osservatore FOREIGN KEY ( codice_tessera_osservatore )
     REFERENCES osservatore ( codice_tessera )
