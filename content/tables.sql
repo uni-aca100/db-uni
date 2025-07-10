@@ -254,6 +254,8 @@ CREATE TABLE specie (
   Il database include esclusivamente habitat associati a pattern migratori di specie di
   uccelli già presenti nel database.
   Il codice_eunis rappresenta il codice EUNIS dell'habitat.
+  dalla banca dati Europe Nature Information System (EUNIS),dove è possibile reperire
+  informazioni dettagliate sugli habitat naturali in Europa.
 */
 CREATE TABLE habitat (
   codice_eunis    VARCHAR2(10) NOT NULL,

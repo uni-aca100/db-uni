@@ -3,17 +3,18 @@ Autore: Davide Duraccio.
 # Requisiti:
 L'obiettivo di questo progetto è creare un database per la gestione di un'associazione di birdwatching. Il database permette di gestire sia le informazioni relative alle varie specie di uccelli, solitamente avvistate in Europa, sia quelle riguardanti le attività osservative e revisionali dei soci dell'associazione.
 
-I Soci devono potersi connettere al database per consultare le informazioni riguardanti le specie di uccelli, gli avvistamenti effettuati e tutte le informazioni relative ( inclusi dettagli come il numero di esemplari, i contenuti multimediali e le condizioni ambientali.). Avranno inoltre la possibilità di eseguire ricerche sulla distribuzione regionale o nazionale delle specie avvistate e di condurre analisi migratorie.
+I Soci devono potersi connettere al database per consultare le informazioni riguardanti le specie di uccelli, gli avvistamenti effettuati e tutte le informazioni relative (inclusi dettagli come il numero di esemplari, i contenuti multimediali e le condizioni ambientali.). Avranno inoltre la possibilità di eseguire ricerche sulla distribuzione regionale o nazionale delle specie avvistate e di condurre analisi migratorie.
 
 Inoltre, per registrare un avvistamento, i soci devono compilare un apposito modulo da consegnare ai responsabili dell'associazione. Sarà poi compito del responsabile dell'associazione registrare l'avvistamento nel database, associando le informazioni fornite dal socio.
 
-I Responsabili dell'associazione hanno l'ulteriore compito di gestire le informazioni sui soci, le specie di uccelli e i loro habitat. Devono mantenere aggiornate queste informazioni tramite operazioni di inserimento, modifica e cancellazione. I dati sulle specie di uccelli e sugli habitat provengono dalla banca dati Europe Nature Information System (EUNIS).
+I Responsabili dell'associazione hanno l'ulteriore compito di gestire le informazioni sui soci, le specie di uccelli e i loro habitat. Devono mantenere aggiornate queste informazioni tramite operazioni di inserimento, modifica e cancellazione.
 
-I Revisori, soci con un ruolo specifico, possono connettersi al database per revisionare e validare gli avvistamenti degli osservatori. La validazione avviene tramite una classificazione che include le opzioni "confermato", "possibile" e "non confermato". Questa valutazione si basa sulle informazioni fornite, come contenuti multimediali (foto, video, audio), condizioni ambientali (meteo, temperatura, umidità, vento) ed eventuali testimonianze di altri soci, oltre alla conoscenza della specie avvistata (ad esempio, habitat e distribuzione).
+I Revisori, soci con un ruolo specifico, possono connettersi al database per revisionare e validare gli avvistamenti degli osservatori. La validazione avviene tramite una classificazione che include le opzioni "confermato", "possibile" e "non confermato". Questa valutazione si basa sulle informazioni fornite, come contenuti multimediali (foto, video, audio), condizioni ambientali (meteo, temperatura, umidità) ed eventuali testimonianze di altri soci, oltre alla conoscenza della specie avvistata.
 
 I soci possono ricevere badge di riconoscimento in base ai risultati ottenuti. Questi includono, ad esempio, badge per il numero di avvistamenti confermati (come il primo, il decimo, ecc.), oppure per la prima osservazione di una specie in uno stato di conservazione particolare (ad esempio, Criticamente Minacciata (CR) o In Pericolo (EN)).
 
 La richiesta di assegnazione di un badge può essere effettuata informalmente da un socio a un Responsabile dell'associazione. Il Responsabile provvederà poi a registrare l'assegnazione nel database, ma solo se i requisiti sono stati soddisfatti e gli avvistamenti confermati da un Revisore.
+
 
 # vincoli di integrità:
 ## vincoli dinamici:

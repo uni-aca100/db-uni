@@ -14,12 +14,12 @@ GRANT SELECT ON socio TO ruolo_responsabile;
 GRANT SELECT,INSERT,DELETE,UPDATE ON osservatore TO ruolo_responsabile;
 GRANT SELECT,INSERT ON revisore TO ruolo_responsabile;
 GRANT SELECT,DELETE,UPDATE ON regione TO ruolo_responsabile;
-GRANT SELECT,DELETE ON specie TO ruolo_responsabile;
-GRANT SELECT,DELETE ON habitat TO ruolo_responsabile;
+GRANT SELECT,DELETE,UPDATE ON specie TO ruolo_responsabile;
+GRANT SELECT,DELETE,UPDATE ON habitat TO ruolo_responsabile;
+GRANT SELECT,DELETE,UPDATE ON pattern_migratori TO ruolo_responsabile;
 GRANT SELECT,DELETE ON localita_avvistamento TO ruolo_responsabile;
 GRANT SELECT,DELETE ON avvistamento TO ruolo_responsabile;
 GRANT SELECT,DELETE ON esemplare TO ruolo_responsabile;
-GRANT SELECT,DELETE ON pattern_migratori TO ruolo_responsabile;
 GRANT SELECT,DELETE ON badge TO ruolo_responsabile;
 GRANT SELECT,INSERT,DELETE,UPDATE ON media TO ruolo_responsabile;
 GRANT SELECT,INSERT,DELETE,UPDATE ON dispositivo_richiamo TO ruolo_responsabile;
@@ -52,10 +52,10 @@ GRANT SELECT ON socio_pubblico TO ruolo_socio;
 
 -- Ruolo Socio revisore
 CREATE ROLE ruolo_socio_revisore IDENTIFIED BY revisorepwd;
-GRANT EXECUTE ON revisione_avvistamento TO ruolo_socio_revisore;
 GRANT connect,
   CREATE SESSION
 TO ruolo_socio;
+GRANT EXECUTE ON revisione_avvistamento TO ruolo_socio_revisore;
 
 -- utente revisore_1, possiede un doppio ruolo, di socio e revisore
 CREATE USER revisore_1 IDENTIFIED BY revisore1pwd;
