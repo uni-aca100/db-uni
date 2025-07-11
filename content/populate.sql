@@ -730,7 +730,7 @@ INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G5F+0O',
                                                    'G1.1' );
 
 -- Popolamento tabella avvistamento
-INSERT INTO avvistamento VALUES ( 'ABWMI2010LR0001-20230701-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2023-07-01 10','YYYY-MM-DD HH24'),
                                   'confermato',
                                   TO_DATE('2023-07-10','YYYY-MM-DD HH24'),
@@ -740,7 +740,7 @@ INSERT INTO avvistamento VALUES ( 'ABWMI2010LR0001-20230701-001',
                                   'sole',
                                   18.5,
                                   60.0 );
-INSERT INTO avvistamento VALUES ( 'ABWRM2003MB0001-20201005-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2020-10-05 10','YYYY-MM-DD HH24'),
                                   'possibile',
                                   TO_DATE('2020-10-15','YYYY-MM-DD HH24'),
@@ -750,7 +750,7 @@ INSERT INTO avvistamento VALUES ( 'ABWRM2003MB0001-20201005-001',
                                   'nuvoloso',
                                   17.0,
                                   70.0 );
-INSERT INTO avvistamento VALUES ( 'ABWTO2000NG0001-20200113-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2020-01-13 11','YYYY-MM-DD HH24'),
                                   'possibile',
                                   TO_DATE('2020-02-03','YYYY-MM-DD HH24'),
@@ -760,7 +760,7 @@ INSERT INTO avvistamento VALUES ( 'ABWTO2000NG0001-20200113-001',
                                   'pioggia',
                                   15.0,
                                   80.0 );
-INSERT INTO avvistamento VALUES ( 'ABWPA2007FR0001-20201104-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2020-11-04 15','YYYY-MM-DD HH24'),
                                   'confermato',
                                   TO_DATE('2020-11-27','YYYY-MM-DD HH24'),
@@ -770,7 +770,7 @@ INSERT INTO avvistamento VALUES ( 'ABWPA2007FR0001-20201104-001',
                                   'sole',
                                   20.0,
                                   55.0 );
-INSERT INTO avvistamento VALUES ( 'ABWVE2001LB0001-20200606-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2020-06-06 14','YYYY-MM-DD HH24'),
                                   'confermato',
                                   TO_DATE('2020-06-21','YYYY-MM-DD HH24'),
@@ -780,7 +780,7 @@ INSERT INTO avvistamento VALUES ( 'ABWVE2001LB0001-20200606-001',
                                   'sole',
                                   27.0,
                                   50.0 );
-INSERT INTO avvistamento VALUES ( 'ABWFI2010SE0003-20210222-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2021-02-22 10','YYYY-MM-DD HH24'),
                                   'possibile',
                                   TO_DATE('2021-04-08','YYYY-MM-DD HH24'),
@@ -790,7 +790,7 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2010SE0003-20210222-001',
                                   'nuvoloso',
                                   16.5,
                                   65.0 );
-INSERT INTO avvistamento VALUES ( 'ABWBO2005DC0001-20210418-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2021-04-18 12','YYYY-MM-DD HH24'),
                                   'confermato',
                                   TO_DATE('2021-04-29','YYYY-MM-DD HH24'),
@@ -800,7 +800,7 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2005DC0001-20210418-001',
                                   'sole',
                                   22.0,
                                   48.0 );
-INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20210509-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2021-05-09 11','YYYY-MM-DD HH24'),
                                   'confermato',
                                   TO_DATE('2021-09-01','YYYY-MM-DD HH24'),
@@ -810,7 +810,7 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20210509-001',
                                   'sole',
                                   25.0,
                                   52.0 );
-INSERT INTO avvistamento VALUES ( 'ABWBA2008SG0001-20210612-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2021-06-12 13','YYYY-MM-DD HH24'),
                                   'possibile',
                                   TO_DATE('2021-06-20','YYYY-MM-DD HH24'),
@@ -820,7 +820,7 @@ INSERT INTO avvistamento VALUES ( 'ABWBA2008SG0001-20210612-001',
                                   'sole',
                                   29.0,
                                   44.0 );
-INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20210703-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2021-07-03 10','YYYY-MM-DD HH24'),
                                   'confermato',
                                   TO_DATE('2021-07-10','YYYY-MM-DD HH24'),
@@ -830,7 +830,7 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20210703-001',
                                   'sole',
                                   32.0,
                                   40.0 );
-INSERT INTO avvistamento VALUES ( 'ABWRM2000MC0001-20210711-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2021-07-11 12','YYYY-MM-DD HH24'),
                                   'confermato',
                                   TO_DATE('2021-07-21','YYYY-MM-DD HH24'),
@@ -840,7 +840,7 @@ INSERT INTO avvistamento VALUES ( 'ABWRM2000MC0001-20210711-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220812-001',
+INSERT INTO avvistamento VALUES ( 2,
                                   TO_DATE('2022-08-12 09','YYYY-MM-DD HH24'),
                                   'non confermato',
                                   TO_DATE('2022-10-20','YYYY-MM-DD HH24'),
@@ -850,7 +850,7 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220812-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220323-001',
+INSERT INTO avvistamento VALUES ( 3,
                                   TO_DATE('2022-03-23 08','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -860,7 +860,7 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2000DV0001-20220323-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20220814-001',
+INSERT INTO avvistamento VALUES ( 2,
                                   TO_DATE('2022-08-14 10','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -870,7 +870,7 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20220814-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWFI2010FB0005-20220725-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2022-07-25 08','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -880,7 +880,7 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2010FB0005-20220725-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWBO2002PF0001-20230716-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2023-07-16 09','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -890,7 +890,7 @@ INSERT INTO avvistamento VALUES ( 'ABWBO2002PF0001-20230716-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20230717-001',
+INSERT INTO avvistamento VALUES ( 3,
                                   TO_DATE('2023-07-17 11','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -900,7 +900,7 @@ INSERT INTO avvistamento VALUES ( 'ABWFI2015IT0001-20230717-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWBA2001RR0001-20230718-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2023-07-18 10','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -910,7 +910,7 @@ INSERT INTO avvistamento VALUES ( 'ABWBA2001RR0001-20230718-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWMI2010GF0006-20230719-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2023-07-19 10','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -920,7 +920,7 @@ INSERT INTO avvistamento VALUES ( 'ABWMI2010GF0006-20230719-001',
                                   NULL,
                                   NULL,
                                   NULL );
-INSERT INTO avvistamento VALUES ( 'ABWRM2000SM0002-20230720-001',
+INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2023-07-20 07','YYYY-MM-DD HH24'),
                                   NULL,
                                   NULL,
@@ -932,144 +932,167 @@ INSERT INTO avvistamento VALUES ( 'ABWRM2000SM0002-20230720-001',
                                   NULL );
 
 -- Popolamento tabella esemplare
-INSERT INTO esemplare VALUES ( 'ABWMI2010LR0001-20230701-001',
+INSERT INTO esemplare VALUES ( 'ABWMI2010LR0001',
                                1,
                                'adulto',
                                'sano',
                                'maschio',
-                               'Aquila chrysaetos' );
-INSERT INTO esemplare VALUES ( 'ABWRM2003MB0001-20201005-001',
+                               'Aquila chrysaetos',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWRM2003MB0001',
                                1,
                                'pulcino',
                                'sano',
                                'femmina',
-                               'Passer italiae' );
-INSERT INTO esemplare VALUES ( 'ABWRM2003MB0001-20201005-001',
+                               'Passer italiae',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWRM2003MB0001',
                                2,
                                'adulto',
                                'sano',
                                'femmina',
-                               'Passer italiae' );
-INSERT INTO esemplare VALUES ( 'ABWTO2000NG0001-20200113-001',
+                               'Passer italiae',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWTO2000NG0001',
                                1,
                                'adulto',
                                'sano',
                                'sconosciuto',
-                               'Aythya nyroca' );
-INSERT INTO esemplare VALUES ( 'ABWPA2007FR0001-20201104-001',
+                               'Aythya nyroca',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWPA2007FR0001',
                                1,
                                'adulto',
                                'sano',
                                'maschio',
-                               'Corvus corone' );
-INSERT INTO esemplare VALUES ( 'ABWVE2001LB0001-20200606-001',
+                               'Corvus corone',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWVE2001LB0001',
                                1,
                                'adulto',
                                'sano',
                                'femmina',
-                               'Turdus merula' );
-INSERT INTO esemplare VALUES ( 'ABWVE2001LB0001-20200606-001',
+                               'Turdus merula',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWVE2001LB0001',
                                2,
                                'pulcino',
                                'sano',
                                'sconosciuto',
-                               'Turdus merula' );
-INSERT INTO esemplare VALUES ( 'ABWVE2001LB0001-20200606-001',
+                               'Turdus merula',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWVE2001LB0001',
                                3,
                                'pulcino',
                                'malato',
                                'sconosciuto',
-                               'Turdus merula' );
-INSERT INTO esemplare VALUES ( 'ABWFI2010SE0003-20210222-001',
+                               'Turdus merula',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWFI2010SE0003',
                                1,
                                'adulto',
                                'sano',
                                'sconosciuto',
-                               'Aquila adalberti' );
-INSERT INTO esemplare VALUES ( 'ABWBO2005DC0001-20210418-001',
+                               'Aquila adalberti',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWBO2005DC0001',
                                1,
                                'adulto',
                                'sano',
                                'maschio',
-                               'Corvus corax' );
-INSERT INTO esemplare VALUES ( 'ABWFI2015IT0001-20210509-001',
+                               'Corvus corax',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWFI2015IT0001',
                                1,
                                'adulto',
                                'sano',
                                'femmina',
-                               'Lanius collurio' );
-INSERT INTO esemplare VALUES ( 'ABWBA2008SG0001-20210612-001',
+                               'Lanius collurio',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWBA2008SG0001',
                                1,
                                'adulto',
                                'sano',
                                'sconosciuto',
-                               'Picus viridis' );
-INSERT INTO esemplare VALUES ( 'ABWBO2000DV0001-20210703-001',
+                               'Picus viridis',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWBO2000DV0001',
                                1,
                                'adulto',
                                'sano',
                                'maschio',
-                               'Motacilla alba' );
-INSERT INTO esemplare VALUES ( 'ABWRM2000MC0001-20210711-001',
+                               'Motacilla alba',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWRM2000MC0001',
                                1,
                                'adulto',
                                'ferito',
                                'femmina',
-                               'Numenius tenuirostris' );
-INSERT INTO esemplare VALUES ( 'ABWBO2000DV0001-20220812-001',
+                               'Numenius tenuirostris',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWBO2000DV0001',
                                1,
                                'adulto',
                                'sano',
                                'sconosciuto',
-                               'Cyanistes caeruleus' );
-INSERT INTO esemplare VALUES ( 'ABWBO2000DV0001-20220323-001',
+                               'Cyanistes caeruleus',
+                               2 );
+INSERT INTO esemplare VALUES ( 'ABWBO2000DV0001',
                                1,
                                'adulto',
                                'sano',
                                'maschio',
-                               'Tetrax tetrax' );
-INSERT INTO esemplare VALUES ( 'ABWFI2015IT0001-20220814-001',
+                               'Tetrax tetrax',
+                               3 );
+INSERT INTO esemplare VALUES ( 'ABWFI2015IT0001',
                                1,
                                'adulto',
                                'sano',
                                'femmina',
-                               'Erithacus rubecula' );
-INSERT INTO esemplare VALUES ( 'ABWFI2010FB0005-20220725-001',
+                               'Erithacus rubecula',
+                               2 );
+INSERT INTO esemplare VALUES ( 'ABWFI2010FB0005',
                                1,
                                'adulto',
                                'sano',
                                'sconosciuto',
-                               'Regulus regulus' );
-INSERT INTO esemplare VALUES ( 'ABWBO2002PF0001-20230716-001',
+                               'Regulus regulus',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWBO2002PF0001',
                                1,
                                'adulto',
                                'sano',
                                'maschio',
-                               'Pica pica' );
-INSERT INTO esemplare VALUES ( 'ABWFI2015IT0001-20230717-001',
+                               'Pica pica',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWFI2015IT0001',
                                1,
                                'adulto',
                                'ferito',
                                'femmina',
-                               'Aquila chrysaetos' );
-INSERT INTO esemplare VALUES ( 'ABWBA2001RR0001-20230718-001',
+                               'Aquila chrysaetos',
+                               3 );
+INSERT INTO esemplare VALUES ( 'ABWBA2001RR0001',
                                1,
                                'adulto',
                                'sano',
                                'sconosciuto',
-                               'Passer italiae' );
-INSERT INTO esemplare VALUES ( 'ABWMI2010GF0006-20230719-001',
+                               'Passer italiae',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWMI2010GF0006',
                                1,
                                'adulto',
                                'sano',
                                'maschio',
-                               'Aythya nyroca' );
-INSERT INTO esemplare VALUES ( 'ABWRM2000SM0002-20230720-001',
+                               'Aythya nyroca',
+                               1 );
+INSERT INTO esemplare VALUES ( 'ABWRM2000SM0002',
                                1,
                                'adulto',
                                'ferito',
                                'femmina',
-                               'Corvus corone' );
+                               'Corvus corone',
+                               1 );
 
 -- Popolamento tabella badge
 INSERT INTO badge VALUES ( 'occhio di Kakapo',
@@ -1106,155 +1129,188 @@ INSERT INTO badge VALUES ( 'custode della natura',
                            'https://cloud.it/badge/ABWRM2000MC0001' );
 
 -- Popolamento tabella media
-INSERT INTO media VALUES ( 'ABWMI2010LR0001-20230701-001',
+INSERT INTO media VALUES ( 'ABWMI2010LR0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/adasdad.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWRM2003MB0001-20201005-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWRM2003MB0001',
                            'video1',
                            'video',
                            'https://cloud.it/media/sxca.wav',
-                           'wav' );
-INSERT INTO media VALUES ( 'ABWPA2007FR0001-20201104-001',
+                           'wav',
+                           1 );
+INSERT INTO media VALUES ( 'ABWPA2007FR0001',
                            'audio1',
                            'audio',
                            'https://cloud.it/media/xxas.wav',
-                           'wav' );
-INSERT INTO media VALUES ( 'ABWVE2001LB0001-20200606-001',
+                           'wav',
+                           1 );
+INSERT INTO media VALUES ( 'ABWVE2001LB0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/xasxw.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWFI2010SE0003-20210222-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWFI2010SE0003',
                            'video1',
                            'video',
                            'https://cloud.it/media/xaxmm.mp4',
-                           'mp4' );
-INSERT INTO media VALUES ( 'ABWTO2000NG0001-20200113-001',
+                           'mp4',
+                           1 );
+INSERT INTO media VALUES ( 'ABWTO2000NG0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/jkkjh.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWBO2005DC0001-20210418-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWBO2005DC0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/povs.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWBA2008SG0001-20210612-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWBA2008SG0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/jdc.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWBO2000DV0001-20210703-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWBO2000DV0001',
                            'audio1',
                            'audio',
                            'https://cloud.it/media/nbd.wav',
-                           'wav' );
-INSERT INTO media VALUES ( 'ABWRM2000MC0001-20210711-001',
+                           'wav',
+                           1 );
+INSERT INTO media VALUES ( 'ABWRM2000MC0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/ash.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWBO2000DV0001-20220812-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWBO2000DV0001',
                            'audio1',
                            'audio',
                            'https://cloud.it/media/mnasj.wav',
-                           'wav' );
-INSERT INTO media VALUES ( 'ABWMI2010GF0006-20230719-001',
+                           'wav',
+                           2 );
+INSERT INTO media VALUES ( 'ABWMI2010GF0006',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/nkd.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWFI2015IT0001-20210509-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWFI2015IT0001',
                            'audio1',
                            'audio',
                            'https://cloud.it/media/nbcjd.wav',
-                           'wav' );
-INSERT INTO media VALUES ( 'ABWBO2000DV0001-20220323-001',
+                           'wav',
+                           1 );
+INSERT INTO media VALUES ( 'ABWBO2000DV0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/knc.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWFI2010FB0005-20220725-001',
+                           'jpg',
+                           3 );
+INSERT INTO media VALUES ( 'ABWFI2010FB0005',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/jbjc.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWFI2015IT0001-20230717-001',
+                           'jpg',
+                           1 );
+INSERT INTO media VALUES ( 'ABWFI2015IT0001',
                            'foto1',
                            'foto',
                            'https://cloud.it/media/bcd.jpg',
-                           'jpg' );
-INSERT INTO media VALUES ( 'ABWBO2002PF0001-20230716-001',
+                           'jpg',
+                           2 );
+INSERT INTO media VALUES ( 'ABWBO2002PF0001',
                            'video1',
                            'video',
                            'https://cloud.it/media/nnkx.wav',
-                           'wav' );
-INSERT INTO media VALUES ( 'ABWBA2001RR0001-20230718-001',
+                           'wav',
+                           1 );
+INSERT INTO media VALUES ( 'ABWBA2001RR0001',
                            'audio1',
                            'audio',
                            'https://cloud.it/media/lcj.wav',
-                           'wav' );
+                           'wav',
+                           1 );
                            
 -- Popolamento tabella dispositivo_richiamo
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWMI2010LR0001-20230701-001',
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWMI2010LR0001',
                                           'Echo1',
                                           'BirdCo',
-                                          'territoriale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWRM2003MB0001-20201005-001',
+                                          'territoriale',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWRM2003MB0001',
                                           'SongX',
                                           'FlyTech',
-                                          'corteggiamento' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWTO2000NG0001-20200113-001',
+                                          'corteggiamento',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWTO2000NG0001',
                                           'CallMini',
                                           'Avia',
-                                          'sociale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWPA2007FR0001-20201104-001',
+                                          'sociale',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWPA2007FR0001',
                                           'Whistle',
                                           'Orni',
-                                          'territoriale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWVE2001LB0001-20200606-001',
+                                          'territoriale',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWVE2001LB0001',
                                           'Chirp',
                                           'Birdy',
-                                          'corteggiamento' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2010SE0003-20210222-001',
+                                          'corteggiamento',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2010SE0003',
                                           'Tweet',
                                           'Sky',
-                                          'sociale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2005DC0001-20210418-001',
+                                          'sociale',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2005DC0001',
                                           'Echo2',
                                           'BirdCo',
-                                          'territoriale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2015IT0001-20210509-001',
+                                          'territoriale',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2015IT0001',
                                           'CallPro',
                                           'Avia',
-                                          'corteggiamento' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWBA2008SG0001-20210612-001',
+                                          'corteggiamento',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBA2008SG0001',
                                           'WhistlX',
                                           'Orni',
-                                          'territoriale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001-20210703-001',
+                                          'territoriale',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001',
                                           'Chirp2',
                                           'Birdy',
-                                          'sociale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWRM2000MC0001-20210711-001',
+                                          'sociale',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWRM2000MC0001',
                                           'SongY',
                                           'FlyTech',
-                                          'corteggiamento' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001-20220812-001',
+                                          'corteggiamento',
+                                          1 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001',
                                           'EchoMini',
                                           'BirdCo',
-                                          'territoriale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001-20220323-001',
+                                          'territoriale',
+                                          2 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWBO2000DV0001',
                                           'CallLite',
                                           'Avia',
-                                          'sociale' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2015IT0001-20220814-001',
+                                          'sociale',
+                                          3 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2015IT0001',
                                           'WhistlZ',
                                           'Orni',
-                                          'corteggiamento' );
-INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2010FB0005-20220725-001',
+                                          'corteggiamento',
+                                          2 );
+INSERT INTO dispositivo_richiamo VALUES ( 'ABWFI2010FB0005',
                                           'Chirp3',
                                           'Birdy',
-                                          'territoriale' );
+                                          'territoriale',
+                                          1 );

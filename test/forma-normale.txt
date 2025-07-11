@@ -1,7 +1,7 @@
 # prima forma normale
 Il database rispetta la prima forma normale (1NF) perché tutte le tabelle sono progettate in modo che tutti gli attributi sono atomici.
 L’unico caso di attributo strutturato riguarda le condizioni ambientali di un avvistamento, che sono state opportunamente scomposte in più colonne distinte (temperatura, umidità, meteo), così da garantire l’atomicità (l'associazione richiede un solo recapito telefonico).
-Inoltre, anche attributi come il plus_code (codice di geolocalizzazione Google Maps), il codice_tessera associativo e il codice_avvistamento (che deriva dalla composizione di più informazioni) sono trattati come atomici. Pur essendo codici composti, secondo le convenzioni vengono considerati attributi indivisibili, evitando così violazioni della 1NF.
+Inoltre, anche attributi come il plus_code (codice di geolocalizzazione Google Maps), il codice_tessera associativo sono trattati come atomici. Pur essendo codici composti, secondo le convenzioni vengono considerati attributi indivisibili, evitando così violazioni della 1NF.
 La stessa convenzione si applica agli attributi di tipo data, che viene considerata atomica ai fini della progettazione.
 
 # Seconda forma normale

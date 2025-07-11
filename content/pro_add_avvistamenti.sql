@@ -56,9 +56,8 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
   p_sesso                      IN tb_esp_sesso,
   p_nome_scientifico_specie    IN esemplare.nome_scientifico_specie%TYPE
 ) AS
-  var_codice_avvistamento  avvistamento.codice_avvistamento%TYPE;
-  var_n_avvistamento_today NUMBER := 0;
-  socio_exists             NUMBER := 0;
+  var_n_avvistamenti NUMBER := 0;
+  socio_exists       NUMBER := 0;
   socio_non_esistente EXCEPTION;
 BEGIN
   -- Verifica se il socio osservatore esiste
@@ -119,18 +118,22 @@ BEGIN
        WHERE plus_code = p_plus_code
     );
 
-  var_codice_avvistamento := genera_codice_avvistamento(
-    p_codice_tessera_osservatore,
-    p_data_e_ora
-  );
+  -- Calcola il nuovo numero di avvistamento per l'osservatore
+  SELECT nvl(
+    max(n_avvistamento),
+    0
+  ) + 1
+    INTO var_n_avvistamenti
+    FROM avvistamento
+   WHERE codice_tessera_osservatore = p_codice_tessera_osservatore;
 
   -- Inserimento dell'avvistamento
   INSERT INTO avvistamento (
-    codice_avvistamento,
+    n_avvistamento,
     data_e_ora,
     codice_tessera_osservatore,
     plus_code
-  ) VALUES ( var_codice_avvistamento,
+  ) VALUES ( var_n_avvistamenti,
              p_data_e_ora,
              p_codice_tessera_osservatore,
              p_plus_code );
@@ -138,20 +141,21 @@ BEGIN
   -- inserimento esemplari
   FOR i IN 1..p_maturita.count LOOP
     INSERT INTO esemplare (
-      codice_avvistamento,
+      codice_tessera_osservatore,
+      n_avvistamento,
       numero_esemplare,
       maturita,
       condizioni_salute,
       sesso,
       nome_scientifico_specie
-    ) VALUES ( var_codice_avvistamento,
+    ) VALUES ( p_codice_tessera_osservatore,
+               var_n_avvistamenti,
                i,
                p_maturita(i),
                p_condizioni_salute(i),
                p_sesso(i),
                p_nome_scientifico_specie );
   END LOOP;
-  dbms_output.put_line('Avvistamento inserito con successo: ' || var_codice_avvistamento);
   COMMIT;
 EXCEPTION
   WHEN socio_non_esistente THEN

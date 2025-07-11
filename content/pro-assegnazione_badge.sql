@@ -1,25 +1,4 @@
 /*
-  La funzione conta e restituisce il numero di avvistamenti
-  di un socio nello stato specificato dal parametro.
-*/
-CREATE OR REPLACE FUNCTION count_avvistamenti (
-  par_codice_tessera IN avvistamento.codice_tessera_osservatore%TYPE,
-  par_valutazione    IN avvistamento.valutazione%TYPE
-) RETURN NUMBER AS
-  var_count NUMBER := 0;
-BEGIN
-  SELECT COUNT(*)
-    INTO var_count
-    FROM avvistamento
-   WHERE codice_tessera_osservatore = par_codice_tessera
-     AND valutazione = par_valutazione;
-
-  RETURN var_count;
-END;
-/
-
-
-/*
   Questa procedura è usata per assegnare i badge ai soci.
   L'assegnazione avviene in base a specifici requisiti che i soci devono soddisfare.
   Se questi requisiti non vengono soddisfatti, la procedura solleva un'eccezione dedicata.
@@ -72,7 +51,8 @@ BEGIN
        AND EXISTS (
       SELECT 1
         FROM esemplare e
-       WHERE e.codice_avvistamento = a.codice_avvistamento
+       WHERE e.codice_tessera_osservatore = a.codice_tessera_osservatore
+         AND e.n_avvistamento = a.n_avvistamento
          AND e.nome_scientifico_specie IN (
         SELECT nome_scientifico
           FROM specie s
@@ -85,38 +65,37 @@ BEGIN
       RAISE requirement_not_met_custode;
     END IF;
   ELSE
-    -- Per gli altri badge, verifichiamo il numero di avvistamenti confermati
-    SELECT count_avvistamenti(
-      p_codice_tessera_socio,
-      'confermato'
-    )
+    SELECT COUNT(*)
       INTO var_avvistamenti_confermati
-      FROM dual;
+      FROM avvistamento
+     WHERE codice_tessera_osservatore = p_codice_tessera_socio
+       AND valutazione = 'confermato';
 
-    IF
-      p_nome_badge = 'occhio di colibrì'
+    IF (
+      p_nome_badge = 'occhio di Colibrì'
       AND var_avvistamenti_confermati < 10
-    THEN
+    ) THEN
       RAISE requirement_not_met_colibri;
-    ELSIF
-      p_nome_badge = 'occhio di kakapo'
+    END IF;
+    IF (
+      p_nome_badge = 'occhio di Kakapo'
       AND var_avvistamenti_confermati < 1
-    THEN
+    ) THEN
       RAISE requirement_not_met_kakapo;
     END IF;
-
-    -- Inserimento del badge se i requisiti sono soddisfatti
-    INSERT INTO badge (
-      codice_tessera_socio,
-      nome_badge,
-      data_assegnazione,
-      url_badge
-    ) VALUES ( p_codice_tessera_socio,
-               p_nome_badge,
-               p_data_assegnazione,
-               p_badge_url );
-    COMMIT;
   END IF;
+
+  -- Inserimento del badge se i requisiti sono soddisfatti
+  INSERT INTO badge (
+    codice_tessera_socio,
+    nome_badge,
+    data_assegnazione,
+    url_badge
+  ) VALUES ( p_codice_tessera_socio,
+             p_nome_badge,
+             p_data_assegnazione,
+             p_badge_url );
+  COMMIT;
 EXCEPTION
   WHEN socio_not_found THEN
     raise_application_error(
@@ -143,4 +122,3 @@ EXCEPTION
     );
     ROLLBACK;
 END;
-/

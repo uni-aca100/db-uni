@@ -18,17 +18,19 @@ Vengono imposti i seguenti requisiti per la valutazione:
       la valutazione della revisione non può essere "confermato".
 
   La procedura accetta i seguenti parametri:
-    - p_codice_avvistamento: Codice dell'avvistamento da valutare.
+    - p_codice_tessera: Codice dell'avvistamento da valutare.
+    - p_n_avvistamento: Numero dell'avvistamento da valutare.
     - p_codice_tessera_revisore: Codice della tessera del revisore che effettua la valutazione.
     - p_valutazione: Valutazione dell'avvistamento (confermato, possibile, non confermato).
     - p_data_revisione: Data della revisione (opzionale, se non specificata viene usata la data corrente).
   */
 
 CREATE OR REPLACE PROCEDURE revisione_avvistamento (
-  p_codice_avvistamento     IN avvistamento.codice_avvistamento%TYPE,
-  p_codice_tessera_revisore IN revisore.codice_tessera%TYPE,
-  p_valutazione             IN avvistamento.valutazione%TYPE,
-  p_data_revisione          IN avvistamento.data_revisione%TYPE DEFAULT sysdate
+  p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
+  p_n_avvistamento             IN avvistamento.n_avvistamento%TYPE,
+  p_codice_tessera_revisore    IN revisore.codice_tessera%TYPE,
+  p_valutazione                IN avvistamento.valutazione%TYPE,
+  p_data_revisione             IN avvistamento.data_revisione%TYPE DEFAULT sysdate
 ) AS
   var_exists_avvistamento        NUMBER := 0;
   avvistamento_not_found EXCEPTION;
@@ -47,7 +49,8 @@ BEGIN
   SELECT COUNT(*)
     INTO var_exists_avvistamento
     FROM avvistamento
-   WHERE codice_avvistamento = p_codice_avvistamento;
+   WHERE codice_tessera_osservatore = p_codice_tessera_osservatore
+     AND n_avvistamento = p_n_avvistamento;
 
   IF var_exists_avvistamento = 0 THEN
     RAISE avvistamento_not_found;
@@ -77,7 +80,8 @@ BEGIN
   SELECT COUNT(*)
     INTO var_exists_avvistamento
     FROM avvistamento
-   WHERE codice_avvistamento = p_codice_avvistamento
+   WHERE codice_tessera_osservatore = p_codice_tessera_osservatore
+     AND n_avvistamento = p_n_avvistamento
      AND data_e_ora <= p_data_revisione;
 
   IF var_exists_avvistamento = 0 THEN
@@ -92,14 +96,16 @@ BEGIN
    WHERE s.nome_scientifico = (
     SELECT MIN(e.nome_scientifico_specie)
       FROM esemplare e
-     WHERE e.codice_avvistamento = p_codice_avvistamento
+     WHERE e.codice_tessera_osservatore = p_codice_tessera_osservatore
+       AND e.n_avvistamento = p_n_avvistamento
   );
 
   -- Controlla se l'avvistamento ha media associati
   SELECT COUNT(*)
     INTO var_media_count
     FROM media
-   WHERE codice_avvistamento = p_codice_avvistamento;
+   WHERE codice_tessera_osservatore = p_codice_tessera_osservatore
+     AND n_avvistamento = p_n_avvistamento;
 
   -- Controlla se almeno un campo delle condizioni ambientali è valorizzato
   SELECT CASE
@@ -111,7 +117,8 @@ BEGIN
          END
     INTO var_has_condizioni_ambientali
     FROM avvistamento
-   WHERE codice_avvistamento = p_codice_avvistamento;
+   WHERE codice_tessera_osservatore = p_codice_tessera_osservatore
+     AND n_avvistamento = p_n_avvistamento;
 
   -- Verifica i requisiti per la valutazione
   IF
@@ -135,7 +142,8 @@ BEGIN
      SET valutazione = p_valutazione,
          data_revisione = p_data_revisione,
          codice_tessera_revisore = p_codice_tessera_revisore
-   WHERE codice_avvistamento = p_codice_avvistamento;
+   WHERE codice_tessera_osservatore = p_codice_tessera_osservatore
+     AND n_avvistamento = p_n_avvistamento;
   COMMIT;
 EXCEPTION
   WHEN avvistamento_not_found THEN
@@ -181,3 +189,4 @@ EXCEPTION
     );
     ROLLBACK;
 END;
+/

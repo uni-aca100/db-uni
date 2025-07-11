@@ -297,12 +297,11 @@ CREATE TABLE localita_avvistamento (
 
 /*
   Avvistamento, indica un avvistamento di un esemplare di uccello in una specifica località.
-  Il codice_avvistamento rappresenta un identificatore unico per l'avvistamento,
   fornito dall'associazione di birdwatching.
-  (il formato è decritto dalla funzione genera_codice_avvistamento)
+  n_avvistamento rappresenta l'n-essimo avvistamento effettuato da un osservatore.
 */
 CREATE TABLE avvistamento (
-  codice_avvistamento        VARCHAR2(29) NOT NULL,
+  n_avvistamento             NUMBER(16) NOT NULL,
   data_e_ora                 TIMESTAMP NOT NULL,
   valutazione                VARCHAR2(20) CHECK ( valutazione IN ( 'confermato',
                                                     'possibile',
@@ -318,9 +317,8 @@ CREATE TABLE avvistamento (
                                         'neve' ) ),
   temperatura                NUMBER(3,1),
   umidita                    NUMBER(3,1),
-  CONSTRAINT fm_cd_avvistamento CHECK ( REGEXP_LIKE ( codice_avvistamento,
-                                                      '^ABW[A-Z]{2}[0-9]{4}[A-Z]{2}[0-9]{4}-[0-9]{8}-[0-9]{3}$' ) ),
-  CONSTRAINT pk_avvistamento PRIMARY KEY ( codice_avvistamento ),
+  CONSTRAINT pk_avvistamento PRIMARY KEY ( n_avvistamento,
+                                           codice_tessera_osservatore ),
   CONSTRAINT fk_avvistamento_osservatore FOREIGN KEY ( codice_tessera_osservatore )
     REFERENCES osservatore ( codice_tessera )
       ON DELETE CASCADE,
@@ -339,23 +337,28 @@ CREATE TABLE avvistamento (
   Un avvistamento può includere più esemplari della medesima specie.
 */
 CREATE TABLE esemplare (
-  codice_avvistamento     VARCHAR2(29) NOT NULL,
-  numero_esemplare        NUMBER(3) NOT NULL,
-  maturita                VARCHAR2(8) CHECK ( maturita IN ( 'adulto',
+  codice_tessera_osservatore VARCHAR2(29) NOT NULL,
+  numero_esemplare           NUMBER(3) NOT NULL,
+  maturita                   VARCHAR2(8) CHECK ( maturita IN ( 'adulto',
                                              'giovane',
                                              'pulcino' ) ),
-  condizioni_salute       VARCHAR2(8) CHECK ( condizioni_salute IN ( 'sano',
+  condizioni_salute          VARCHAR2(8) CHECK ( condizioni_salute IN ( 'sano',
                                                                'malato',
                                                                'ferito' ) ),
-  sesso                   VARCHAR2(12) CHECK ( sesso IN ( 'maschio',
+  sesso                      VARCHAR2(12) CHECK ( sesso IN ( 'maschio',
                                         'femmina',
                                         'sconosciuto' ) ),
-  nome_scientifico_specie VARCHAR2(40) NOT NULL,
-  CONSTRAINT pk_esemplare PRIMARY KEY ( codice_avvistamento,
-                                        numero_esemplare ),
-  CONSTRAINT fk_esemplare_avvistamento FOREIGN KEY ( codice_avvistamento )
-    REFERENCES avvistamento ( codice_avvistamento )
-      ON DELETE CASCADE,
+  nome_scientifico_specie    VARCHAR2(40) NOT NULL,
+  n_avvistamento             NUMBER(16) NOT NULL,
+  CONSTRAINT pk_esemplare PRIMARY KEY ( codice_tessera_osservatore,
+                                        numero_esemplare,
+                                        n_avvistamento ),
+  CONSTRAINT fk_esemplare_avvistamento
+    FOREIGN KEY ( codice_tessera_osservatore,
+                  n_avvistamento )
+      REFERENCES avvistamento ( codice_tessera_osservatore,
+                                n_avvistamento )
+        ON DELETE CASCADE,
   CONSTRAINT fk_esemplare_specie FOREIGN KEY ( nome_scientifico_specie )
     REFERENCES specie ( nome_scientifico )
       ON DELETE CASCADE
@@ -366,21 +369,26 @@ CREATE TABLE esemplare (
   È possibile allegare più elementi multimediali allo stesso avvistamento.
   */
 CREATE TABLE media (
-  codice_avvistamento VARCHAR2(29) NOT NULL,
-  titolo_media        VARCHAR2(40) NOT NULL,
-  tipo_media          VARCHAR2(6) CHECK ( tipo_media IN ( 'foto',
+  codice_tessera_osservatore VARCHAR2(29) NOT NULL,
+  titolo_media               VARCHAR2(40) NOT NULL,
+  tipo_media                 VARCHAR2(6) CHECK ( tipo_media IN ( 'foto',
                                                  'video',
                                                  'audio' ) ),
-  url_media           VARCHAR2(100) NOT NULL,
-  formato_media       VARCHAR2(4) CHECK ( formato_media IN ( 'jpg',
+  url_media                  VARCHAR2(100) NOT NULL,
+  formato_media              VARCHAR2(4) CHECK ( formato_media IN ( 'jpg',
                                                        'png',
                                                        'mp4',
                                                        'mp3',
                                                        'wav' ) ),
-  CONSTRAINT pk_media PRIMARY KEY ( codice_avvistamento,
-                                    titolo_media ),
-  CONSTRAINT fk_media_avvistamento FOREIGN KEY ( codice_avvistamento )
-    REFERENCES avvistamento ( codice_avvistamento )
+  n_avvistamento             NUMBER(16) NOT NULL,
+  CONSTRAINT pk_media PRIMARY KEY ( codice_tessera_osservatore,
+                                    titolo_media,
+                                    n_avvistamento ),
+  CONSTRAINT fk_media_avvistamento
+    FOREIGN KEY ( codice_tessera_osservatore,
+                  n_avvistamento )
+      REFERENCES avvistamento ( codice_tessera_osservatore,
+                                n_avvistamento )
 );
 
 /*
@@ -389,16 +397,22 @@ CREATE TABLE media (
   tipo_richiamo (es: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, etc.)
 */
 CREATE TABLE dispositivo_richiamo (
-  codice_avvistamento VARCHAR2(29) NOT NULL,
-  modello             VARCHAR2(40) NOT NULL,
-  marca               VARCHAR2(40) NOT NULL,
-  tipo_richiamo       VARCHAR2(30) NOT NULL,
-  CONSTRAINT pk_dispositivo_richiamo PRIMARY KEY ( codice_avvistamento,
-                                                   modello,
-                                                   marca ),
-  CONSTRAINT fk_dispositivo_avvistamento FOREIGN KEY ( codice_avvistamento )
-    REFERENCES avvistamento ( codice_avvistamento )
-      ON DELETE CASCADE
+  codice_tessera_osservatore VARCHAR2(29) NOT NULL,
+  modello                    VARCHAR2(40) NOT NULL,
+  marca                      VARCHAR2(40) NOT NULL,
+  tipo_richiamo              VARCHAR2(30) NOT NULL,
+  n_avvistamento             NUMBER(16) NOT NULL,
+  CONSTRAINT pk_dispositivo_richiamo
+    PRIMARY KEY ( codice_tessera_osservatore,
+                  modello,
+                  marca,
+                  n_avvistamento ),
+  CONSTRAINT fk_dispositivo_avvistamento
+    FOREIGN KEY ( codice_tessera_osservatore,
+                  n_avvistamento )
+      REFERENCES avvistamento ( codice_tessera_osservatore,
+                                n_avvistamento )
+        ON DELETE CASCADE
 );
 
 CREATE TABLE pattern_migratori (

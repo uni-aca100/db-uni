@@ -7,39 +7,39 @@
   riguardare più esemplari della stessa specie.
 */
 CREATE OR REPLACE TRIGGER trg_check_localita_avvistamento BEFORE
-  INSERT OR UPDATE ON avvistamento
+-- solo dopo che l'esemplare è stato inserito possiamo verificare
+-- se l'avvistamento è valido, la procedura add_avvistamento
+-- inserisce entrambi e fa rollback su tutto in caso di errore
+  INSERT OR UPDATE ON esemplare
   FOR EACH ROW
 DECLARE
   habitat_non_valido EXCEPTION;
-  var_specie_nome_scientifico specie.nome_scientifico%TYPE;
-  found_habitat               NUMBER(1) := 0;
+  found_habitat  NUMBER(1) := 0;
+  var_data_e_ora avvistamento.data_e_ora%TYPE;
+  var_plus_code  avvistamento.plus_code%TYPE;
 BEGIN
-  -- uno stesso avvistamento anche se di più esemplari, 
-  -- si riferisce a una sola specie.
-  SELECT nome_scientifico_specie
-    INTO var_specie_nome_scientifico
-    FROM esemplare
-   WHERE codice_avvistamento = :new.codice_avvistamento;
+  -- Recupera data e località dell'avvistamento
+  SELECT data_e_ora,
+         plus_code
+    INTO
+    var_data_e_ora,
+    var_plus_code
+    FROM avvistamento
+   WHERE codice_tessera_osservatore = :new.codice_tessera_osservatore
+     AND n_avvistamento = :new.n_avvistamento;
 
-  /*
-    Contiamo quante corrispondenze esistono tra gli habitat della
-    località avvistamento (:new.plus_code) e gli habitat della specie
-    osservata (var_specie_nome_scientifico) per il periodo dell'anno
-    in cui è stato effettuato l'avvistamento (:new.data_e_ora).
-    In pratica, verifica se esiste almeno un habitat associato a quella
-    località che sia anche un habitat tipico per la specie in quel periodo.
-  */
+  -- Verifica habitat
   SELECT COUNT(*)
     INTO found_habitat
     FROM associazione_localita_habitat l
-   WHERE l.plus_code = :new.plus_code
+   WHERE l.plus_code = var_plus_code
      AND EXISTS (
     SELECT 1
       FROM specie_vive_in_habitat v
-     WHERE v.nome_scientifico_specie = var_specie_nome_scientifico
+     WHERE v.nome_scientifico_specie = :new.nome_scientifico_specie
        AND v.codice_eunis = l.codice_eunis
        AND TO_NUMBER(to_char(
-      :new.data_e_ora,
+      var_data_e_ora,
       'MM'
     )) BETWEEN v.periodo_inizio AND v.periodo_fine
   );
@@ -51,7 +51,7 @@ EXCEPTION
   WHEN no_data_found THEN
     raise_application_error(
       -20013,
-      'La specie associata all''avvistamento non esiste.'
+      'L''avvistamento specificato non esiste.'
     );
   WHEN habitat_non_valido THEN
     raise_application_error(
