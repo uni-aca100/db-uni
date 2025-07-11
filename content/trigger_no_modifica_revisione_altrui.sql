@@ -5,19 +5,19 @@
   Il responsabile della revisione deve essere unico per ogni avvistamento
 */
 CREATE OR REPLACE TRIGGER trg_no_modifica_revisione_altrui BEFORE
-  UPDATE OF valutazione ON avvistamento
-  FOR EACH ROW
+    UPDATE OF valutazione ON avvistamento
+    FOR EACH ROW
 DECLARE
-  revisione_altrui EXCEPTION;
+    revisione_altrui EXCEPTION;
 BEGIN
-  IF :new.codice_tessera_revisore != :old.codice_tessera_revisore THEN
-    RAISE revisione_altrui;
-  END IF;
+    IF :new.codice_tessera_revisore != :old.codice_tessera_revisore THEN
+        RAISE revisione_altrui;
+    END IF;
 EXCEPTION
-  WHEN revisione_altrui THEN
-    raise_application_error(
-      -20003,
-      'Il revisore non può modificare le valutazioni di un avvistamento già validato da un altro revisore.'
-    );
+    WHEN revisione_altrui THEN
+        raise_application_error(
+            -20003,
+            'Il revisore non può modificare le valutazioni di un avvistamento già validato da un altro revisore.'
+        );
 END;
 /

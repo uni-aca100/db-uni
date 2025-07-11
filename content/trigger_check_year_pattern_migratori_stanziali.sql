@@ -8,23 +8,23 @@
   con valori da 1 (gennaio) a 12 (dicembre).
 */
 CREATE OR REPLACE TRIGGER trg_check_year_pattern_migratori_stanziali BEFORE
-  INSERT OR UPDATE ON pattern_migratori
-  FOR EACH ROW
+    INSERT OR UPDATE ON pattern_migratori
+    FOR EACH ROW
 DECLARE
-  not_all_year_stanziale EXCEPTION;
+    not_all_year_stanziale EXCEPTION;
 BEGIN
-  IF
-    :new.motivo_migrazione = 'stanziale'
-    AND ( :new.periodo_inizio != 1
-    OR :new.periodo_fine != 12 )
-  THEN
-    RAISE not_all_year_stanziale;
-  END IF;
+    IF
+        :new.motivo_migrazione = 'stanziale'
+        AND ( :new.periodo_inizio != 1
+        OR :new.periodo_fine != 12 )
+    THEN
+        RAISE not_all_year_stanziale;
+    END IF;
 EXCEPTION
-  WHEN not_all_year_stanziale THEN
-    raise_application_error(
-      -20019,
-      'Un pattern migratorio stanziale deve coprire l''intero anno.'
-    );
+    WHEN not_all_year_stanziale THEN
+        raise_application_error(
+            -20019,
+            'Un pattern migratorio stanziale deve coprire l''intero anno.'
+        );
 END;
 /

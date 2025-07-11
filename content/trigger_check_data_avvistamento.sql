@@ -5,33 +5,33 @@
   Un Socio può contribuire alle attività dell'associazione solo dopo essersi iscritto.
 */
 CREATE OR REPLACE TRIGGER trg_check_data BEFORE
-  INSERT OR UPDATE ON avvistamento
-  FOR EACH ROW
+    INSERT OR UPDATE ON avvistamento
+    FOR EACH ROW
 DECLARE
-  var_data_iscrizione socio.data_iscrizione%TYPE;
-  date_avvistamento_precedente EXCEPTION;
+    var_data_iscrizione socio.data_iscrizione%TYPE;
+    date_avvistamento_precedente EXCEPTION;
 BEGIN
   -- Recupera la data di iscrizione del socio osservatore
-  SELECT data_iscrizione
-    INTO var_data_iscrizione
-    FROM socio
-   WHERE codice_tessera = :new.codice_tessera_osservatore;
+    SELECT data_iscrizione
+      INTO var_data_iscrizione
+      FROM socio
+     WHERE codice_tessera = :new.codice_tessera_osservatore;
 
   -- Se la data dell'avvistamento è precedente alla data di iscrizione, solleva errore
-  IF :new.data_e_ora < var_data_iscrizione THEN
-    RAISE date_avvistamento_precedente;
-  END IF;
+    IF :new.data_e_ora < var_data_iscrizione THEN
+        RAISE date_avvistamento_precedente;
+    END IF;
 EXCEPTION
-  WHEN no_data_found THEN
-    raise_application_error(
-      -20011,
-      'Il socio osservatore non esiste.'
-    );
-  WHEN date_avvistamento_precedente THEN
-    raise_application_error(
-      -20012,
-      'Non è consentito inserire avvistamenti precedenti alla data di iscrizione del
+    WHEN no_data_found THEN
+        raise_application_error(
+            -20011,
+            'Il socio osservatore non esiste.'
+        );
+    WHEN date_avvistamento_precedente THEN
+        raise_application_error(
+            -20012,
+            'Non è consentito inserire avvistamenti precedenti alla data di iscrizione del
       socio osservatore.'
-    );
+        );
 END;
 /
