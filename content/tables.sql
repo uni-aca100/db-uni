@@ -257,12 +257,14 @@ CREATE TABLE specie (
 );
 
 /* 
-  Habitat, Indica un ambiente naturale in cui possono essere avvistate specie di uccelli.
+  La tabellaHabitat, rappresenta un ambiente naturale in cui possono essere avvistate specie di uccelli.
   Il database include esclusivamente habitat associati a pattern migratori di specie di
   uccelli già presenti nel database.
   Il codice_eunis rappresenta il codice EUNIS dell'habitat.
   dalla banca dati Europe Nature Information System (EUNIS),dove è possibile reperire
   informazioni dettagliate sugli habitat naturali in Europa.
+  Il rappresentata ha il ruolo di opolare la tabella tramite la procedura add_pattern_migratori.
+  inoltre le altre operazioni di modifica ed eliminazione vengono effettuate manualmente dal responsabile.
 */
 CREATE TABLE habitat (
   codice_eunis    VARCHAR2(10) NOT NULL,
@@ -272,11 +274,12 @@ CREATE TABLE habitat (
 );
 
 /*
-  Località di avvistamento, indica una località geografica in cui sono stati effettuati
-  avvistamenti di uccelli.
-  Il plus_code rappresenta un codice unico per la località, utilizzando il sistema
-  Open Location Code (OLC), impiegato per la geolocalizzazione in Google Maps.
-  Il database contiene solo località con almeno un avvistamento associato.
+  La tabella Località dell'Avvistamento rappresenta una località geografica specifica dove sono stati
+  effettuati avvistamenti di uccelli. Il plus_code ne identifica la posizione in modo univoco,
+  utilizzando il sistema Open Location Code (OLC) impiegato per la geolocalizzazione in Google Maps.
+  Il database include solo località con almeno un avvistamento associato. Il Responsabile si occupa
+  del popolamento di questa tabella tramite la procedura add_avvistamento. Le operazioni di eliminazione
+  sono invece gestite manualmente sempre dal Responsabile.
 */
 CREATE TABLE localita_avvistamento (
   plus_code     VARCHAR2(12) NOT NULL,
@@ -296,9 +299,11 @@ CREATE TABLE localita_avvistamento (
 );
 
 /*
-  Avvistamento, indica un avvistamento di un esemplare di uccello in una specifica località.
-  fornito dall'associazione di birdwatching.
-  n_avvistamento rappresenta l'n-essimo avvistamento effettuato da un osservatore.
+  La tabella Avvistamento rappresenta l'osservazione di un esemplare di uccello in una specifica località.
+  Il campo n_avvistamento indica l'N-esimo avvistamento effettuato da un osservatore.
+  Un singolo avvistamento può essere associato a più esemplari della stessa specie.
+  Il Responsabile si occupa del popolamento di questa tabella tramite la procedura add_avvistamento.
+  Le operazioni di  eliminazione sono invece gestite manualmente sempre dal Responsabile.
 */
 CREATE TABLE avvistamento (
   n_avvistamento             NUMBER(16) NOT NULL,
@@ -332,9 +337,11 @@ CREATE TABLE avvistamento (
 
 
 /*
-  Esemplare, indica un esemplare di uccello avvistato in una specifica località.
-  Il numero_esemplare rappresenta l'N-esimo esemplare all'interno dello stesso avvistamento.
-  Un avvistamento può includere più esemplari della medesima specie.
+La tabella Esemplare rappresenta un singolo uccello avvistato in una specifica località.
+Il numero_esemplare indica l'N-esimo individuo all'interno del medesimo avvistamento.
+È importante notare che un avvistamento può includere solo esemplari della stessa specie.
+Il Responsabile si occupa del popolamento di questa tabella tramite la procedura add_avvistamento.
+Le operazioni di modifica ed eliminazione sono invece gestite manualmente sempre dal Responsabile.
 */
 CREATE TABLE esemplare (
   codice_tessera_osservatore VARCHAR2(29) NOT NULL,
@@ -365,8 +372,10 @@ CREATE TABLE esemplare (
 );
 
 /*
-  Media, Rappresenta un contenuto multimediale associato a un avvistamento.
+  La tabella Media rappresenta un contenuto multimediale associato a un avvistamento.
   È possibile allegare più elementi multimediali allo stesso avvistamento.
+  Il Responsabile si occupa del popolamento di questa tabella tramite
+  operazioni manuali di inserimento, modifica ed eliminazione.
   */
 CREATE TABLE media (
   codice_tessera_osservatore VARCHAR2(29) NOT NULL,
@@ -392,9 +401,13 @@ CREATE TABLE media (
 );
 
 /*
-  Dispositivo_Richiamo, indica un dispositivo utilizzato per richiamare gli uccelli
-  durante l'avvistamento.
-  tipo_richiamo (es: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, etc.)
+La tabella Dispositivo_Richiamo rappresenta un dispositivo utilizzato per richiamare
+gli uccelli durante l'avvistamento. Il campo tipo_richiamo ne specifica la funzione
+(ad esempio: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, ecc.).
+È importante sottolineare che l'impiego di tali dispositivi è una pratica scoraggiata,
+in particolare nelle aree protette.
+Il Responsabile si occupa del popolamento di questa tabella tramite operazioni
+manuali di inserimento, modifica ed eliminazione.
 */
 CREATE TABLE dispositivo_richiamo (
   codice_tessera_osservatore VARCHAR2(29) NOT NULL,
@@ -415,6 +428,14 @@ CREATE TABLE dispositivo_richiamo (
         ON DELETE CASCADE
 );
 
+
+/*
+  La tabella Pattern Migratori rappresenta i modelli di migrazione delle specie di uccelli.
+  Ogni record associa una specie a un habitat specifico, indicando il motivo della migrazione
+  e il periodo dell'anno in cui avviene. Il Responsabile si occupa del popolamento di questa
+  tabella tramite la procedura add_pattern_migratorio. Le operazioni di modifica ed eliminazione
+  sono invece gestite manualmente sempre dal Responsabile.
+*/
 CREATE TABLE pattern_migratori (
   nome_scientifico_specie VARCHAR2(40) NOT NULL,
   codice_eunis_habitat    VARCHAR2(10) NOT NULL,
@@ -435,7 +456,14 @@ CREATE TABLE pattern_migratori (
       ON DELETE CASCADE
 );
 
--- Badge, indica un badge assegnato a un socio per riconoscimenti specifici.
+/*
+  La tabella Badge rappresenta i riconoscimenti assegnati ai soci per meriti specifici.
+  Ogni badge è associato a un socio tramite il codice_tessera_socio e ha una data di assegnazione.
+  Inoltre, è presente un campo url_badge che contiene un link all'immagine del badge.
+  Il Responsabile si occupa del popolamento di questa tabella tramite la procedura
+  assegnazione_badge. Le operazioni eliminazione sono invece gestite
+  manualmente sempre dal Responsabile.
+*/
 CREATE TABLE badge (
   nome_badge           VARCHAR2(25) CHECK ( nome_badge IN ( 'occhio di Kakapo',
                                                   'occhio di Colibrì',

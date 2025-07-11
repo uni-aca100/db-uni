@@ -729,7 +729,7 @@ INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G6F+9N',
 INSERT INTO associazione_localita_habitat VALUES ( '8GWC9G5F+0O',
                                                    'G1.1' );
 
--- Popolamento tabella avvistamento
+-- Popolamento tabella avvistamento s
 INSERT INTO avvistamento VALUES ( 1,
                                   TO_DATE('2023-07-01 10','YYYY-MM-DD HH24'),
                                   'confermato',
