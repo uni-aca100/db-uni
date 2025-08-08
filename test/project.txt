@@ -1,4 +1,3 @@
-Autore: Davide Duraccio.
 
 # Requisiti:
 L'obiettivo di questo progetto è creare un database per la gestione di un'associazione di birdwatching. Il database permette di gestire sia le informazioni relative alle varie specie di uccelli, solitamente avvistate in Europa, sia quelle riguardanti le attività osservative e revisionali dei soci dell'associazione.

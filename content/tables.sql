@@ -99,8 +99,8 @@
       Un revisore può revisionare più avvistamenti, ma ogni avvistamento può essere
       revisionato da un solo revisore.
 
-    - Avvistamento (1,1) [contiene] (1,N) Esemplare
-      Un avvistamento può contenere più esemplari, ma ogni esemplare è associato
+    - Avvistamento (1,1) [include] (1,N) Esemplare
+      Un avvistamento può includere più esemplari, ma ogni esemplare è associato
       a un solo avvistamento.
 
     - Avvistamento (1,1) [ha] (0,N) Media
@@ -125,8 +125,8 @@
       Un esemplare rappresenta una sola specie,
       ma una specie può essere rappresentata da più esemplari.
 
-    - Specie (1,1) [possiede] (1,N) pattern_migratori
-      Una specie può possedere più pattern migratori.
+    - Specie (1,1) [presenta] (1,N) pattern_migratori
+      Una specie può presentare più pattern migratori.
       Ogni pattern migratorio è associato a una sola specie.
 
     - Habitat (1,1) [è_destinazione] (1,N) pattern_migratori
