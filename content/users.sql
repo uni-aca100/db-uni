@@ -25,6 +25,7 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON media TO ruolo_responsabile;
 GRANT SELECT,INSERT,DELETE,UPDATE ON dispositivo_richiamo TO ruolo_responsabile;
 GRANT SELECT,INSERT,DELETE,UPDATE ON associazione_localita_habitat TO ruolo_responsabile;
 GRANT SELECT ON specie_vive_in_habitat TO ruolo_responsabile;
+GRANT SELECT ON distribuzione_avvistamenti_per_specie TO ruolo_responsabile;
 GRANT EXECUTE ON iscrivi_nuovo_socio TO ruolo_responsabile;
 GRANT EXECUTE ON add_avvistamento TO ruolo_responsabile;
 GRANT EXECUTE ON add_pattern_migratorio TO ruolo_responsabile;
@@ -49,6 +50,7 @@ GRANT SELECT ON badge TO ruolo_socio;
 GRANT SELECT ON associazione_localita_habitat TO ruolo_socio;
 GRANT SELECT ON specie_vive_in_habitat TO ruolo_socio;
 GRANT SELECT ON socio_pubblico TO ruolo_socio;
+GRANT SELECT ON distribuzione_avvistamenti_per_specie TO ruolo_socio;
 
 -- Ruolo Socio revisore
 CREATE ROLE ruolo_socio_revisore IDENTIFIED BY revisorepwd;
