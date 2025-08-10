@@ -38,10 +38,7 @@ BEGIN
           FROM specie_vive_in_habitat v
          WHERE v.nome_scientifico_specie = :new.nome_scientifico_specie
            AND v.codice_eunis = l.codice_eunis
-           AND TO_NUMBER(to_char(
-            var_data_e_ora,
-            'MM'
-        )) BETWEEN v.periodo_inizio AND v.periodo_fine
+           AND extract (MONTH FROM var_data_e_ora) BETWEEN v.periodo_inizio AND v.periodo_fine
     );
 
     IF found_habitat = 0 THEN

@@ -17,12 +17,12 @@ DECLARE
 BEGIN
    -- verifica se la località dell'avvistamento è in un'area protetta
     SELECT l.area_protetta
-      INTO var_area_protetta
-      FROM avvistamento a
-      JOIN localita_avvistamento l
-    ON a.plus_code = l.plus_code
-     WHERE a.codice_tessera_osservatore = :new.codice_tessera_osservatore
-       AND a.n_avvistamento = :new.n_avvistamento;
+    INTO var_area_protetta
+    FROM avvistamento a
+    JOIN localita_avvistamento l
+        ON a.plus_code = l.plus_code
+    WHERE a.codice_tessera_osservatore = :new.codice_tessera_osservatore
+        AND a.n_avvistamento = :new.n_avvistamento;
 
     IF var_area_protetta = 1 THEN
         RAISE deny_dispositivo_richiamo;
