@@ -13,11 +13,11 @@ CREATE OR REPLACE VIEW specie_vive_in_habitat AS
            p.motivo_migrazione AS motivo,
            p.periodo_inizio,
            p.periodo_fine
-      FROM specie s
-      JOIN pattern_migratori p
-    ON s.nome_scientifico = p.nome_scientifico_specie
-      JOIN habitat h
-    ON p.codice_eunis_habitat = h.codice_eunis;
+    FROM specie s
+    JOIN pattern_migratorio p
+      ON s.nome_scientifico = p.nome_scientifico_specie
+    JOIN habitat h
+      ON p.codice_eunis_habitat = h.codice_eunis;
 
 -- view per proteggere i dati sensibili dei soci
 CREATE OR REPLACE VIEW socio_pubblico AS

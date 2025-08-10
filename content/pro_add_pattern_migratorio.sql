@@ -40,9 +40,9 @@ CREATE OR REPLACE PROCEDURE add_pattern_migratorio (
     p_famiglia            IN specie.famiglia%TYPE,
     p_url_verso           IN specie.url_verso%TYPE,
     p_url_immagine        IN specie.url_immagine%TYPE,
-    p_motivo_migrazione   IN pattern_migratori.motivo_migrazione%TYPE,
-    p_periodo_inizio      IN pattern_migratori.periodo_inizio%TYPE,
-    p_periodo_fine        IN pattern_migratori.periodo_fine%TYPE,
+    p_motivo_migrazione   IN pattern_migratorio.motivo_migrazione%TYPE,
+    p_periodo_inizio      IN pattern_migratorio.periodo_inizio%TYPE,
+    p_periodo_fine        IN pattern_migratorio.periodo_fine%TYPE,
     p_codice_eunis        IN habitat.codice_eunis%TYPE,
     p_nome_habitat        IN habitat.nome_habitat%TYPE,
     p_url_descrizione     IN habitat.url_descrizione%TYPE
@@ -92,7 +92,7 @@ BEGIN
   -- verifica che il pattern migratorio non esista già
     SELECT COUNT(*)
       INTO pattern_exists
-      FROM pattern_migratori
+      FROM pattern_migratorio
      WHERE nome_scientifico_specie = p_nome_scientifico
        AND codice_eunis_habitat = p_codice_eunis
        AND motivo_migrazione = p_motivo_migrazione;
@@ -102,7 +102,7 @@ BEGIN
     END IF;
 
   -- Inserimento dei pattern migratori associati
-    INSERT INTO pattern_migratori (
+    INSERT INTO pattern_migratorio (
         nome_scientifico_specie,
         codice_eunis_habitat,
         motivo_migrazione,

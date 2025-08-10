@@ -3,7 +3,7 @@
   per lo stesso habitat di una specie stanziale.
 */
 CREATE OR REPLACE TRIGGER trg_check_multiple_pattern_migratori_stanziali BEFORE
-    INSERT OR UPDATE ON pattern_migratori
+    INSERT OR UPDATE ON pattern_migratorio
     FOR EACH ROW
 DECLARE
     var_same_habitat_count NUMBER := 0;
@@ -12,11 +12,11 @@ BEGIN
 
   /*
   contiamo quanti pattern migratori "stanziali" esistono per la
-  stessa specie e lo stesso habitat nella tabella pattern_migratori.
+  stessa specie e lo stesso habitat nella tabella pattern_migratorio.
   */
     SELECT COUNT(*)
       INTO var_same_habitat_count
-      FROM pattern_migratori
+      FROM pattern_migratorio
      WHERE codice_eunis_habitat = :new.codice_eunis_habitat
        AND nome_scientifico_specie = :new.nome_scientifico_specie
        AND motivo_migrazione = 'stanziale';

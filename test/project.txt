@@ -61,7 +61,7 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
   Ogni specie ha un nome scientifico il quale è univoco.
   le informazioni sulle specie sono registrate dai Responsabili dell'associazione,
   e provengono dalla banca dati Europe Nature Information System (EUNIS).
-  Per le specie non migratrici, esiste un record in pattern_migratori con motivo_migrazione='stanziale'.
+  Per le specie non migratrici, esiste un record in pattern_migratorio con motivo_migrazione='stanziale'.
   gli stati di conservazione sono LC, NT, VU, EN, CR
 
 - Esemplare:
@@ -98,7 +98,7 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
   Le regioni possono essere associate a una o più località_avvistamento.
   è spesso impiegata per analizzare la distribuzione delle specie di uccelli avvistati.
 
-  - Pattern_Migratori:
+  - pattern_migratorio:
   I pattern migratori rappresentano le rotte e i comportamenti di migrazione delle specie di uccelli.
   Questi pattern possono variare notevolmente tra le diverse specie e sono influenzati da fattori ambientali, disponibilità di cibo e condizioni climatiche.
   Se una specie di uccello non è migratoria, il suo motivo_migrazione sarà 'stanziale' e i valori di periodo_inizio e periodo_fine saranno nulli.

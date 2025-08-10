@@ -125,11 +125,11 @@
       Un esemplare rappresenta una sola specie,
       ma una specie può essere rappresentata da più esemplari.
 
-    - Specie (1,1) [presenta] (1,N) pattern_migratori
+    - Specie (1,1) [presenta] (1,N) pattern_migratorio
       Una specie può presentare più pattern migratori.
       Ogni pattern migratorio è associato a una sola specie.
 
-    - Habitat (1,1) [è_destinazione] (1,N) pattern_migratori
+    - Habitat (1,1) [è_destinazione] (1,N) pattern_migratorio
       Un habitat può essere destinazione di più pattern migratori,
       ma un pattern migratorio ha come destinazione un solo habitat.
 
@@ -137,16 +137,16 @@
       Un habitat può essere presente in più località_avvistamento,
       ma una località_avvistamento può presentare più habitat.
 
-    - osservatore (1,1) [ha_ottenuto] (0,N) badge
-      Un osservatore può ottenere più badge,
-      ma ogni badge è associato a un solo osservatore.
-    
+    - Socio (1,1) [ha_ottenuto] (0,N) badge
+      Un socio può ottenere più badge,
+      ma ogni badge è associato a un solo socio.
+
     - Dispositivo_Richiamo (1,1) [utilizza] (0,N) Avvistamento
       Un dispositivo di richiamo può essere utilizzato in più avvistamenti,
       ma ogni avvistamento può utilizzare un solo dispositivo di richiamo.
 
   Entità di associazione:
-    - pattern_migratori: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
+    - pattern_migratorio: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
       PK: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
       FK: nome_scientifico_specie (riferimento a Specie)
       FK: codice_EUNIS_habitat (riferimento a Habitat)
@@ -164,7 +164,7 @@
 -- DROP delle tabelle
 DROP TABLE associazione_localita_habitat CASCADE CONSTRAINTS;
 DROP TABLE badge CASCADE CONSTRAINTS;
-DROP TABLE pattern_migratori CASCADE CONSTRAINTS;
+DROP TABLE pattern_migratorio CASCADE CONSTRAINTS;
 DROP TABLE media CASCADE CONSTRAINTS;
 DROP TABLE dispositivo_richiamo CASCADE CONSTRAINTS;
 DROP TABLE esemplare CASCADE CONSTRAINTS;
@@ -436,7 +436,7 @@ CREATE TABLE dispositivo_richiamo (
   tabella tramite la procedura add_pattern_migratorio. Le operazioni di modifica ed eliminazione
   sono invece gestite manualmente sempre dal Responsabile.
 */
-CREATE TABLE pattern_migratori (
+CREATE TABLE pattern_migratorio (
   nome_scientifico_specie VARCHAR2(40) NOT NULL,
   codice_eunis_habitat    VARCHAR2(10) NOT NULL,
   motivo_migrazione       VARCHAR2(15) CHECK ( motivo_migrazione IN ( 'stanziale',

@@ -156,38 +156,38 @@
 
 
 
-/*  Popolamento tabella pattern_migratori  */
- INSERT INTO pattern_migratori VALUES ( 'Aquila chrysaetos', 'C1.1', 'nidificazione', 4, 7 );
- INSERT INTO pattern_migratori VALUES ( 'Passer italiae', 'C2.2', 'stanziale', 1, 12 );
- INSERT INTO pattern_migratori VALUES ( 'Aythya nyroca', 'E1.2', 'svernamento', 11, 2 );
- INSERT INTO pattern_migratori VALUES ( 'Corvus corone', 'F3.2', 'migrazione', 3, 5 );
- INSERT INTO pattern_migratori VALUES ( 'Turdus merula', 'G1.1', 'stanziale', 1, 12 );
- INSERT INTO pattern_migratori VALUES ( 'Aquila adalberti', 'D5.2', 'nidificazione', 5, 8 );
- INSERT INTO pattern_migratori VALUES ( 'Corvus corax', 'B1.3', 'svernamento', 10, 2 );
- INSERT INTO pattern_migratori VALUES ( 'Lanius collurio', 'A2.5', 'migrazione', 4, 9 );
- INSERT INTO pattern_migratori VALUES ( 'Picus viridis', 'C3.4', 'stanziale', 1, 12 );
- INSERT INTO pattern_migratori VALUES ( 'Motacilla alba', 'E4.1', 'nidificazione', 5, 7 );
- INSERT INTO pattern_migratori VALUES ( 'Numenius tenuirostris', 'F2.2', 'svernamento', 11, 2 );
- INSERT INTO pattern_migratori VALUES ( 'Cyanistes caeruleus', 'G2.1', 'stanziale', 1, 12 );
- INSERT INTO pattern_migratori VALUES ( 'Tetrax tetrax', 'D1.1', 'migrazione', 3, 6 );
- INSERT INTO pattern_migratori VALUES ( 'Erithacus rubecula', 'C6.3', 'svernamento', 10, 3 );
- INSERT INTO pattern_migratori VALUES ( 'Regulus regulus', 'B2.4', 'nidificazione', 6, 8 );
- INSERT INTO pattern_migratori VALUES ( 'Pica pica', 'C1.1', 'stanziale', 1, 12 );
- INSERT INTO pattern_migratori VALUES ( 'Aquila chrysaetos', 'F3.2', 'svernamento', 11, 2 );
- INSERT INTO pattern_migratori VALUES ( 'Passer italiae', 'G1.1', 'nidificazione', 4, 7 );
- INSERT INTO pattern_migratori VALUES ( 'Aythya nyroca', 'D5.2', 'migrazione', 8, 10 );
- INSERT INTO pattern_migratori VALUES ( 'Corvus corone', 'C2.2', 'nidificazione', 5, 8 );
- INSERT INTO pattern_migratori VALUES ( 'Turdus merula', 'E1.2', 'svernamento', 10, 2 );
- INSERT INTO pattern_migratori VALUES ( 'Aquila adalberti', 'B1.3', 'migrazione', 3, 5 );
- INSERT INTO pattern_migratori VALUES ( 'Corvus corax', 'A2.5', 'nidificazione', 6, 8 );
- INSERT INTO pattern_migratori VALUES ( 'Lanius collurio', 'C3.4', 'svernamento', 11, 2 );
- INSERT INTO pattern_migratori VALUES ( 'Picus viridis', 'E4.1', 'migrazione', 9, 11 );
- INSERT INTO pattern_migratori VALUES ( 'Motacilla alba', 'F2.2', 'stanziale', 1, 12 );
- INSERT INTO pattern_migratori VALUES ( 'Numenius tenuirostris', 'G2.1', 'nidificazione', 5, 7 );
- INSERT INTO pattern_migratori VALUES ( 'Cyanistes caeruleus', 'D1.1', 'svernamento', 10, 2 );
- INSERT INTO pattern_migratori VALUES ( 'Tetrax tetrax', 'C6.3', 'nidificazione', 4, 7 );
- INSERT INTO pattern_migratori VALUES ( 'Erithacus rubecula', 'B2.4', 'migrazione', 8, 10 );
- INSERT INTO pattern_migratori VALUES ( 'Regulus regulus', 'C2.2', 'svernamento', 11, 2 );
+/*  Popolamento tabella pattern_migratorio  */
+ INSERT INTO pattern_migratorio VALUES ( 'Aquila chrysaetos', 'C1.1', 'nidificazione', 4, 7 );
+ INSERT INTO pattern_migratorio VALUES ( 'Passer italiae', 'C2.2', 'stanziale', 1, 12 );
+ INSERT INTO pattern_migratorio VALUES ( 'Aythya nyroca', 'E1.2', 'svernamento', 11, 2 );
+ INSERT INTO pattern_migratorio VALUES ( 'Corvus corone', 'F3.2', 'migrazione', 3, 5 );
+ INSERT INTO pattern_migratorio VALUES ( 'Turdus merula', 'G1.1', 'stanziale', 1, 12 );
+ INSERT INTO pattern_migratorio VALUES ( 'Aquila adalberti', 'D5.2', 'nidificazione', 5, 8 );
+ INSERT INTO pattern_migratorio VALUES ( 'Corvus corax', 'B1.3', 'svernamento', 10, 2 );
+ INSERT INTO pattern_migratorio VALUES ( 'Lanius collurio', 'A2.5', 'migrazione', 4, 9 );
+ INSERT INTO pattern_migratorio VALUES ( 'Picus viridis', 'C3.4', 'stanziale', 1, 12 );
+ INSERT INTO pattern_migratorio VALUES ( 'Motacilla alba', 'E4.1', 'nidificazione', 5, 7 );
+ INSERT INTO pattern_migratorio VALUES ( 'Numenius tenuirostris', 'F2.2', 'svernamento', 11, 2 );
+ INSERT INTO pattern_migratorio VALUES ( 'Cyanistes caeruleus', 'G2.1', 'stanziale', 1, 12 );
+ INSERT INTO pattern_migratorio VALUES ( 'Tetrax tetrax', 'D1.1', 'migrazione', 3, 6 );
+ INSERT INTO pattern_migratorio VALUES ( 'Erithacus rubecula', 'C6.3', 'svernamento', 10, 3 );
+ INSERT INTO pattern_migratorio VALUES ( 'Regulus regulus', 'B2.4', 'nidificazione', 6, 8 );
+ INSERT INTO pattern_migratorio VALUES ( 'Pica pica', 'C1.1', 'stanziale', 1, 12 );
+ INSERT INTO pattern_migratorio VALUES ( 'Aquila chrysaetos', 'F3.2', 'svernamento', 11, 2 );
+ INSERT INTO pattern_migratorio VALUES ( 'Passer italiae', 'G1.1', 'nidificazione', 4, 7 );
+ INSERT INTO pattern_migratorio VALUES ( 'Aythya nyroca', 'D5.2', 'migrazione', 8, 10 );
+ INSERT INTO pattern_migratorio VALUES ( 'Corvus corone', 'C2.2', 'nidificazione', 5, 8 );
+ INSERT INTO pattern_migratorio VALUES ( 'Turdus merula', 'E1.2', 'svernamento', 10, 2 );
+ INSERT INTO pattern_migratorio VALUES ( 'Aquila adalberti', 'B1.3', 'migrazione', 3, 5 );
+ INSERT INTO pattern_migratorio VALUES ( 'Corvus corax', 'A2.5', 'nidificazione', 6, 8 );
+ INSERT INTO pattern_migratorio VALUES ( 'Lanius collurio', 'C3.4', 'svernamento', 11, 2 );
+ INSERT INTO pattern_migratorio VALUES ( 'Picus viridis', 'E4.1', 'migrazione', 9, 11 );
+ INSERT INTO pattern_migratorio VALUES ( 'Motacilla alba', 'F2.2', 'stanziale', 1, 12 );
+ INSERT INTO pattern_migratorio VALUES ( 'Numenius tenuirostris', 'G2.1', 'nidificazione', 5, 7 );
+ INSERT INTO pattern_migratorio VALUES ( 'Cyanistes caeruleus', 'D1.1', 'svernamento', 10, 2 );
+ INSERT INTO pattern_migratorio VALUES ( 'Tetrax tetrax', 'C6.3', 'nidificazione', 4, 7 );
+ INSERT INTO pattern_migratorio VALUES ( 'Erithacus rubecula', 'B2.4', 'migrazione', 8, 10 );
+ INSERT INTO pattern_migratorio VALUES ( 'Regulus regulus', 'C2.2', 'svernamento', 11, 2 );
 
 
 

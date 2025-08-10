@@ -8,7 +8,7 @@
   con valori da 1 (gennaio) a 12 (dicembre).
 */
 CREATE OR REPLACE TRIGGER trg_check_year_pattern_migratori_stanziali BEFORE
-    INSERT OR UPDATE ON pattern_migratori
+    INSERT OR UPDATE ON pattern_migratorio
     FOR EACH ROW
 DECLARE
     not_all_year_stanziale EXCEPTION;

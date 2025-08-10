@@ -5,7 +5,7 @@ Inoltre, anche attributi come il plus_code (codice di geolocalizzazione Google M
 La stessa convenzione si applica agli attributi di tipo data, che viene considerata atomica ai fini della progettazione.
 
 # Seconda forma normale
-Il database rispetta la seconda forma normale (2NF) perché, in tutte le tabelle con chiave primaria composta da più attributi (come media, dispositivo_richiamo, badge, esemplare, regione, pattern_migratori e associazione_localita_habitat), ogni attributo non chiave dipende sempre dall’intera chiave primaria e non solo da una sua parte.
+Il database rispetta la seconda forma normale (2NF) perché, in tutte le tabelle con chiave primaria composta da più attributi (come media, dispositivo_richiamo, badge, esemplare, regione, pattern_migratorio e associazione_localita_habitat), ogni attributo non chiave dipende sempre dall’intera chiave primaria e non solo da una sua parte.
 Quindi non esistono attributi che dipendono solo da una parte della chiave composta, evitando così anomalie di aggiornamento, inserimento o cancellazione.
 Inoltre la prima forma normale è rispettata come abbiamo verificato precedentemente.
 

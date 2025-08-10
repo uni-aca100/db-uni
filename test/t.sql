@@ -55,7 +55,7 @@ SELECT *
 
  -- Visualizza tutti i pattern migratori per la specie appena inserita
 SELECT *
-  FROM pattern_migratori
+  FROM pattern_migratorio
  WHERE nome_scientifico_specie = 'Testudo test';
 
 -- Visualizza tutti gli habitat associati alla specie appena inserita
@@ -92,7 +92,7 @@ END;
 
 -- Visualizza tutti i pattern migratori per la specie appena inserita
 SELECT *
-  FROM pattern_migratori
+  FROM pattern_migratorio
  WHERE nome_scientifico_specie = 'Testudo test';
 
 -- Visualizza tutti gli habitat associati alla specie appena inserita
@@ -315,5 +315,96 @@ BEGIN
 EXCEPTION
   WHEN OTHERS THEN
     dbms_output.put_line('Trigger attivato correttamente (caso negativo): ' || sqlerrm);
+END;
+/
+
+
+-- test trigger pattern_migratorio stanziali
+-- Caso positivo: inserimento di un solo pattern stanziale per specie/habitat
+BEGIN
+  INSERT INTO pattern_migratorio (
+    nome_scientifico_specie,
+    codice_eunis_habitat,
+    motivo_migrazione,
+    periodo_inizio,
+    periodo_fine
+  ) VALUES (
+    'Passer italiae',
+    'C2.2',
+    'stanziale',
+    1,
+    12
+  );
+  dbms_output.put_line('Pattern migratorio stanziale inserito correttamente (caso positivo).');
+EXCEPTION
+  WHEN OTHERS THEN
+    dbms_output.put_line('Errore (caso positivo): ' || SQLERRM);
+END;
+/
+
+-- Caso negativo: tentativo di inserire un secondo pattern stanziale per la stessa specie/habitat
+BEGIN
+  INSERT INTO pattern_migratorio (
+    nome_scientifico_specie,
+    codice_eunis_habitat,
+    motivo_migrazione,
+    periodo_inizio,
+    periodo_fine
+  ) VALUES (
+    'Passer italiae',
+    'C2.2',
+    'stanziale',
+    1,
+    12
+  );
+  dbms_output.put_line('Pattern migratorio stanziale inserito (ERRORE: non dovrebbe essere possibile).');
+EXCEPTION
+  WHEN OTHERS THEN
+    dbms_output.put_line('Trigger attivato correttamente (caso negativo): ' || SQLERRM);
+END;
+/
+
+-- tst patter migratori annui staziali
+-- Caso positivo: inserimento di un pattern stanziale che copre tutto l'anno
+BEGIN
+  INSERT INTO pattern_migratorio (
+    nome_scientifico_specie,
+    codice_eunis_habitat,
+    motivo_migrazione,
+    periodo_inizio,
+    periodo_fine
+  ) VALUES (
+    'Passer italiae',
+    'C2.2',
+    'stanziale',
+    1,
+    12
+  );
+  dbms_output.put_line('Pattern migratorio stanziale inserito correttamente (caso positivo).');
+EXCEPTION
+  WHEN OTHERS THEN
+    dbms_output.put_line('Errore (caso positivo): ' || SQLERRM);
+END;
+/
+
+-- Caso negativo: inserimento di un pattern stanziale che NON copre tutto l'anno
+BEGIN
+  INSERT INTO pattern_migratorio (
+    nome_scientifico_specie,
+    codice_eunis_habitat,
+    motivo_migrazione,
+    periodo_inizio,
+    periodo_fine
+  ) VALUES (
+    'Passer italiae',
+    'C2.2',
+    'stanziale',
+    3,
+    10
+  );
+  dbms_output.put_line('Pattern migratorio stanziale inserito (ERRORE: non dovrebbe essere possibile).');
+EXCEPTION
+  WHEN OTHERS THEN
+    dbms_output.put_line('Trigger attivato correttamente (caso negativo): ' || SQLERRM);
 END;
 /
