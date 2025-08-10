@@ -17,6 +17,7 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
 
 # vincoli di integrità:
 ## vincoli dinamici:
+- Non è consentito che lo stesso osservatore effettui avvistamenti in regioni diverse nello stesso giorno.
 - Non è consentito registrare un avvistamento se la località non rientra tra gli habitat tipici della specie in quel periodo dell'anno.
 - Per le specie non migratorie (ovvero 'stanziali'), è possibile registrare al massimo un solo pattern migratorio per habitat.
 - Per le specie non migratorie, il periodo di migrazione deve coprire l'intero arco dell'anno
