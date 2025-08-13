@@ -430,9 +430,19 @@ CREATE TABLE dispositivo_richiamo (
 
 
 /*
-  La tabella Pattern Migratori rappresenta i modelli di migrazione delle specie di uccelli.
-  Ogni record associa una specie a un habitat specifico, indicando il motivo della migrazione
-  e il periodo dell'anno in cui avviene. Il Responsabile si occupa del popolamento di questa
+  La tabella Pattern Migratorio rappresenta i modelli di presenza stagionale
+  delle specie di uccelli in uno specifico habitat.
+  Non si limita ai soli comportamenti migratori,
+  ma include anche la stanzialità, la nidificazione e lo svernamento.
+  Ogni record associa una specie a un habitat, specificando il motivo
+  della presenza (ad esempio: "migrazione", "nidificazione", "svernamento", "stanziale")
+  e il periodo dell'anno (mesi da 1 a 12) in cui tale comportamento si verifica.
+  In particolare, il motivo "stanziale" indica che la specie è presente stabilmente
+  nell'habitat durante tutto l'anno.
+  Descrive in modo completo sia le specie migratrici che quelle residenti.
+  Periodo_fine rappresenta il termine ultimo della presenza della specie
+  in quell’habitat per il motivo indicato.
+  Il Responsabile si occupa del popolamento di questa
   tabella tramite la procedura add_pattern_migratorio. Le operazioni di modifica ed eliminazione
   sono invece gestite manualmente sempre dal Responsabile.
 */

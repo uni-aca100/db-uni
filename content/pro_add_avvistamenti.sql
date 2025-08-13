@@ -119,6 +119,8 @@ BEGIN
         );
 
   -- Calcola il nuovo numero di avvistamento per l'osservatore
+  -- usiamo nvl per gestire il caso in cui vi siano avvistamenti
+  -- precedentemente rimossi (usando il count sarebbero ignorati)
     SELECT nvl(
         max(n_avvistamento),
         0

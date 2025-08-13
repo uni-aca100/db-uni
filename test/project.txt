@@ -19,12 +19,13 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
 ## vincoli dinamici:
 - Non è consentito che lo stesso osservatore effettui avvistamenti in regioni diverse nello stesso giorno.
 - Non è consentito registrare un avvistamento se la località non rientra tra gli habitat tipici della specie in quel periodo dell'anno.
+- Ogni osservatore può registrare al massimo 15 esemplari, appartenenti alla stessa specie e con lo stesso stato di maturità, avvistati nella stessa località nell’arco di una settimana.
 - Per le specie non migratorie (ovvero 'stanziali'), è possibile registrare al massimo un solo pattern migratorio per habitat.
 - Per le specie non migratorie, il periodo di migrazione deve coprire l'intero arco dell'anno
 - Un Revisore non può validare i propri avvistamenti.
 - Un Revisore non può modificare le revisioni effettuate da altri Revisori.
 - Non è possibile inserire avvistamento che sia stato effettuato prima della data di iscrizione del socio.
-- Non è possibile aggiungere dispositivi di richiamo se l'avvistamento è stato effettuato in un'area protetta. 
+- Non è possibile aggiungere dispositivi di richiamo se l'avvistamento è stato effettuato in un'area protetta.
 
 
 # Descrizione del generale del database e sistema di gestione associazioni di birdwatching:
