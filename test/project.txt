@@ -20,6 +20,7 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
 - Non è consentito che lo stesso osservatore effettui avvistamenti in regioni diverse nello stesso giorno.
 - Non è consentito registrare un avvistamento se la località non rientra tra gli habitat tipici della specie in quel periodo dell'anno.
 - Ogni osservatore può registrare al massimo 15 esemplari, appartenenti alla stessa specie e con lo stesso stato di maturità, avvistati nella stessa località nell’arco di una settimana.
+- Gli osservatori che rientrano tra i primi 5 per numero di avvistamenti effettuati utilizzando dispositivi di richiamo non possono registrare ulteriori avvistamenti che prevedano l’impiego di tali dispositivi.
 - Per le specie non migratorie (ovvero 'stanziali'), è possibile registrare al massimo un solo pattern migratorio per habitat.
 - Per le specie non migratorie, il periodo di migrazione deve coprire l'intero arco dell'anno
 - Un Revisore non può validare i propri avvistamenti.
