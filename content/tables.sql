@@ -406,8 +406,8 @@ gli uccelli durante l'avvistamento. Il campo tipo_richiamo ne specifica la funzi
 (ad esempio: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, ecc.).
 È importante sottolineare che l'impiego di tali dispositivi è una pratica scoraggiata,
 in particolare nelle aree protette.
-Il Responsabile si occupa del popolamento di questa tabella tramite operazioni
-manuali di inserimento, modifica ed eliminazione.
+Il Responsabile si occupa del popolamento di questa tabella tramite la procedura add_avvistamento,
+la modifica ed eliminazione sono gestite manualmente sempre dal Responsabile.
 */
 CREATE TABLE dispositivo_richiamo (
   codice_tessera_osservatore VARCHAR2(29) NOT NULL,

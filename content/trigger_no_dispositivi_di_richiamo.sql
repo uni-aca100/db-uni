@@ -11,6 +11,8 @@ Tale restrizione è dovuta a diversi fattori:
 CREATE OR REPLACE TRIGGER trg_no_dispositivi_di_richiamo BEFORE
     INSERT OR UPDATE ON dispositivo_richiamo
     FOR EACH ROW
+    -- facciamo affidamento sulla procedura
+    -- add_avvistamento che in caso di errore effettua il rollback
 DECLARE
     var_area_protetta NUMBER;
     deny_dispositivo_richiamo EXCEPTION;
