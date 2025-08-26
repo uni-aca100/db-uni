@@ -70,9 +70,9 @@
     - Media:
       PK: (codice_avvistamento, titolo_media)
       Attributi:
-        tipo_media (foto, video, audio),
+        tipo (foto, video, audio),
         url_media,
-        formato_media (jpg, png, mp4, mp3, wav),
+        formato (jpg, png, mp4, mp3, wav),
         titolo_media,
       FK: codice_avvistamento (riferimento a Avvistamento)
 
@@ -380,11 +380,11 @@ CREATE TABLE esemplare (
 CREATE TABLE media (
   codice_tessera_osservatore VARCHAR2(29) NOT NULL,
   titolo_media               VARCHAR2(40) NOT NULL,
-  tipo_media                 VARCHAR2(6) CHECK ( tipo_media IN ( 'foto',
+  tipo                 VARCHAR2(6) CHECK ( tipo IN ( 'foto',
                                                  'video',
                                                  'audio' ) ),
   url_media                  VARCHAR2(100) NOT NULL,
-  formato_media              VARCHAR2(4) CHECK ( formato_media IN ( 'jpg',
+  formato              VARCHAR2(4) CHECK ( formato IN ( 'jpg',
                                                        'png',
                                                        'mp4',
                                                        'mp3',

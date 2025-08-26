@@ -50,8 +50,7 @@ CREATE OR REPLACE TYPE tb_dis_tipo_richiamo as
     - p_nome_scientifico_specie: Nome scientifico della specie degli esemplari
 
   Le informazioni relative a media, dispositivo di richiamo e condizioni_ambientali sono opzionali e
-  possono essere aggiunte in un secondo momento tramite inserimento manuale,
-  evitando così di appesantire ulteriormente questa procedura.
+  possono essere aggiunte in un secondo momento.
 */
 CREATE OR REPLACE PROCEDURE add_avvistamento (
     p_data_e_ora                 IN avvistamento.data_e_ora%TYPE,
@@ -61,7 +60,7 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
     p_area_protetta              IN localita_avvistamento.area_protetta%TYPE,
     p_url_mappa                  IN localita_avvistamento.url_mappa%TYPE,
     p_nome_regione               IN regione.nome_regione%TYPE,
-    p_nazione                      IN regione.nazione%TYPE,
+    p_nazione                    IN regione.nazione%TYPE,
     p_maturita                   IN tb_esp_maturita,
     p_condizioni_salute          IN tb_esp_condizioni_salute,
     p_sesso                      IN tb_esp_sesso,

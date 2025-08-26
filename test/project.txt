@@ -4,7 +4,7 @@ L'obiettivo di questo progetto è creare un database per la gestione di un'assoc
 
 I Soci devono potersi connettere al database per consultare le informazioni riguardanti le specie di uccelli, gli avvistamenti effettuati e tutte le informazioni relative (inclusi dettagli come il numero di esemplari, i contenuti multimediali e le condizioni ambientali.). Avranno inoltre la possibilità di eseguire ricerche sulla distribuzione regionale o nazionale delle specie avvistate e di condurre analisi migratorie.
 
-Inoltre, per registrare un avvistamento, i soci devono compilare un apposito modulo da consegnare ai responsabili dell'associazione. Sarà poi compito del responsabile dell'associazione registrare l'avvistamento nel database, associando le informazioni fornite dal socio.
+Inoltre, per registrare un avvistamento, i soci devono compilare un apposito modulo da consegnare ai responsabili dell'associazione. Sarà poi compito del responsabile dell'associazione registrare l'avvistamento nel database, associando le informazioni fornite dal socio (i soci hannola possibilità di aggiungere i soli media autonomamente).
 
 I Responsabili dell'associazione hanno l'ulteriore compito di gestire le informazioni sui soci, le specie di uccelli e i loro habitat. Devono mantenere aggiornate queste informazioni tramite operazioni di inserimento, modifica e cancellazione.
 
