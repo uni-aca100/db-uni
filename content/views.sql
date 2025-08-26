@@ -31,7 +31,7 @@ CREATE OR REPLACE VIEW distribuzione_avvistamenti_per_specie AS
   SELECT
     s.nome_scientifico AS nome_scientifico_specie,
     s.nome_comune AS nome_comune_specie,
-    r.paese,
+    r.nazione,
     r.nome_regione AS regione,
     COUNT(e.numero_esemplare) AS n_esemplari
   FROM avvistamento a
@@ -40,5 +40,5 @@ CREATE OR REPLACE VIEW distribuzione_avvistamenti_per_specie AS
   JOIN specie s ON e.nome_scientifico_specie = s.nome_scientifico
   JOIN localita_avvistamento la ON a.plus_code = la.plus_code
   JOIN regione r ON la.nome_regione = r.nome_regione
-    AND r.paese = la.paese
-  GROUP BY s.nome_scientifico, s.nome_comune, r.paese, r.nome_regione;
+    AND r.nazione = la.nazione
+  GROUP BY s.nome_scientifico, s.nome_comune, r.nazione, r.nome_regione;

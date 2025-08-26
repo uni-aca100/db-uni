@@ -43,7 +43,7 @@ CREATE OR REPLACE TYPE tb_dis_tipo_richiamo as
     - p_area_protetta: Area protetta della località di avvistamento
     - p_url_mappa: URL della mappa della località di avvistamento
     - p_nome_regione: Nome della regione della località di avvistamento
-    - p_paese: Paese della regione della località di avvistamento
+    - p_nazione: nazione della regione della località di avvistamento
     - p_maturita: Tabella con le maturità degli esemplari (può contenere più valori)
     - p_condizioni_salute: Tabella con le condizioni di salute degli esemplari (può contenere più valori)
     - p_sesso: Tabella con i sessi degli esemplari (può contenere più valori)
@@ -61,7 +61,7 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
     p_area_protetta              IN localita_avvistamento.area_protetta%TYPE,
     p_url_mappa                  IN localita_avvistamento.url_mappa%TYPE,
     p_nome_regione               IN regione.nome_regione%TYPE,
-    p_paese                      IN regione.paese%TYPE,
+    p_nazione                      IN regione.nazione%TYPE,
     p_maturita                   IN tb_esp_maturita,
     p_condizioni_salute          IN tb_esp_condizioni_salute,
     p_sesso                      IN tb_esp_sesso,
@@ -96,14 +96,14 @@ BEGIN
     );
     
   -- Inserimento della regione se non esiste
-  INSERT INTO regione ( nome_regione, paese )
-      SELECT p_nome_regione, p_paese
+  INSERT INTO regione ( nome_regione, nazione )
+      SELECT p_nome_regione, p_nazione
       FROM dual
       WHERE NOT EXISTS (
         SELECT 1
         FROM regione
         WHERE nome_regione = p_nome_regione
-          AND paese = p_paese
+          AND nazione = p_nazione
       );
 
   -- Inserimento della località di avvistamento se non esiste
@@ -113,14 +113,14 @@ BEGIN
       area_protetta,
       url_mappa,
       nome_regione,
-      paese
+      nazione
   )
     SELECT p_plus_code,
           p_nome_localita,
           p_area_protetta,
           p_url_mappa,
           p_nome_regione,
-          p_paese
+          p_nazione
     FROM dual
     WHERE NOT EXISTS (
         SELECT 1

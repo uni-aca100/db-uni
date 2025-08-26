@@ -38,10 +38,10 @@
         url_immagine
 
     - Regione:
-      PK: (nome_regione, paese)
+      PK: (nome_regione, nazione)
       Attributi:
         nome_regione,
-        paese,
+        nazione,
 
     - località_avvistamento:
       PK: plus_code
@@ -49,7 +49,7 @@
         nome,
         area_protetta (booleano),
         url_mappa,
-      FK: (nome_regione, paese) (riferimento a Regione)
+      FK: (nome_regione, nazione) (riferimento a Regione)
 
     - Habitat:
       PK: codice_EUNIS
@@ -121,16 +121,16 @@
       Una località_avvistamento può appartenere a una sola regione,
       ma una regione può avere più località_avvistamento associate.
 
-    - Esemplare (0,N) [rappresenta] (1,1) Specie
-      Un esemplare rappresenta una sola specie,
-      ma una specie può essere rappresentata da più esemplari.
+    - Esemplare (0,N) [di] (1,1) Specie
+      Un esemplare di una sola specie,
+      ma una specie può essere di più esemplari.
 
     - Specie (1,1) [presenta] (1,N) pattern_migratorio
       Una specie può presentare più pattern migratori.
       Ogni pattern migratorio è associato a una sola specie.
 
-    - Habitat (1,1) [è_destinazione] (1,N) pattern_migratorio
-      Un habitat può essere destinazione di più pattern migratori,
+    - Habitat (1,1) [verso] (1,N) pattern_migratorio
+      Un habitat può essere la destinazione di più pattern migratori,
       ma un pattern migratorio ha come destinazione un solo habitat.
 
     - Habitat (1,N) [è_presente_in] (0,N) località_avvistamento
@@ -188,10 +188,10 @@ DROP TABLE socio CASCADE CONSTRAINTS;
 */
 CREATE TABLE regione (
   nome_regione VARCHAR2(40) NOT NULL,
-  paese        VARCHAR2(40) NOT NULL,
+  nazione        VARCHAR2(40) NOT NULL,
   numero_sedi  NUMBER(2) DEFAULT 0 NOT NULL CHECK ( numero_sedi >= 0 ),
   CONSTRAINT pk_regione PRIMARY KEY ( nome_regione,
-                                      paese )
+                                      nazione )
 );
 
 /*
@@ -288,13 +288,13 @@ CREATE TABLE localita_avvistamento (
                                                      1 ) ),
   url_mappa     VARCHAR2(100),
   nome_regione  VARCHAR2(40) NOT NULL,
-  paese         VARCHAR2(40) NOT NULL,
+  nazione         VARCHAR2(40) NOT NULL,
   CONSTRAINT pk_localita_avvistamento PRIMARY KEY ( plus_code ),
   CONSTRAINT fk_localita_regione
     FOREIGN KEY ( nome_regione,
-                  paese )
+                  nazione )
       REFERENCES regione ( nome_regione,
-                           paese )
+                           nazione )
         ON DELETE CASCADE
 );
 
@@ -442,6 +442,12 @@ CREATE TABLE dispositivo_richiamo (
   Descrive in modo completo sia le specie migratrici che quelle residenti.
   Periodo_fine rappresenta il termine ultimo della presenza della specie
   in quell’habitat per il motivo indicato.
+  motivo_migrazione può assumere i valori:
+    - stanziale: specie che vive tutto l'anno nell'habitat.
+    - nidificazione: presenza in un habitat per riprodursi e allevare i piccoli
+    - svernamento: specie che trascorre l'inverno nell'habitat.
+    - migrazione: fase di spostamento tra aree di nidificazione e svernamento
+  Una specie può avere lo stesso motivo di migrazione in più habitat, anche nello stesso periodo.
   Il Responsabile si occupa del popolamento di questa
   tabella tramite la procedura add_pattern_migratorio. Le operazioni di modifica ed eliminazione
   sono invece gestite manualmente sempre dal Responsabile.
