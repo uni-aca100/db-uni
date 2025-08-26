@@ -13,7 +13,7 @@
     - Avvistamento (per la verifica dell'esistenza)
     - Esemplare (per la verifica della specie)
 */
-create or replace procedure pro_add_media (
+create or replace procedure add_media (
     p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
     p_n_avvistamento             IN avvistamento.n_avvistamento%TYPE,
     p_titolo_media               IN media.titolo_media%TYPE,
