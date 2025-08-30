@@ -55,7 +55,8 @@ BEGIN
     dbms_output.put_line('Nuovo socio iscritto con codice tessera: ' || var_codice_tessera);
 
     -- stato iniziale del socio come 'attivo' (la data è di default)
-    INSERT INTO stato VALUES (var_codice_tessera, 'attivo');
+    INSERT INTO stato (codice_tessera_socio, tipo)
+    VALUES (var_codice_tessera, 'attivo');
     COMMIT;
 EXCEPTION
     WHEN not_older_than_18 THEN
