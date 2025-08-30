@@ -31,9 +31,11 @@ CREATE OR REPLACE TYPE tb_dis_tipo_richiamo as
     - Località_avvistamento (inserita solo se non già esistente)
     - Regione (inserita solo se non già esistente).
     - Dispositivo richiamo (opzionale)
+    - Socio e Stato (per verificare che l'osservatore sia un socio attivo).
   Il codice generato è quindi stampato a video.
 
   La procedura fallisce se l'osservatore non è un socio già iscritto.
+  Oppure se il socio non è in stato "attivo".
 
   La procedura accetta i seguenti parametri:
     - p_data_e_ora: Data e ora dell'avvistamento
@@ -72,6 +74,7 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
     var_n_avvistamenti NUMBER := 0;
     socio_exists       NUMBER := 0;
     socio_non_esistente EXCEPTION;
+    socio_non_attivo EXCEPTION;
 BEGIN
   -- Verifica se il socio osservatore esiste
   SELECT COUNT(*)
@@ -82,6 +85,11 @@ BEGIN
   IF socio_exists = 0 THEN
       RAISE socio_non_esistente;
   END IF; 
+
+  -- Verifica se il socio osservatore è in stato "attivo"
+  IF socio_stato_corrente(p_codice_tessera_osservatore) != 'attivo' THEN
+      RAISE socio_non_attivo;
+  END IF;
 
   -- Inserimento del socio osservatore se non esiste
   -- dovuto dal fatto che potrebbe essere la sua prima osservazione
@@ -186,8 +194,14 @@ BEGIN
 EXCEPTION
     WHEN socio_non_esistente THEN
         raise_application_error(
-            -20016,
+            -20015,
             'Il socio osservatore specificato non esiste.'
+        );
+        ROLLBACK;
+    WHEN socio_non_attivo THEN
+        raise_application_error(
+            -20016,
+            'Il socio osservatore specificato non è attivo.'
         );
         ROLLBACK;
     WHEN OTHERS THEN

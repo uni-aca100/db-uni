@@ -12,6 +12,10 @@
     - Media
     - Avvistamento (per la verifica dell'esistenza)
     - Esemplare (per la verifica della specie)
+    - Stato (per verificare che l'osservatore sia un socio attivo).
+
+    Se il socio non è attivo, l'avvistamento non esiste,
+    o si è raggiunto il limite di media, la procedura fallisce.
 */
 create or replace procedure add_media (
     p_codice_tessera_osservatore IN avvistamento.codice_tessera_osservatore%TYPE,
@@ -28,7 +32,13 @@ AS
   var_count_p_tipo NUMBER := 0;
   var_count_audio NUMBER := 0;
   media_type_limit_reached EXCEPTION;
+  socio_non_attivo EXCEPTION;
 BEGIN
+  -- Verifica se il socio osservatore è attivo
+  IF socio_stato_corrente(p_codice_tessera_osservatore) != 'attivo' THEN
+      RAISE socio_non_attivo;
+  END IF;
+
   -- Verifica se l'avvistamento esiste, se esiste lo carica in var_avvistamento
   select *
   into var_avvistamento
@@ -90,6 +100,12 @@ EXCEPTION
         ROLLBACK;
     WHEN media_type_limit_reached THEN
         RAISE_APPLICATION_ERROR(-20042, 'Limite per il tipo di media specificato è stato raggiunto.');
+        ROLLBACK;
+    WHEN socio_non_attivo THEN
+        RAISE_APPLICATION_ERROR(
+            -20043,
+            'Il socio osservatore specificato non è attivo.'
+        );
         ROLLBACK;
 END;
 /

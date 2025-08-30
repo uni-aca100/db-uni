@@ -32,6 +32,7 @@ GRANT EXECUTE ON add_avvistamento TO ruolo_responsabile;
 GRANT EXECUTE ON add_pattern_migratorio TO ruolo_responsabile;
 GRANT EXECUTE ON assegnazione_badge TO ruolo_responsabile;
 GRANT EXECUTE ON add_media TO ruolo_responsabile;
+GRANT EXECUTE ON socio_stato_corrente TO ruolo_responsabile;
 
 -- Ruolo per i soci
 CREATE ROLE ruolo_socio IDENTIFIED BY sociopwd;
