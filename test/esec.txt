@@ -1,0 +1,7 @@
+[content/tables.sql, content/populate.sql, content/views.sql]
+[content/fun_genera_codici.sql, content/pro_add_avvistamenti.sql, content/pro_add_media.sql, content/pro_add_pattern_migratorio.sql, content/pro_revisione_avvistamento.sql, content/pro-assegnazione_badge.sql, content/pro-iscrivi-socio.sql]
+[content/trg_no_multi_region_avvistamento.sql, content/trigger_check_data_avvistamento.sql
+content/trigger_check_localita_avvistamento.sql,
+content/trigger_check_multiple_pattern_migratori_stanziali.sql,
+]
+[content/users.sql]

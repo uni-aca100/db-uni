@@ -92,3 +92,4 @@ EXCEPTION
         RAISE_APPLICATION_ERROR(-20042, 'Limite per il tipo di media specificato è stato raggiunto.');
         ROLLBACK;
 END;
+/

@@ -5,6 +5,8 @@
   è necessario verificare la coerenza tra la località e gli habitat della specie.
   ricordiamo che un avvistamento si riferisce a una sola specie, ma può
   riguardare più esemplari della stessa specie.
+
+  nota: il trigger utilizza la view specie_vive_in_habitat (ricordarsi di crearla prima)
 */
 CREATE OR REPLACE TRIGGER trg_check_localita_avvistamento BEFORE
 -- solo dopo che l'esemplare è stato inserito possiamo verificare

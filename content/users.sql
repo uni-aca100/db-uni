@@ -12,6 +12,7 @@ TO ruolo_responsabile;
 
 GRANT SELECT ON socio TO ruolo_responsabile;
 GRANT SELECT,INSERT,DELETE,UPDATE ON osservatore TO ruolo_responsabile;
+GRANT SELECT,INSERT,DELETE,UPDATE ON stato TO ruolo_responsabile;
 GRANT SELECT,INSERT ON revisore TO ruolo_responsabile;
 GRANT SELECT,DELETE,UPDATE ON regione TO ruolo_responsabile;
 GRANT SELECT,DELETE,UPDATE ON specie TO ruolo_responsabile;

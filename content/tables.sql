@@ -90,6 +90,13 @@
       FK: codice_avvistamento (riferimento a Avvistamento)
       Descrizione: Dispositivo utilizzato per richiamare gli uccelli durante l'avvistamento.
 
+    - stato:
+      PK: (codice_tessera_socio, data_inizio_stato)
+      Attributi:
+        stato (es: attivo, inattivo),
+        data_inizio_stato,
+      FK: codice_tessera_socio (riferimento a Socio)
+
   Relazioni:
     - Osservatore(Socio) (1,1) [effettua] (1,N) Avvistamento
       Un osservatore può effettuare più avvistamenti, ma ogni avvistamento
@@ -145,6 +152,10 @@
       Un dispositivo di richiamo può essere utilizzato in più avvistamenti,
       ma ogni avvistamento può utilizzare un solo dispositivo di richiamo.
 
+    - Socio (1,1) [è in] (1,N) stato
+      Un socio può avere più stati,
+      ma ogni stato è associato a un solo socio.
+
   Entità di associazione:
     - pattern_migratorio: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
       PK: (nome_scientifico_specie, codice_EUNIS_habitat, motivo_migrazione)
@@ -176,6 +187,7 @@ DROP TABLE specie CASCADE CONSTRAINTS;
 DROP TABLE revisore CASCADE CONSTRAINTS;
 DROP TABLE osservatore CASCADE CONSTRAINTS;
 DROP TABLE socio CASCADE CONSTRAINTS;
+DROP TABLE stato CASCADE CONSTRAINTS;
 
 -- creazione delle tabelle in ordine di dipendenza
 
@@ -277,6 +289,8 @@ CREATE TABLE habitat (
   La tabella Località dell'Avvistamento rappresenta una località geografica specifica dove sono stati
   effettuati avvistamenti di uccelli. Il plus_code ne identifica la posizione in modo univoco,
   utilizzando il sistema Open Location Code (OLC) impiegato per la geolocalizzazione in Google Maps.
+  La taglia preferita (ma non obbligatoria) del plus_code è quella ridotta,
+  quindi il nome della località può essere incluso in molti plus_code diversi.
   Il database include solo località con almeno un avvistamento associato. Il Responsabile si occupa
   del popolamento di questa tabella tramite la procedura add_avvistamento. Le operazioni di eliminazione
   sono invece gestite manualmente sempre dal Responsabile.
@@ -406,6 +420,10 @@ gli uccelli durante l'avvistamento. Il campo tipo_richiamo ne specifica la funzi
 (ad esempio: richiamo territoriale, richiamo di corteggiamento, richiamo sociale, ecc.).
 È importante sottolineare che l'impiego di tali dispositivi è una pratica scoraggiata,
 in particolare nelle aree protette.
+Si registrano esclusivamente i diversi modelli di dispositivi di richiamo utilizzati
+(valutazione dell’efficacia), e non l’uso ripetuto dello stesso modello.
+nota: È possibile impiegare più dispositivi contemporaneamente,
+ad esempio per la riproduzione di versi sociali utili ad attrarre specie gregarie.
 Il Responsabile si occupa del popolamento di questa tabella tramite la procedura add_avvistamento,
 la modifica ed eliminazione sono gestite manualmente sempre dal Responsabile.
 */
@@ -506,4 +524,23 @@ CREATE TABLE associazione_localita_habitat (
   CONSTRAINT fk_associazione_habitat FOREIGN KEY ( codice_eunis )
     REFERENCES habitat ( codice_eunis )
       ON DELETE CASCADE
+);
+
+/*
+  La tabella Stato traccia la storia degli stati di attività dei soci dell’associazione.
+  Ogni record indica se un socio è attivo o inattivo a partire da una determinata data.
+  La data di fine di ciascuno stato può essere dedotta dalla data di inizio del successivo,
+  consentendo così di ricostruire i periodi temporali in cui ciascun socio è
+  stato attivo o inattivo.
+  un socio può essere inattivo per vari motivi, come ad esempio una sospensione temporanea
+  o il mancato rinnovo dell'iscrizione ecc.
+  La tabella è gestita dal Responsabile manualmente.
+*/
+CREATE TABLE stato (
+  codice_tessera_socio      VARCHAR2(16) NOT NULL,
+  tipo               VARCHAR2(8) CHECK (tipo IN ('attivo', 'inattivo')) NOT NULL,
+  data_inizio   DATE DEFAULT sysdate NOT NULL,
+  CONSTRAINT fk_stato_socio FOREIGN KEY (codice_tessera_socio)
+    REFERENCES socio (codice_tessera) ON DELETE CASCADE,
+  CONSTRAINT pk_stato PRIMARY KEY (codice_tessera_socio, data_inizio)
 );

@@ -1,9 +1,9 @@
 /*
   funzione per la generazione univoca del codice di tessera per un socio.
   Pattern codice tessera:
-    ABW (fisso)
-    [A-Z]{2}: es. MI, RO ecc. (sigla città)
-    [0-9]{4}: anno di iscrizione es. 2020
+    ABW (fisso per Associazione Bird Watching)
+    [A-Z]{2}: es. MI, RO ecc. (sigla sede iscrizione)
+    [0-9]{4}: anno iscrizione es. 2020
     [A-Z]: iniziale nome es. M (Marco)
     [A-Z]: iniziale cognome es. A (Ambrosio)
     [0-9]{4}: n-esimo socio iscritto nell'anno corrente (4 cifre)

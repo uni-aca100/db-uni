@@ -107,7 +107,8 @@ BEGIN
      WHERE codice_tessera_osservatore = p_codice_tessera_osservatore
        AND n_avvistamento = p_n_avvistamento;
 
-  -- Controlla se almeno un campo delle condizioni ambientali tra meteo e temperaturaè valorizzato
+  -- Controlla se almeno un campo delle condizioni ambientali tra
+  -- meteo e temperaturaè valorizzato
     SELECT CASE
                WHEN meteo IS NOT NULL
                    OR temperatura IS NOT NULL THEN

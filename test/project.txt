@@ -11,6 +11,7 @@ I Responsabili dell'associazione hanno l'ulteriore compito di gestire le informa
 I Revisori, soci con un ruolo specifico, possono connettersi al database per revisionare e validare gli avvistamenti degli osservatori. La validazione avviene tramite una classificazione che include le opzioni "confermato", "possibile" e "non confermato". Questa valutazione si basa sulle informazioni fornite, come contenuti multimediali (foto, video, audio), condizioni ambientali (meteo, temperatura, umidità) ed eventuali testimonianze di altri soci, oltre alla conoscenza della specie avvistata.
 
 I soci possono ricevere badge di riconoscimento in base ai risultati ottenuti. Questi includono, ad esempio, badge per il numero di avvistamenti confermati (come il primo, il decimo, ecc.), oppure per la prima osservazione di una specie in uno stato di conservazione particolare (ad esempio, Criticamente Minacciata (CR) o In Pericolo (EN)).
+Inoltre, un socio può trovarsi in uno stato di "attivo" o "inattivo" (ad esempio in caso di mancato rinnovo, sospensione o altre motivazioni).
 
 La richiesta di assegnazione di un badge può essere effettuata informalmente da un socio a un Responsabile dell'associazione. Il Responsabile provvederà poi a registrare l'assegnazione nel database, ma solo se i requisiti sono stati soddisfatti e gli avvistamenti confermati da un Revisore.
 
