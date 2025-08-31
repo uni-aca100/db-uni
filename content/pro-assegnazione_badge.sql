@@ -2,6 +2,7 @@
   Questa procedura è usata per assegnare i badge ai soci.
   L'assegnazione avviene in base a specifici requisiti che i soci devono soddisfare.
   Se questi requisiti non vengono soddisfatti, la procedura solleva un'eccezione dedicata.
+  La procedura coinvolge le tabelle socio, avvistamento, esemplare, specie e badge.
 
   La procedura accetta i seguenti parametri:
     - p_codice_tessera_socio: il codice della tessera del socio a cui assegnare il badge (solo se esistente).
@@ -9,8 +10,6 @@
     - p_data_assegnazione: la data in cui il badge viene assegnato (default è la data corrente).
     - p_badge_url: l'URL del badge.
 
-  Per l'assegnazione dei badge, la procedura considera le tabelle dei badge e del revisore,
-  oltre a quelle degli avvistamenti e delle specie per la verifica dei requisiti.
   I requisiti per ogni badge:
     Badge "Occhio di Colibrì": Può essere assegnato solo se il socio ha effettuato almeno 10 avvistamenti confermati.
     Badge "Occhio di Kakapo": Può essere assegnato solo se il socio ha effettuato almeno un avvistamento confermato.

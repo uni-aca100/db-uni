@@ -1,5 +1,5 @@
 /*
-  funzione per la generazione univoca del codice di tessera per un socio.
+  funzione per la generazione univoca del codice della tessera di un socio.
   Pattern codice tessera:
     ABW (fisso per Associazione Bird Watching)
     [A-Z]{2}: es. MI, RO ecc. (sigla sede iscrizione)

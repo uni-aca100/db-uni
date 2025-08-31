@@ -103,7 +103,7 @@ INSERT INTO osservatore VALUES ('ABWBO2000DV0001');
 INSERT INTO revisore VALUES ( 'ABWBO2000DV0001', DATE '2000-07-08' );
 INSERT INTO revisore VALUES ( 'ABWRM2003MB0001', DATE '2005-05-04' );
 INSERT INTO revisore VALUES ( 'ABWFI2010SE0003', DATE '2022-09-05' );
--- ( arriviamo a 15 per il numero minimo, ma forse in questo contesto è innapropriato) 
+-- ( alcuni revisori extra per arrivare a 15 per il numero minimo) 
 INSERT INTO revisore VALUES ( 'ABWMI2013VG0004', DATE '1999-07-08' );
 INSERT INTO revisore VALUES ( 'ABWNA2010AM0002', DATE '2001-05-09' );
 INSERT INTO revisore VALUES ( 'ABWNA2012ER0001', DATE '2022-09-11' );
@@ -188,7 +188,6 @@ INSERT INTO pattern_migratorio VALUES ( 'Aquila adalberti', 'D5.2', 'nidificazio
 INSERT INTO pattern_migratorio VALUES ( 'Corvus corax', 'B1.3', 'svernamento', 10, 2 );
 INSERT INTO pattern_migratorio VALUES ( 'Lanius collurio', 'A2.5', 'migrazione', 4, 9 );
 INSERT INTO pattern_migratorio VALUES ( 'Picus viridis', 'C3.4', 'stanziale', 1, 12 );
-INSERT INTO pattern_migratorio VALUES ( 'Motacilla alba', 'E4.1', 'nidificazione', 5, 7 );
 INSERT INTO pattern_migratorio VALUES ( 'Numenius tenuirostris', 'F2.2', 'svernamento', 11, 2 );
 INSERT INTO pattern_migratorio VALUES ( 'Cyanistes caeruleus', 'G2.1', 'stanziale', 1, 12 );
 INSERT INTO pattern_migratorio VALUES ( 'Tetrax tetrax', 'D1.1', 'migrazione', 3, 6 );
@@ -196,17 +195,13 @@ INSERT INTO pattern_migratorio VALUES ( 'Erithacus rubecula', 'C6.3', 'svernamen
 INSERT INTO pattern_migratorio VALUES ( 'Regulus regulus', 'B2.4', 'nidificazione', 6, 8 );
 INSERT INTO pattern_migratorio VALUES ( 'Pica pica', 'C1.1', 'stanziale', 1, 12 );
 INSERT INTO pattern_migratorio VALUES ( 'Aquila chrysaetos', 'F3.2', 'svernamento', 11, 2 );
-INSERT INTO pattern_migratorio VALUES ( 'Passer italiae', 'G1.1', 'nidificazione', 4, 7 );
 INSERT INTO pattern_migratorio VALUES ( 'Aythya nyroca', 'D5.2', 'migrazione', 8, 10 );
 INSERT INTO pattern_migratorio VALUES ( 'Corvus corone', 'C2.2', 'nidificazione', 5, 8 );
-INSERT INTO pattern_migratorio VALUES ( 'Turdus merula', 'E1.2', 'svernamento', 10, 2 );
 INSERT INTO pattern_migratorio VALUES ( 'Aquila adalberti', 'B1.3', 'migrazione', 3, 5 );
 INSERT INTO pattern_migratorio VALUES ( 'Corvus corax', 'A2.5', 'nidificazione', 6, 8 );
 INSERT INTO pattern_migratorio VALUES ( 'Lanius collurio', 'C3.4', 'svernamento', 11, 2 );
-INSERT INTO pattern_migratorio VALUES ( 'Picus viridis', 'E4.1', 'migrazione', 9, 11 );
 INSERT INTO pattern_migratorio VALUES ( 'Motacilla alba', 'F2.2', 'stanziale', 1, 12 );
 INSERT INTO pattern_migratorio VALUES ( 'Numenius tenuirostris', 'G2.1', 'nidificazione', 5, 7 );
-INSERT INTO pattern_migratorio VALUES ( 'Cyanistes caeruleus', 'D1.1', 'svernamento', 10, 2 );
 INSERT INTO pattern_migratorio VALUES ( 'Tetrax tetrax', 'C6.3', 'nidificazione', 4, 7 );
 INSERT INTO pattern_migratorio VALUES ( 'Erithacus rubecula', 'B2.4', 'migrazione', 8, 10 );
 INSERT INTO pattern_migratorio VALUES ( 'Regulus regulus', 'C2.2', 'svernamento', 11, 2 );

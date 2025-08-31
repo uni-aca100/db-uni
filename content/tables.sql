@@ -189,12 +189,13 @@ DROP TABLE osservatore CASCADE CONSTRAINTS;
 DROP TABLE socio CASCADE CONSTRAINTS;
 DROP TABLE stato CASCADE CONSTRAINTS;
 
--- creazione delle tabelle in ordine di dipendenza
+-- Creazione delle tabelle in ordine di dipendenza
 
 /*
   Regione, indica una regione geografica (solitamente) europea
-  una regione è contenuta nel database solo se ha almeno una località di avvistamento
-  associata.
+  una regione è contenuta nel database solo se ha almeno una località di
+  avvistamento associata.
+  Il numero di sedi rappresenta il numero di sedi dell'associazione nella regione.
   La regione è inserita dal responsabile, tramite l'operazione add_avvistamento.
   ma può essere modificata o eliminata manualmente dal responsabile.
 */
@@ -209,9 +210,10 @@ CREATE TABLE regione (
 /*
   Socio, indica un socio dell'associazione di birdwatching.
   Tale tabella è popolata tramite la procedura iscrivi_nuovo_socio.
-  il codice_tessera rappresenta il codice di tesserino del socio.
-  il database contiene tutti i soci iscritti all'associazione,
-  anche se non hanno effettuato avvistamenti.
+  il codice_tessera rappresenta il codice univoco di tesserino del socio.
+  il database contiene tutti i soci storicamente iscritti all'associazione,
+  anche se non hanno effettuato avvistamenti, o inattivi.
+  L'associazione richiede un unico recapito telefonico.
   Il formato del codice_tessera è descritto dalla funzione genera_codice_tessera.
 */
 CREATE TABLE socio (
@@ -228,7 +230,7 @@ CREATE TABLE socio (
 );
 
 -- Osservatore, indica un socio che ha effettuato almeno un avvistamento.
--- 
+-- La tabella utilizza la specializzazione verticale
 CREATE TABLE osservatore (
   codice_tessera VARCHAR2(16) NOT NULL,
   CONSTRAINT fk_osservatore_socio FOREIGN KEY ( codice_tessera )

@@ -8,6 +8,7 @@ La procedura verifica innanzitutto che l'avvistamento e il revisore esistano.
 Inoltre, controlla che la data di revisione sia successiva sia alla data
 dell'avvistamento che a quella di designazione del revisore.
 Se queste condizioni non sono rispettate, verrà generata un'eccezione.
+La procedura coinvolge le tabelle avvistamento, revisore, esemplare, media, e specie.
 
 Requisiti per la Revisione:
 Vengono imposti i seguenti requisiti per la valutazione:

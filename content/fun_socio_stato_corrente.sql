@@ -1,5 +1,5 @@
 /*
-  questa procedura permette di recuperare lo stato corrente di un socio
+  La funzione recupera lo stato corrente di un socio
   in base al codice tessera fornito.
 */
 CREATE OR REPLACE FUNCTION socio_stato_corrente (

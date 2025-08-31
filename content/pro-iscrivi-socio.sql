@@ -1,5 +1,5 @@
 /*
-  Questa procedura gestisce l'iscrizione di nuovi soci.
+  Questa procedura gestisce la registrazione di un nuovo socio.
   Automaticamente, viene generato un codice tessera univoco che viene poi
   utilizzato per inserire il socio nella tabella Socio.
   Il codice generato è quindi stampato a video.
@@ -11,7 +11,7 @@
     p_email: email del socio
     p_data_nascita: data di nascita del socio
     p_telefono: telefono del socio (opzionale)
-    p_sigla_citta: sigla della città del socio (es. MI, RO)
+    p_sigla_citta: sigla sede iscrizione (es. MI, RO)
 */
 CREATE OR REPLACE PROCEDURE iscrivi_nuovo_socio (
     p_nome         IN socio.nome%TYPE,
@@ -28,7 +28,6 @@ CREATE OR REPLACE PROCEDURE iscrivi_nuovo_socio (
 BEGIN
 
   -- Calcolo dell'età del socio, per verificare che il socio sia maggiorenne
-  -- per semplicita omettiamo il controllo sui giorni
     var_age := trunc(months_between(
         var_data_iscrizione,
         p_data_nascita
