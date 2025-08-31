@@ -12,6 +12,7 @@ TO ruolo_responsabile;
 
 GRANT SELECT ON socio TO ruolo_responsabile;
 GRANT SELECT,INSERT,DELETE,UPDATE ON stato TO ruolo_responsabile;
+GRANT SELECT,INSERT,DELETE,UPDATE ON responsabile TO ruolo_responsabile;
 GRANT SELECT,INSERT ON revisore TO ruolo_responsabile;
 GRANT SELECT,DELETE,UPDATE ON regione TO ruolo_responsabile;
 GRANT SELECT,DELETE,UPDATE ON specie TO ruolo_responsabile;
@@ -53,6 +54,7 @@ GRANT SELECT ON associazione_localita_habitat TO ruolo_socio;
 GRANT SELECT ON specie_vive_in_habitat TO ruolo_socio;
 GRANT SELECT ON socio_pubblico TO ruolo_socio;
 GRANT SELECT ON distribuzione_avvistamenti_per_specie TO ruolo_socio;
+GRANT SELECT ON responsabile TO ruolo_socio;
 GRANT EXECUTE ON add_media TO ruolo_socio;
 
 -- Ruolo Socio revisore

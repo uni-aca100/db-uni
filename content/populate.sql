@@ -80,23 +80,24 @@ INSERT INTO stato VALUES ( 'ABWMI2013VG0004', 'inattivo', DATE '2013-05-09' );
 INSERT INTO stato VALUES ( 'ABWNA2010AM0002', 'inattivo', DATE '2011-01-21' );
 
 
-/*  Popolamento tabella osservatore  */
-/* INSERT INTO osservatore VALUES ('ABWMI2010LR0001');
-INSERT INTO osservatore VALUES ('ABWPA2007FR0001');
-INSERT INTO osservatore VALUES ('ABWBO2005DC0001');
-INSERT INTO osservatore VALUES ('ABWBA2008SG0001');
-INSERT INTO osservatore VALUES ('ABWRM2000MC0001');
-INSERT INTO osservatore VALUES ('ABWFI2010FB0005');
-INSERT INTO osservatore VALUES ('ABWBO2002PF0001');
-INSERT INTO osservatore VALUES ('ABWBA2001RR0001');
-INSERT INTO osservatore VALUES ('ABWMI2010GF0006');
-INSERT INTO osservatore VALUES ('ABWRM2000SM0002');
-INSERT INTO osservatore VALUES ('ABWVE2001LB0001');
-INSERT INTO osservatore VALUES ('ABWTO2000NG0001');
-INSERT INTO osservatore VALUES ('ABWFI2015IT0001');
-INSERT INTO osservatore VALUES ('ABWFI2010SE0003');
-INSERT INTO osservatore VALUES ('ABWRM2003MB0001');
-INSERT INTO osservatore VALUES ('ABWBO2000DV0001'); */
+/*  Popolamento tabella responsabile  */
+INSERT INTO responsabile VALUES ( 'ABWRM2000MC0001', 'matteo.conti@abw.com', 'tecnico');
+INSERT INTO responsabile VALUES ( 'ABWVE2016CM0001', 'chiara.mancini@abw.com', 'amministrativo' );
+INSERT INTO responsabile VALUES ( 'ABWPA2004SL0001', 'stefano.lombardi@abw.com', 'tecnico' );
+INSERT INTO responsabile VALUES ( 'ABWTO2017MM0001', 'martina.moretti@abw.com', 'amministrativo' );
+-- ( alcuni responsabili extra per arrivare a 15 per il numero minimo) 
+INSERT INTO responsabile VALUES ( 'ABWFI2010FB0005', 'fabio.barbieri@abw.com', 'amministrativo' );
+INSERT INTO responsabile VALUES ( 'ABWBO2002PF0001', 'paola.fontana@abw.com', 'amministrativo' );
+INSERT INTO responsabile VALUES ( 'ABWNA2010AM0002', 'andrea.mariani@abw.com', 'tecnico' );
+INSERT INTO responsabile VALUES ( 'ABWBA2001RR0001', 'roberta.riva@abw.com', 'amministrativo' );
+INSERT INTO responsabile VALUES ( 'ABWMI2010GF0006', 'giorgio.ferri@abw.com', 'tecnico' );
+INSERT INTO responsabile VALUES ( 'ABWRM2000SM0002', 'silvia.martini@abw.com', 'tecnico' );
+INSERT INTO responsabile VALUES ( 'ABWVE2001LB0001', 'lorenzo.bianco@abw.com', 'tecnico' );
+INSERT INTO responsabile VALUES ( 'ABWPA2012FL0002', 'federica.longo@abw.com', 'tecnico' );
+INSERT INTO responsabile VALUES ( 'ABWTO2000NG0001', 'nicola.gatti@abw.com', 'tecnico' );
+INSERT INTO responsabile VALUES ( 'ABWFI2015IT0001', 'ilaria.testa@abw.com', 'amministrativo' );
+INSERT INTO responsabile VALUES ( 'ABWBO2000DV0001', 'daniele.villa@abw.com', 'amministrativo' );
+INSERT INTO responsabile VALUES ( 'ABWNA2016MS0001', 'michela.serra@abw.com', 'tecnico' );
 
 
 /*  Popolamento tabella revisore */

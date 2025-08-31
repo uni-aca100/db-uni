@@ -10,6 +10,11 @@
       - Revisore:
         PK: codice_tessera (ereditato da Socio)
         Attributi: data_attribuzione.
+      - Responsabile:
+        PK: codice_tessera (ereditato da Socio)
+        Attributi:
+          email_istituzionale,
+          ruolo (amministrativo, tecnico, scientifico)
 
     - Avvistamento:
       PK: codice_avvistamento
@@ -184,6 +189,7 @@ DROP TABLE specie CASCADE CONSTRAINTS;
 DROP TABLE revisore CASCADE CONSTRAINTS;
 DROP TABLE socio CASCADE CONSTRAINTS;
 DROP TABLE stato CASCADE CONSTRAINTS;
+DROP TABLE responsabile CASCADE CONSTRAINTS;
 
 -- Creazione delle tabelle in ordine di dipendenza
 
@@ -216,7 +222,7 @@ CREATE TABLE socio (
   codice_tessera  VARCHAR2(16),
   nome            VARCHAR2(30) NOT NULL,
   cognome         VARCHAR2(30) NOT NULL,
-  email           VARCHAR2(60) UNIQUE NOT NULL,
+  email           VARCHAR2(50) UNIQUE NOT NULL,
   telefono        VARCHAR2(15),
   data_nascita    DATE NOT NULL,
   data_iscrizione DATE DEFAULT sysdate NOT NULL,
@@ -226,7 +232,7 @@ CREATE TABLE socio (
 );
 
 -- Revisore, indica un socio designato come revisore degli avvistamenti.
--- La tabella utilizza la specializzazione verticale
+-- La tabella è collegata alla tabella Socio tramite una relazione di specializzazione verticale.
 CREATE TABLE revisore (
   codice_tessera    VARCHAR2(16) NOT NULL,
   data_attribuzione DATE DEFAULT sysdate NOT NULL,
@@ -234,6 +240,28 @@ CREATE TABLE revisore (
     REFERENCES socio ( codice_tessera )
       ON DELETE CASCADE,
   CONSTRAINT pk_revisore PRIMARY KEY ( codice_tessera )
+);
+
+/*
+  La tabella rappresenta i soci che ricoprono un ruolo di responsabile
+  all’interno dell’associazione (a scopo informativo).
+  Ogni responsabile possiede un’email istituzionale per le
+  comunicazioni ufficiali, con cui può essere contattato dai soci.
+  Il campo "ruolo" specifica la tipologia di responsabilità assegnata:
+  - amministrativo: si occupa della gestione amministrativa dell'associazione
+  (ad esempio: gestione iscrizioni, documentazione).
+  - tecnico: gestione piattaforma informativa.
+  La tabella è collegata alla tabella Socio tramite una relazione di specializzazione verticale.
+*/
+CREATE TABLE responsabile (
+  codice_tessera    VARCHAR2(16) NOT NULL,
+  email_istituzionale VARCHAR2(50) UNIQUE NOT NULL,
+  ruolo             VARCHAR2(15) CHECK ( ruolo IN ( 'amministrativo',
+                                                     'tecnico') ) NOT NULL,
+  CONSTRAINT fk_responsabile_socio FOREIGN KEY ( codice_tessera )
+    REFERENCES socio ( codice_tessera )
+      ON DELETE CASCADE,
+  CONSTRAINT pk_responsabile PRIMARY KEY ( codice_tessera )
 );
 
 /*
