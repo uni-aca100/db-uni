@@ -12,7 +12,7 @@
     - Media
     - Avvistamento (per la verifica dell'esistenza)
     - Esemplare (per la verifica della specie)
-    - Stato (per verificare che l'osservatore sia un socio attivo).
+    - Stato (per verificare che il socio sia un socio attivo).
 
     Se il socio non è attivo, l'avvistamento non esiste,
     o si è raggiunto il limite di media, la procedura fallisce.
@@ -34,7 +34,7 @@ AS
   media_type_limit_reached EXCEPTION;
   socio_non_attivo EXCEPTION;
 BEGIN
-  -- Verifica se il socio osservatore è attivo
+  -- Verifica se il socio è attivo
   IF socio_stato_corrente(p_codice_tessera_osservatore) != 'attivo' THEN
       RAISE socio_non_attivo;
   END IF;
@@ -104,7 +104,7 @@ EXCEPTION
     WHEN socio_non_attivo THEN
         RAISE_APPLICATION_ERROR(
             -20043,
-            'Il socio osservatore specificato non è attivo.'
+            'Il socio specificato non è attivo.'
         );
         ROLLBACK;
 END;

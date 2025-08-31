@@ -1,6 +1,6 @@
 /*
   questo trigger implementa il vincolo:
-  Ogni osservatore può registrare al massimo 15 esemplari,
+  Ogni socio può registrare al massimo 15 esemplari,
   appartenenti alla stessa specie e con lo stesso stato di maturità,
   avvistati nella stessa località nell’arco di una settimana.
 
@@ -21,7 +21,7 @@ BEGIN
   WHERE codice_tessera_osservatore = :new.codice_tessera_osservatore
     AND n_avvistamento = :new.n_avvistamento;
 
-  -- ottiene il numero di esemplari avvistati per lo stesso osservatore
+  -- ottiene il numero di esemplari avvistati per lo stesso socio
   -- nella stessa località e con lo stesso stato di maturità
   SELECT COUNT(*)
   INTO var_count_avv
@@ -50,7 +50,7 @@ EXCEPTION
   WHEN too_many_avvistamenti THEN
     raise_application_error(
       -20016,
-      'L''osservatore ha già registrato il numero massimo di avvistamenti per la stessa specie e stato di maturità nella stessa località nell''arco di una settimana.'
+      'Il socio ha già registrato il numero massimo di avvistamenti per la stessa specie e stato di maturità nella stessa località nell''arco di una settimana.'
     );
 END;
 /

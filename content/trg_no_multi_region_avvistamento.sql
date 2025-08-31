@@ -1,6 +1,6 @@
 /*
   Questo trigger implementa il vincolo di integrità dinamico:
-  Non è consentito che lo stesso osservatore effettui avvistamenti
+  Non è consentito che lo stesso socio effettui avvistamenti
   in regioni diverse nello stesso giorno.
 */
 CREATE OR REPLACE TRIGGER trg_no_multi_region_avvistamento
@@ -20,7 +20,7 @@ BEGIN
         ON r.nome_regione = l.nome_regione AND r.nazione = l.nazione
     WHERE l.plus_code = :NEW.plus_code;
 
-    -- verifica se l'osservatore ha già effettuato un avvistamento in una
+    -- verifica se il socio ha già effettuato un avvistamento in una
     -- regione diversa nello stesso giorno
     SELECT COUNT(DISTINCT l.nome_regione)
     INTO var_count_regioni

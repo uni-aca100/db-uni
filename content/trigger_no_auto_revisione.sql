@@ -1,6 +1,6 @@
 /*
   Trigger per impedire che un revisore validi i propri avvistamenti.
-  Un revisore non può validare gli avvistamenti che ha effettuato come osservatore.
+  Un revisore non può validare i propri avvistamenti.
   Per prevenire che possa approfittarsi della sua posizione all'interno dell'associazione
 */
 CREATE OR REPLACE TRIGGER trg_no_auto_revisione BEFORE

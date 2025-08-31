@@ -26,7 +26,6 @@ CREATE OR REPLACE TYPE tb_dis_tipo_richiamo as
   Procedura Automatica di Inserimento Avvistamenti Questa procedura automatizza
   l'inserimento degli avvistamenti, gestendo anche le tabelle correlate. Vengono coinvolte:
     - Avvistamento (inserito sempre)
-    - Osservatore (inserito solo se non già esistente)
     - Esemplare (inserito sempre, con molteplici valori per maturità, sesso e condizioni di salute)
     - Località_avvistamento (inserita solo se non già esistente)
     - Regione (inserita solo se non già esistente).
@@ -39,7 +38,7 @@ CREATE OR REPLACE TYPE tb_dis_tipo_richiamo as
 
   La procedura accetta i seguenti parametri:
     - p_data_e_ora: Data e ora dell'avvistamento
-    - p_codice_tessera_osservatore: Codice della tessera del socio osservatore
+    - p_codice_tessera_osservatore: Codice della tessera del socio
     - p_plus_code: Plus code della località di avvistamento
     - p_nome_localita: Nome della località di avvistamento
     - p_area_protetta: Area protetta della località di avvistamento
@@ -76,7 +75,7 @@ CREATE OR REPLACE PROCEDURE add_avvistamento (
     socio_non_esistente EXCEPTION;
     socio_non_attivo EXCEPTION;
 BEGIN
-  -- Verifica se il socio osservatore esiste
+  -- Verifica se il socio esiste
   SELECT COUNT(*)
   INTO socio_exists
   FROM socio
@@ -86,21 +85,10 @@ BEGIN
       RAISE socio_non_esistente;
   END IF; 
 
-  -- Verifica se il socio osservatore è in stato "attivo"
+  -- Verifica se il socio è in stato "attivo"
   IF socio_stato_corrente(p_codice_tessera_osservatore) != 'attivo' THEN
       RAISE socio_non_attivo;
   END IF;
-
-  -- Inserimento del socio osservatore se non esiste
-  -- dovuto dal fatto che potrebbe essere la sua prima osservazione
-  INSERT INTO osservatore ( codice_tessera )
-    SELECT p_codice_tessera_osservatore
-    FROM dual
-    WHERE NOT EXISTS (
-      SELECT 1
-        FROM osservatore
-        WHERE codice_tessera = p_codice_tessera_osservatore
-    );
     
   -- Inserimento della regione se non esiste
   INSERT INTO regione ( nome_regione, nazione )
@@ -135,7 +123,7 @@ BEGIN
         WHERE plus_code = p_plus_code
     );
 
-  -- Calcola il nuovo numero di avvistamento per l'osservatore
+  -- Calcola il nuovo numero di avvistamento del socio
   -- usiamo nvl per gestire il caso in cui vi siano avvistamenti
   -- precedentemente rimossi (usando il count sarebbero ignorati)
   SELECT nvl(
@@ -195,13 +183,13 @@ EXCEPTION
     WHEN socio_non_esistente THEN
         raise_application_error(
             -20015,
-            'Il socio osservatore specificato non esiste.'
+            'Il socio specificato non esiste.'
         );
         ROLLBACK;
     WHEN socio_non_attivo THEN
         raise_application_error(
             -20016,
-            'Il socio osservatore specificato non è attivo.'
+            'Il socio specificato non è attivo.'
         );
         ROLLBACK;
     WHEN OTHERS THEN

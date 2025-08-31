@@ -7,9 +7,6 @@
       PK: codice_tessera
       Attributi: nome, cognome, email, telefono, data_nascita, data_iscrizione
       Specializzazioni parziale e non disgiunta nei sottotipi:
-      - Osservatore:
-        PK: codice_tessera (ereditato da Socio)
-        Attributi: nessuno specifico
       - Revisore:
         PK: codice_tessera (ereditato da Socio)
         Attributi: data_attribuzione.
@@ -98,9 +95,9 @@
       FK: codice_tessera_socio (riferimento a Socio)
 
   Relazioni:
-    - Osservatore(Socio) (1,1) [effettua] (1,N) Avvistamento
-      Un osservatore può effettuare più avvistamenti, ma ogni avvistamento
-      è effettuato da un solo osservatore.
+    - Socio (1,1) [effettua] (1,N) Avvistamento
+      Un Socio può effettuare più avvistamenti, ma ogni avvistamento
+      è effettuato da un solo Socio.
 
     - Revisore(Socio) (0,1) [revisore] (0,N) Avvistamento
       Un revisore può revisionare più avvistamenti, ma ogni avvistamento può essere
@@ -185,7 +182,6 @@ DROP TABLE localita_avvistamento CASCADE CONSTRAINTS;
 DROP TABLE regione CASCADE CONSTRAINTS;
 DROP TABLE specie CASCADE CONSTRAINTS;
 DROP TABLE revisore CASCADE CONSTRAINTS;
-DROP TABLE osservatore CASCADE CONSTRAINTS;
 DROP TABLE socio CASCADE CONSTRAINTS;
 DROP TABLE stato CASCADE CONSTRAINTS;
 
@@ -229,17 +225,8 @@ CREATE TABLE socio (
   CONSTRAINT pk_socio PRIMARY KEY ( codice_tessera )
 );
 
--- Osservatore, indica un socio che ha effettuato almeno un avvistamento.
--- La tabella utilizza la specializzazione verticale
-CREATE TABLE osservatore (
-  codice_tessera VARCHAR2(16) NOT NULL,
-  CONSTRAINT fk_osservatore_socio FOREIGN KEY ( codice_tessera )
-    REFERENCES socio ( codice_tessera )
-      ON DELETE CASCADE,
-  CONSTRAINT pk_osservatore PRIMARY KEY ( codice_tessera )
-);
-
 -- Revisore, indica un socio designato come revisore degli avvistamenti.
+-- La tabella utilizza la specializzazione verticale
 CREATE TABLE revisore (
   codice_tessera    VARCHAR2(16) NOT NULL,
   data_attribuzione DATE DEFAULT sysdate NOT NULL,
@@ -315,11 +302,13 @@ CREATE TABLE localita_avvistamento (
 );
 
 /*
-  La tabella Avvistamento rappresenta l'osservazione di un esemplare di uccello in una specifica località.
-  Il campo n_avvistamento indica l'N-esimo avvistamento effettuato da un osservatore.
+  La tabella Avvistamento rappresenta l'osservazione di un esemplare
+  di uccello in una specifica località.
+  Il campo n_avvistamento indica l'N-esimo avvistamento effettuato da un Socio.
   Un singolo avvistamento può essere associato a più esemplari della stessa specie.
-  Il Responsabile si occupa del popolamento di questa tabella tramite la procedura add_avvistamento.
-  Le operazioni di  eliminazione sono invece gestite manualmente sempre dal Responsabile.
+  Il Responsabile si occupa del popolamento di questa tabella tramite la
+  procedura add_avvistamento.
+  Le operazioni di eliminazione sono invece gestite manualmente sempre dal Responsabile.
 */
 CREATE TABLE avvistamento (
   n_avvistamento             NUMBER(16) NOT NULL,
@@ -341,7 +330,7 @@ CREATE TABLE avvistamento (
   CONSTRAINT pk_avvistamento PRIMARY KEY ( n_avvistamento,
                                            codice_tessera_osservatore ),
   CONSTRAINT fk_avvistamento_osservatore FOREIGN KEY ( codice_tessera_osservatore )
-    REFERENCES osservatore ( codice_tessera )
+    REFERENCES socio ( codice_tessera )
       ON DELETE CASCADE,
   CONSTRAINT fk_avvistamento_revisore FOREIGN KEY ( codice_tessera_revisore )
     REFERENCES revisore ( codice_tessera )

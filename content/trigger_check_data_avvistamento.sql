@@ -11,7 +11,7 @@ DECLARE
     var_data_iscrizione socio.data_iscrizione%TYPE;
     date_avvistamento_precedente EXCEPTION;
 BEGIN
-  -- Recupera la data di iscrizione del socio osservatore
+  -- Recupera la data di iscrizione del socio
     SELECT data_iscrizione
       INTO var_data_iscrizione
       FROM socio
@@ -25,13 +25,12 @@ EXCEPTION
     WHEN no_data_found THEN
         raise_application_error(
             -20011,
-            'Il socio osservatore non esiste.'
+            'Il socio specificato non esiste.'
         );
     WHEN date_avvistamento_precedente THEN
         raise_application_error(
             -20012,
-            'Non è consentito inserire avvistamenti precedenti alla data di iscrizione del
-      socio osservatore.'
+            'Non è consentito inserire avvistamenti precedenti alla data di iscrizione del socio.'
         );
 END;
 /

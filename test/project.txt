@@ -18,10 +18,10 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
 
 # vincoli di integrità:
 ## vincoli dinamici:
-- Non è consentito che lo stesso osservatore effettui avvistamenti in regioni diverse nello stesso giorno.
+- Non è consentito che lo stesso Socio effettui avvistamenti in regioni diverse nello stesso giorno.
 - Non è consentito registrare un avvistamento se la località non rientra tra gli habitat tipici della specie in quel periodo dell'anno.
-- Ogni osservatore può registrare al massimo 15 esemplari, appartenenti alla stessa specie e con lo stesso stato di maturità, avvistati nella stessa località nell’arco di una settimana.
-- Gli osservatori che rientrano tra i primi 5 per numero di avvistamenti effettuati utilizzando dispositivi di richiamo non possono registrare ulteriori avvistamenti che prevedano l’impiego di tali dispositivi.
+- Ogni socio può registrare al massimo 15 esemplari, appartenenti alla stessa specie e con lo stesso stato di maturità, avvistati nella stessa località nell’arco di una settimana.
+- I soci che rientrano tra i primi 5 per numero di avvistamenti effettuati utilizzando dispositivi di richiamo non possono registrare ulteriori avvistamenti che prevedano l’impiego di tali dispositivi.
 - Per le specie non migratorie (ovvero 'stanziali'), è possibile registrare al massimo un solo pattern migratorio per habitat.
 - Per le specie non migratorie, il periodo di migrazione deve coprire l'intero arco dell'anno
 - Un Revisore non può validare i propri avvistamenti.
@@ -36,29 +36,27 @@ La richiesta di assegnazione di un badge può essere effettuata informalmente da
   Nel momento della sua iscrizione, gli viene fornito un codice tessera
   da parte dei Responsabili dell'associazione.
   Il codice tessera è univoco e serve per identificare il socio.
-  - Osservatore: 
-    è un tipo di socio il quale è testimone di uno o più avvistamenti.
   - Revisore:
     è un tipo di socio che ha il compito di verificare e validare gli avvistamenti
-    effettuati dagli osservatori.
+    effettuati dai soci.
     Il revisore non può validare i propri avvistamenti.
 
 - Avvistamento:
   è l'entità che rappresenta un avvistamento di un esemplare di uccello.
-  Ogni avvistamento è associato a un osservatore e può essere validato da
+  Ogni avvistamento è associato a un socio e può essere validato da
   un revisore.
   Per ogni avvistamento, viene assegnato un codice di avvistamento univoco.
   Il quale è assegnato dall'associazione al momento della richiesta di
-  registrazione dell'avvistamento da parte dell'osservatore.
+  registrazione dell'avvistamento da parte del socio.
   Il Responsabile dell'associazione nell'inserimento dell'avvistamento
   associa l'esemplare di uccello avvistato e la località dell'avvistamento.
   Inoltre il Responsabile dell'associazione può opzionalmente decidere
   di associare media (foto, video, audio) all'avvistamento forniti
-  dall'osservatore.
+  dal socio.
   Sempre opzionalmente, il Responsabile può associare le condizioni
   ambientali dell'avvistamento (meteo, temperatura, umidità, vento)
-  se fornite dall'osservatore.
-  
+  se fornite dal socio.
+
 - specie:
   è l'entità che rappresenta una specie di uccello, il quale comprende
   informazioni biologiche e altre informazioni utili.
